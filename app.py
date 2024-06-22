@@ -18,7 +18,6 @@ Session(app)
 account_sid = os.getenv('ACCOUNT_SID')
 auth_token = os.getenv('AUTH_TOKEN')
 phone_number = os.getenv('PHONE_NUMBER')
-messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
 @app.route('/whatsapp', methods=['POST'])
@@ -27,7 +26,7 @@ def handle_incoming_message():
     sender = request.form.get('From')
     profile_name = request.form.get('ProfileName')
     media_url = request.form.get('MediaUrl0')
-
+    print("hello")
     if media_url:
         message_send = twilio_client.messages.create(
             from_ = phone_number,
