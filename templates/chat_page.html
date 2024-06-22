@@ -431,6 +431,18 @@ img {
     border:none;
     outline:none;
  }
+ .button-link {
+            text-decoration: none; /* Removes underline */
+        }
+
+        .button-link button {
+            background-color: blue;
+            color: white;
+            border: 1px solid #000; /* Very small border */
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
   </style>
 </head>
 <body>
@@ -442,7 +454,9 @@ img {
 
 <!--header -->
       <div class="header">
-        <button class="btn btn-lg">Back to Dashboard</button>
+        <a href="#" class="button-link">
+            <button>Back to Dashboard</button>
+        </a>
       </div>
 
 
