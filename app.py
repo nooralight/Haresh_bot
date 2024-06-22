@@ -25,6 +25,10 @@ twilio_client = Client(account_sid, auth_token)
 def home():
     return render_template("home.html")
 
+@app.route('/contacts', methods=['POST','GET'])
+def contacts():
+    return render_template("chat_page.html.html")
+
 @app.route('/whatsapp', methods=['POST'])
 def handle_incoming_message():
     message = request.form.get('Body')
