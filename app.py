@@ -22,7 +22,7 @@ messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
 @app.route('/', methods=['POST','GET'])
-def index():
+def home():
     return render_template("home.html")
 
 @app.route('/whatsapp', methods=['POST'])
