@@ -25,6 +25,14 @@ twilio_client = Client(account_sid, auth_token)
 def home():
     return render_template("home.html")
 
+@app.route('/bookings', methods=['POST','GET'])
+def bookings():
+    return render_template("bookings.html")
+
+@app.route('/players', methods=['POST','GET'])
+def players():
+    return render_template("players.html")
+
 @app.route('/contacts', methods=['POST','GET'])
 def contacts():
     return render_template("chat_page.html")
