@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify,session
+from flask import Flask, request, jsonify,session, render_template
 from flask_session import Session
 from twilio.rest import Client
 
@@ -23,7 +23,7 @@ twilio_client = Client(account_sid, auth_token)
 
 @app.route('/', methods=['POST','GET'])
 def index():
-    return "okay"
+    return render_template("home.html")
 
 @app.route('/whatsapp', methods=['POST'])
 def handle_incoming_message():
