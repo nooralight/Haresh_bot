@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify,session, redirect, url_for
+from flask import Flask, request, jsonify,session
 from flask_session import Session
 from twilio.rest import Client
 
@@ -18,9 +18,10 @@ Session(app)
 account_sid = os.getenv('ACCOUNT_SID')
 auth_token = os.getenv('AUTH_TOKEN')
 phone_number = os.getenv('PHONE_NUMBER')
+messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST','GET'])
 def index():
     return "okay"
 
@@ -38,13 +39,23 @@ def handle_incoming_message():
             to= sender
         )
     else:
-        message_send = twilio_client.messages.create(
-            from_ = phone_number,
-            body=f"Hi {profile_name}, I am Haresh from Pedal Court. Thanks for sending message to me. New version will come very soon.",
-            to= sender
-        )
-    
-    return "okay",200
+        if session.get('context') == None or 'context' not in session:
+            message_send = twilio_client.messages.create(
+                    from_= messaging_sid,
+                    content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
+                    to = sender
+                )
+        
+            session['context'] = "started"
+            return "okay",200
+        elif session.get('context') == "started":
+            message_send = twilio_client.messages.create(
+                    from_ = phone_number,
+                    body=f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!",
+                    to= sender
+                )
+            session['context'] = None
+            return "okay",200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True,port=8000)
