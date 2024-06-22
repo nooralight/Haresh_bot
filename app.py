@@ -20,6 +20,10 @@ auth_token = os.getenv('AUTH_TOKEN')
 phone_number = os.getenv('PHONE_NUMBER')
 twilio_client = Client(account_sid, auth_token)
 
+@app.route('/', methods=['POST'])
+def index():
+    return "okay"
+
 @app.route('/whatsapp', methods=['POST'])
 def handle_incoming_message():
     message = request.form.get('Body')
