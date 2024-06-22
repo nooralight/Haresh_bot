@@ -27,7 +27,7 @@ def home():
 
 @app.route('/contacts', methods=['POST','GET'])
 def contacts():
-    return render_template("chat_page.html.html")
+    return render_template("chat_page.html")
 
 @app.route('/whatsapp', methods=['POST'])
 def handle_incoming_message():
