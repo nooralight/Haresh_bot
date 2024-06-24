@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles.css">
   <title>Whatsapp Clone</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -471,7 +472,7 @@ img {
       <div class="search-container">
         <div class="input">
 <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Search.."></div>
+          <input type="text" id="search-input" placeholder="Search.."></div>
      <i class="fa-sharp fa-solid fa-bars-filter"></i>
       </div>
 
@@ -484,10 +485,10 @@ img {
           <div class="chat-details">
             <div class="text-head">
               <h4>{{contact.name}}</h4>
-              
+              <span style="display: none;">{{ contact.whatsapp }}</span>
             </div>
             <div class="text-message">
-              <p>{{contact.last_message[:15]}}</p>
+              <p>{{contact.last_message[:25]}}</p>
               
             </div>
           </div>
@@ -531,6 +532,18 @@ img {
                                 '<br><span>' + message.timestamp + '</span></p></div>';
                             $('#chat-container').append(messageBox);
                         });
+                    }
+                });
+            });
+            $('#search-input').on('keyup', function() {
+                var searchTerm = $(this).val().toLowerCase();
+                $('.chat-box').each(function() {
+                    var contactName = $(this).find('h4').text().toLowerCase();
+                    var contactWhatsapp = $(this).data('contact-id').toLowerCase();
+                    if (contactName.includes(searchTerm) || contactWhatsapp.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
                     }
                 });
             });
