@@ -61,7 +61,9 @@ def insert_into_contacts(name , whatsapp):
 
 @app.route('/', methods=['POST','GET'])
 def home():
-    return render_template("home.html")
+    numOfcontacts = Contacts.objects().count()
+    numOfmessages = Message_db.objects().count()
+    return render_template("home.html", numOfcontacts = numOfcontacts, numOfmessages = numOfmessages)
 
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
