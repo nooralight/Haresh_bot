@@ -120,7 +120,11 @@ def handle_incoming_message():
                     content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
                     to = sender
                 )
-        
+            
+            body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
+1. Match Reservations
+2. FAQ'''
+            insert_into_message(sender[9:], body, "bot")
             session['context'] = "started"
             return "okay",200
         elif session.get('context') == "started":
@@ -129,6 +133,8 @@ def handle_incoming_message():
                     body=f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!",
                     to= sender
                 )
+            body= f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!"
+            insert_into_message(sender[9:], body, "bot")
             session['context'] = None
             return "okay",200
 
