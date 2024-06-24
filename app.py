@@ -76,6 +76,11 @@ def contacts():
     contacts = Contacts.objects()
     return render_template("chat_page.html",contacts = contacts)
 
+@app.route('/message_history/<contact_id>', methods=['GET'])
+def message_history(contact_id):
+    messages = Message_db.objects(user_number=contact_id)
+    return jsonify(messages)
+
 @app.route('/message_history/<whatsapp>', methods=['GET'])
 def message_history(whatsapp):
     messages = Message_db.objects(user_number=whatsapp)
