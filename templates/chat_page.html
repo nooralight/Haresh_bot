@@ -476,106 +476,21 @@ img {
 
 <!--chats -->
       <div class="chat-list">
+        {% for contact in contacts %}
         <div class="chat-box">
           
           <div class="chat-details">
             <div class="text-head">
-              <h4>Nowfal</h4>
-              <p class="time unread">11:49</p>
+              <h4>{{contact.name}}</h4>
+              
             </div>
             <div class="text-message">
-              <p>“How are you?”</p>
-              <b>1</b>
+              <p>{{contact.last_message[:15]}}</p>
+              
             </div>
           </div>
         </div>
-        <div class="chat-box">
-          
-          <div class="chat-details">
-            <div class="text-head">
-              <h4>Rohan</h4>
-              <p class="time unread">10:49</p>
-            </div>
-            <div class="text-message">
-              <p>“I’ll be there.”</p>
-              <b>4</b>
-            </div>
-          </div>
-        </div>
-        <div class="chat-box">
-          
-          <div class="chat-details">
-            <div class="text-head">
-              <h4>Zoya</h4>
-              <p class="time unread">09:49</p>
-            </div>
-            <div class="text-message">
-              <p>“Make somebody’s day.”</p>
-              <b>2</b>
-            </div>
-          </div>
-        </div>
-        <div class="chat-box">
-          
-          <div class="chat-details">
-            <div class="text-head">
-              <h4>Ava</h4>
-              <p class="time">08:49</p>
-            </div>
-            <div class="text-message">
-              <p>“Dreams come true.”</p>
-            </div>
-          </div>
-        </div>
-        <div class="chat-box active">
-          
-          <div class="chat-details">
-            <div class="text-head">
-              <h4>Leo</h4>
-              <p class="time">07:49</p>
-            </div>
-            <div class="text-message">
-              <p>Awesome! I'll start a vid..</p>
-            </div>
-          </div>
-        </div>
-        <div class="chat-box">
-          
-          <div class="chat-details">
-            <div class="text-head">
-              <h4>Azariah</h4>
-              <p class="time">06:49</p>
-            </div>
-            <div class="text-message">
-              <p>“Love, light, laughter.”</p>
-            </div>
-          </div>
-        </div>
-        <div class="chat-box">
-          
-          <div class="chat-details">
-            <div class="text-head">
-              <h4>Oliver</h4>
-              <p class="time unread">Yesterday</p>
-            </div>
-            <div class="text-message">
-              <p>“Appreciate the mome..”</p>
-              <b>2</b>
-            </div>
-          </div>
-        </div>
-        <div class="chat-box">
-          
-          <div class="chat-details">
-            <div class="text-head">
-              <h4>Jeslin</h4>
-              <p class="time">Yesterday</p>
-            </div>
-            <div class="text-message">
-              <p>“Now or never.”</p>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
 
     </div>

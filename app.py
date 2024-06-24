@@ -21,6 +21,44 @@ phone_number = os.getenv('PHONE_NUMBER')
 messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
+# Define the MongoDB connection
+connect(host="mongodb://127.0.0.1:27017/haresh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.10")
+
+# Define the MongoDB document schema using mongoengine
+class Contacts(Document):
+    id = SequenceField(primary_key=True)
+    name = StringField()
+    whatsapp = StringField()
+    last_message = StringField()
+    created_at = DateTimeField()
+
+class Message_db(Document):
+    id = SequenceField(primary_key=True)
+    user_number = StringField()
+    message = StringField()
+    user_type =StringField()
+    created_at = DateTimeField()
+
+
+def insert_into_message(user_number, message , user_type):
+    new_msg = Message_db(
+        user_number = user_number,
+        message = message,
+        user_type = user_type,
+        created_at = datetime.now()
+    )
+    new_msg.save()
+
+
+def insert_into_contacts(name , whatsapp):
+    contact = Contacts(
+        name = name,
+        whatsapp = whatsapp,
+        created_at = datetime.now()
+    )
+    contact.save()
+    return contact
+
 @app.route('/', methods=['POST','GET'])
 def home():
     return render_template("home.html")
@@ -35,7 +73,13 @@ def players():
 
 @app.route('/contacts', methods=['POST','GET'])
 def contacts():
-    return render_template("chat_page.html")
+    contacts = Contacts.objects()
+    return render_template("chat_page.html",contacts = contacts)
+
+@app.route('/message_history/<whatsapp>', methods=['GET'])
+def message_history(whatsapp):
+    messages = Message_db.objects(user_number=whatsapp)
+    return jsonify(messages)
 
 @app.route('/whatsapp', methods=['POST'])
 def handle_incoming_message():
@@ -44,6 +88,17 @@ def handle_incoming_message():
     profile_name = request.form.get('ProfileName')
     media_url = request.form.get('MediaUrl0')
     print("hello")
+    # Checking if user already available
+    already_user = Contacts.objects(whatsapp = sender[9:]).first()
+    if not already_user:
+        new_created = insert_into_contacts(profile_name, sender[9:])
+        new_created.last_message = message
+        new_created.save()
+    else:
+        already_user.last_message = message
+        already_user.save()
+
+    insert_into_message(sender[9:],message, "user")
     if media_url:
         message_send = twilio_client.messages.create(
             from_ = phone_number,
