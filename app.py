@@ -79,6 +79,8 @@ def contacts():
 @app.route('/message_history/<contact_id>', methods=['GET'])
 def message_history(contact_id):
     messages = Message_db.objects(user_number=contact_id)
+    for message in messages:
+        print(message.message)
     return jsonify(messages)
 
 
