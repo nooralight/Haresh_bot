@@ -79,9 +79,14 @@ def contacts():
 @app.route('/message_history/<contact_id>', methods=['GET'])
 def message_history(contact_id):
     messages = Message_db.objects(user_number=contact_id)
+    message_list = []
     for message in messages:
-        print(message.message)
-    return jsonify(messages)
+        message_list.append({
+            'message': message.message,
+            'timestamp': message.created_at,
+            'user_type': message.user_type
+        })
+    return jsonify(message_list)
 
 
 @app.route('/whatsapp', methods=['POST'])

@@ -512,28 +512,28 @@ img {
 
   </div>
   <script>
-    $(document).ready(function(){
-        $('.chat-box').click(function(){
-            var contactId = $(this).data('contact-id');
-            var contactName = $(this).find('h4').text();
-            $('#contact-name').text(contactName);
+        $(document).ready(function(){
+            $('.chat-box').click(function(){
+                var contactId = $(this).data('contact-id');
+                var contactName = $(this).find('h4').text();
+                $('#contact-name').text(contactName);
 
-            $.ajax({
-                url: '/message_history/' + contactId,
-                method: 'GET',
-                success: function(data) {
-                    $('#chat-container').empty();
-                    data.forEach(function(message) {
-                        var messageBox = '<div class="message-box ' + 
-                            (message.user_type == 'bot' ? 'my-message' : 'friend-message') + 
-                            '"><p>' + message.message + 
-                            '<br><span>' + message.timestamp + '</span></p></div>';
-                        $('#chat-container').append(messageBox);
-                    });
-                }
+                $.ajax({
+                    url: '/message_history/' + contactId,
+                    method: 'GET',
+                    success: function(data) {
+                        $('#chat-container').empty();
+                        data.forEach(function(message) {
+                            var messageBox = '<div class="message-box ' + 
+                                (message.user_type == 'bot' ? 'my-message' : 'friend-message') + 
+                                '"><p>' + message.message + 
+                                '<br><span>' + message.timestamp + '</span></p></div>';
+                            $('#chat-container').append(messageBox);
+                        });
+                    }
+                });
             });
         });
-    });
 </script>
 </body>
 </html>
