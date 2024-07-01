@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify,session, render_template
+from flask import Flask, request, jsonify,session, render_template, redirect
 from flask_session import Session
 from twilio.rest import Client
 from mongoengine import *
@@ -39,6 +39,17 @@ class Message_db(Document):
     user_type =StringField()
     created_at = DateTimeField()
 
+class Admin_user(Document):
+    id = SequenceField(primary_key=True)
+    name = StringField()
+    email = StringField()
+    designation = StringField()
+    role = StringField()
+    password = StringField()
+    created_at = DateTimeField()
+    updated_at = DateTimeField()
+
+
 
 def insert_into_message(user_number, message , user_type):
     new_msg = Message_db(
@@ -58,6 +69,7 @@ def insert_into_contacts(name , whatsapp):
     )
     contact.save()
     return contact
+
 
 @app.route('/', methods=['POST','GET'])
 def home():
