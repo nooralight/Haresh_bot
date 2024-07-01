@@ -10,7 +10,7 @@ class Players(Document):
     id = SequenceField(primary_key=True)
     name = StringField()
     mobile = StringField()
-    age = IntField()
+    age = StringField()
     sex = StringField()
     level = StringField()
     availability = StringField()
@@ -50,6 +50,8 @@ for _, row in data.iterrows():
         availability=None,
         preferred_position=None,
         dominant_hand=None,
-        status=None
+        status=None,
+        created_at = datetime.now(),
+        updated_at = datetime.now()
     )
     player.save()
