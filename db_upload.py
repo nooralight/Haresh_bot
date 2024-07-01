@@ -35,7 +35,7 @@ def process_mobile(mobile):
 def get_value_or_none(value):
     if pd.isna(value):
         return None
-    return value
+    return str(value)
 
 data['Mobile'] = data['Mobile'].apply(process_mobile)
 
