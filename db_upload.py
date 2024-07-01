@@ -29,7 +29,8 @@ data = pd.read_excel(file_path)
 def process_mobile(mobile):
     mobile = str(mobile)
     if len(mobile) == 9 and mobile.isdigit():
-        return '+34 ' + mobile
+        real_mobile = '+34' + mobile
+        return real_mobile.replace(" ", "")
     return mobile
 
 def get_value_or_none(value):
