@@ -186,22 +186,25 @@
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for player in players %}
-                                    <tr>
-                                        <td style="color: black;">{{ player.id }}</td>
-                                        <td style="color: black;">{{ player.name }}</td>
-                                        <td style="color: black;">{{ player.mobile }}</td>
-                                        <td style="color: black;">{{ player.age }}</td>
-                                        <td style="color: black;">{{ player.sex }}</td>
-                                        <td style="color: black;">{{ player.level }}</td>
-                                        <td style="color: black;">{{ player.availability }}</td>
-                                        <td style="color: black;">{{ player.preferred_position }}</td>
-                                        <td style="color: black;">{{ player.dominant_hand }}</td>
-                                        <td style="color: black;">{{ player.status }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
+                            <div class="custom-table-container">
+                                <tbody>
+                                    {% for player in players %}
+                                        <tr>
+                                            <td style="color: black;">{{ player.id }}</td>
+                                            <td style="color: black;">{{ player.name }}</td>
+                                            <td style="color: black;">{{ player.mobile }}</td>
+                                            <td style="color: black;">{{ player.age }}</td>
+                                            <td style="color: black;">{{ player.sex }}</td>
+                                            <td style="color: black;">{{ player.level }}</td>
+                                            <td style="color: black;">{{ player.availability }}</td>
+                                            <td style="color: black;">{{ player.preferred_position }}</td>
+                                            <td style="color: black;">{{ player.dominant_hand }}</td>
+                                            <td style="color: black;">{{ player.status }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </div>
+                            
                         </table>
                     </div>
                     
