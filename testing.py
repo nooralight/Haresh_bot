@@ -24,9 +24,8 @@ class Players(Document):
 all_players = Players.objects()
 levels = []
 for player in all_players:
-    if player.level == "nuevo usuario ":
-        player.level = "nuevo usuario"
-        print("Changed")
+    if player.level not in levels:
+        levels.append(player.level)
 
-# print(levels)
-# ['segunda baja', 'tercera alta', 'Tercera media', 'Segunda media', 'cuarta baja', 'segunda alta', 'cuarta alta', 'usuario no respo', 'Cuarta media', 'tercera baja', 'No interesado', 'undefined', 'Extranjero', 'Quinta', 'primera', 'nuevo usuario', 'nuevo usuario']
+print(levels)
+['segunda baja', 'tercera alta', 'Tercera media', 'Segunda media', 'cuarta baja', 'segunda alta', 'cuarta alta', 'usuario no respo', 'Cuarta media', 'tercera baja', 'No interesado', 'undefined', 'Extranjero', 'Quinta', 'primera', 'nuevo usuario', 'nuevo usuario']
