@@ -170,22 +170,22 @@
                             </div>
                         </form>
                     </div>
-                    <table class="table table-bordered table-sm custom-table" id="customTable" style="color: black;">
-                        <thead class="table-dark">
-                            <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Age</th>
-                                <th class="text-center">Sex</th>
-                                <th class="text-center">Level</th>
-                                <th class="text-center">Availability</th>
-                                <th class="text-center">Preferred Position</th>
-                                <th class="text-center">Dominant Hand</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <div class="custom-table-container">
+                    <div class="custom-table-container">
+                        <table class="table table-bordered table-sm custom-table" id="customTable" style="color: black;">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Age</th>
+                                    <th class="text-center">Sex</th>
+                                    <th class="text-center">Level</th>
+                                    <th class="text-center">Availability</th>
+                                    <th class="text-center">Preferred Position</th>
+                                    <th class="text-center">Dominant Hand</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 {% for player in players %}
                                     <tr>
@@ -202,9 +202,8 @@
                                     </tr>
                                 {% endfor %}
                             </tbody>
-                        </div>
-                        
-                    </table>
+                        </table>
+                    </div>
                     
                 </div>
             </div>
