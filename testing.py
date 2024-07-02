@@ -24,8 +24,10 @@ class Players(Document):
 all_players = Players.objects()
 levels = []
 for player in all_players:
-    if player.level not in levels:
-        levels.append(player.level)
+    player.status = "Active"
+    player.save()
+    # if player.status not in levels:
+    #     levels.append(player.level)
 
-print(levels)
+# print(levels)
 # ['segunda baja', 'tercera alta', 'Tercera media', 'Segunda media', 'cuarta baja', 'segunda alta', 'cuarta alta', 'usuario no respo', 'Cuarta media', 'tercera baja', 'No interesado', 'undefined', 'Extranjero', 'Quinta', 'primera', 'nuevo usuario', 'nuevo usuario']
