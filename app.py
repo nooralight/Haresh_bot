@@ -49,7 +49,19 @@ class Admin_user(Document):
     created_at = DateTimeField()
     updated_at = DateTimeField()
 
-
+class Players(Document):
+    id = SequenceField(primary_key=True)
+    name = StringField()
+    mobile = StringField()
+    age = StringField()
+    sex = StringField()
+    level = StringField()
+    availability = StringField()
+    preferred_position = StringField()
+    dominant_hand = StringField()
+    status = StringField()
+    created_at = DateTimeField()
+    updated_at = DateTimeField()
 
 def insert_into_message(user_number, message , user_type):
     new_msg = Message_db(
@@ -75,7 +87,8 @@ def insert_into_contacts(name , whatsapp):
 def home():
     numOfcontacts = Contacts.objects().count()
     numOfmessages = Message_db.objects().count()
-    return render_template("home.html", numOfcontacts = numOfcontacts, numOfmessages = numOfmessages)
+    numOfplayers = Players.objects().count()
+    return render_template("home.html", numOfcontacts = numOfcontacts, numOfmessages = numOfmessages, numOfplayers = numOfplayers)
 
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
@@ -83,7 +96,8 @@ def bookings():
 
 @app.route('/players', methods=['POST','GET'])
 def players():
-    return render_template("players.html")
+    players = Players.objects().order_by('-id')
+    return render_template("players.html", players = players)
 
 @app.route('/contacts', methods=['POST','GET'])
 def contacts():
