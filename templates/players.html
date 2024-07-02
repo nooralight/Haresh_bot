@@ -270,6 +270,17 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#all_search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#customTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
     <!-- Required vendors -->
     <script src="{{ url_for('static',filename = 'vendor/global/global.min.js') }}"></script>  
     <script src="{{ url_for('static',filename = 'js/quixnav-init.js') }}"></script> 
