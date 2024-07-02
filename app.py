@@ -1,8 +1,9 @@
-from flask import Flask, request, jsonify,session, render_template, redirect
+from flask import Flask, request, jsonify,session, render_template, redirect, url_for
 from flask_session import Session
 from twilio.rest import Client
 from mongoengine import *
 from datetime import datetime,timedelta
+from db_player import add_new_player
 
 import os
 from dotenv import load_dotenv
@@ -83,6 +84,7 @@ def insert_into_contacts(name , whatsapp):
     return contact
 
 
+
 @app.route('/', methods=['POST','GET'])
 def home():
     numOfcontacts = Contacts.objects().count()
@@ -99,6 +101,20 @@ def players():
     players = Players.objects().order_by('-id')
     return render_template("players.html", players = players)
 
+
+
+@app.route('/add_new_player', methods=['POST','GET'])
+def add_new_player():
+
+    name = request.form.get('p_name')
+    mobile = request.form.get('p_mobile')
+    age = request.form.get('p_age')
+    sex = request.form.get('p_sex')
+    level = request.form.get('p_level')
+    status = "Active"
+    add_new_player(name, mobile, age, sex, level, status)
+
+    return redirect(url_for('players'))
 
 @app.route('/delete_player', methods=['POST','GET'])
 def delete_player():

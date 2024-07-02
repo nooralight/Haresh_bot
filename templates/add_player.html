@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" sizes="16x16" href="{{ url_for('static', filename= 'logo/logotipo.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    
+    <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet"> 
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <a href="{{ url_for('home') }}" class="brand-logo" style="background-color: white;">
+                
+                <img class="logo-compact" src="" style="color: black;font-size: small;" alt="Pedal Club">
+                <img class="brand-title" src="" style="color: black;font-size: small;" alt="Pedal Club">
+                
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            
+                        </div>
+
+                        <ul class="navbar-nav header-right">
+                            
+                            <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Profile </span>
+                                    </a>
+                                    
+                                    <a href="#" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Logout </span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav">
+            <div class="quixnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Main Menu</li>
+                    <li><a href="{{ url_for('home') }}" aria-expanded="false"><i class="fas fa-home"></i><span
+                        class="nav-text">Dashboard</span></a>
+                    </li>
+
+                    <li class="nav-label">Message History</li>
+                    <li><a href="{{ url_for('contacts') }}" aria-expanded="false"><i class="fas fa-address-book"></i><span
+                        class="nav-text">Contacts</span></a>
+                    </li>
+                    <li class="nav-label">Matches</li>
+                    <li><a href="{{ url_for('bookings') }}" aria-expanded="false"><i class="fas fa-puzzle-piece"></i><span
+                        class="nav-text">Match Bookings</span></a>
+                    </li>
+                    <li class="nav-label">User Database</li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fas fa-user-friends"></i>
+                        <span class="nav-text">Players</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ url_for('players') }}">List of Players</a></li>
+                            <li><a href="#">Add new Player</a></li></ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Add new Player</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form action="{{ url_for('add_new_player') }}" method="post">
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label style="color: rgb(61, 56, 56);">Player Name</label>
+                                        <input type="text" name="p_name" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label style="color: rgb(61, 56, 56);">Phone/WhatsApp number</label>
+                                        <input type="text" name="p_mobile" class="form-control" required>
+                                        <small class="text-dark">* Don't forget to add country code, Example: +88</small>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label style="color: rgb(61, 56, 56);">Age</label>
+                                        <input type="text" name="p_age" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label style="color: rgb(61, 56, 56);">sex</label>
+                                        <input type="text" name="p_sex" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label style="color: rgb(61, 56, 56);">Player Level</label>
+                                        <select id="inputLevel" name="p_level" class="form-control">
+                                            <option selected>Choose...</option>
+                                            <option value="segunda baja">segunda baja</option>
+                                            <option value="tercera alta">tercera alta</option>
+                                            <option value="Tercera medi">Tercera media</option>
+                                            <option value="Segunda medi">Segunda medi</option>
+                                            <option value="cuarta baja">cuarta baja</option>
+                                            <option value="segunda alta">segunda alta</option>
+                                            <option value="cuarta alta">cuarta alta</option>
+                                            <option value="usuario no respo">usuario no respo</option>
+                                            <option value="Cuarta media">Cuarta media</option>
+                                            <option value="tercera baja">tercera baja</option>
+                                            <option value="No interesad">No interesado</option>
+                                            <option value="undefined">undefined</option>
+                                            <option value="Extranjero">Extranjero</option>
+                                            <option value="Quinta">Quinta</option>
+                                            <option value="primera">primera</option>
+                                            <option value="nuevo usuario">nuevo usuario</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-primary">Save & Add</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <!-- <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="https://yatezzitos.com/" target="_blank">Yatezzitos</a></p>
+            </div>
+        </div> -->
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="{{ url_for('static',filename = 'vendor/global/global.min.js') }}"></script>  
+    <script src="{{ url_for('static',filename = 'js/quixnav-init.js') }}"></script> 
+    <script src="{{ url_for('static',filename = 'js/custom.min.js') }}"></script> 
+
+</body>
+
+</html>
