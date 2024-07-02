@@ -105,16 +105,18 @@ def players():
 
 @app.route('/add_new_player', methods=['POST','GET'])
 def add_new_player():
+    if request.method == "POST":
+        name = request.form.get('p_name')
+        mobile = request.form.get('p_mobile')
+        age = request.form.get('p_age')
+        sex = request.form.get('p_sex')
+        level = request.form.get('p_level')
+        status = "Active"
+        add_new_player(name, mobile, age, sex, level, status)
 
-    name = request.form.get('p_name')
-    mobile = request.form.get('p_mobile')
-    age = request.form.get('p_age')
-    sex = request.form.get('p_sex')
-    level = request.form.get('p_level')
-    status = "Active"
-    add_new_player(name, mobile, age, sex, level, status)
-
-    return redirect(url_for('players'))
+        return redirect(url_for('players'))
+    
+    return render_template('add_player.html')
 
 @app.route('/delete_player', methods=['POST','GET'])
 def delete_player():
