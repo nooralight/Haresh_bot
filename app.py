@@ -104,7 +104,7 @@ def players():
 
 
 @app.route('/add_new_player', methods=['POST','GET'])
-def add_new_player():
+def create_new_player():
     if request.method == "POST":
         name = request.form.get('p_name')
         mobile = request.form.get('p_mobile')
