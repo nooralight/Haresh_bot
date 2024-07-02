@@ -141,48 +141,37 @@
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                            <form method="post">
+                            <form method="post" id="new_player_form">
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label style="color: rgb(61, 56, 56);">Player Name</label>
-                                        <input type="text" name="p_name" class="form-control" required>
+                                        <input type="text" name="p_name" id="p_name" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label style="color: rgb(61, 56, 56);">Phone/WhatsApp number</label>
-                                        <input type="text" name="p_mobile" class="form-control" required>
+                                        <input type="text" name="p_mobile" id="p_mobile" class="form-control" required>
                                         <small class="text-dark">* Don't forget to add country code, Example: +88</small>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label style="color: rgb(61, 56, 56);">Age</label>
-                                        <input type="text" name="p_age" class="form-control" required>
+                                        <input type="text" name="p_age" id="p_age" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label style="color: rgb(61, 56, 56);">sex</label>
                                         <select id="inputSex" name="p_sex" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option value="segunda baja">segunda baja</option>
-                                            <option value="tercera alta">tercera alta</option>
-                                            <option value="Tercera medi">Tercera media</option>
-                                            <option value="Segunda medi">Segunda medi</option>
-                                            <option value="cuarta baja">cuarta baja</option>
-                                            <option value="segunda alta">segunda alta</option>
-                                            <option value="cuarta alta">cuarta alta</option>
-                                            <option value="usuario no respo">usuario no respo</option>
-                                            <option value="Cuarta media">Cuarta media</option>
-                                            <option value="tercera baja">tercera baja</option>
-                                            <option value="No interesad">No interesado</option>
-                                            <option value="undefined">undefined</option>
-                                            <option value="Extranjero">Extranjero</option>
-                                            <option value="Quinta">Quinta</option>
-                                            <option value="primera">primera</option>
-                                            <option value="nuevo usuario">nuevo usuario</option>
+                                            <option value="choose" selected>Choose...</option>
+                                            <option value="Hombre">Hombre</option>
+                                            <option value="Mujer">Mujer</option>
                                         </select>
+                                        <div class="small text-danger" id="sex_error">
+
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label style="color: rgb(61, 56, 56);">Player Level</label>
                                         <select id="inputLevel" name="p_level" class="form-control">
-                                            <option selected>Choose...</option>
+                                            <option value="choose" selected>Choose...</option>
                                             <option value="segunda baja">segunda baja</option>
                                             <option value="tercera alta">tercera alta</option>
                                             <option value="Tercera medi">Tercera media</option>
@@ -200,6 +189,9 @@
                                             <option value="primera">primera</option>
                                             <option value="nuevo usuario">nuevo usuario</option>
                                         </select>
+                                        <div class="small text-danger" id="level_error">
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -252,6 +244,32 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    <script>
+        document.getElementById('new_player_form').addEventListener('submit', function(event) {
+            let isValid = true;
+            const sex = document.getElementById('inputSex').value;
+            const level = document.getElementById('inputLevel').value;
+            const sexErrorDiv = document.getElementById('sex_error');
+            const levelErrorDiv = document.getElementById('level_error');
+            
+            sexErrorDiv.textContent = '';
+            levelErrorDiv.textContent = '';
+            
+            if (sex === 'Choose...') {
+                sexErrorDiv.textContent = 'This field cannot be empty';
+                isValid = false;
+            }
+            
+            if (level === 'Choose...') {
+                levelErrorDiv.textContent = 'This field cannot be empty';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
     <!-- Required vendors -->
     <script src="{{ url_for('static',filename = 'vendor/global/global.min.js') }}"></script>  
     <script src="{{ url_for('static',filename = 'js/quixnav-init.js') }}"></script> 
