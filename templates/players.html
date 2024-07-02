@@ -276,7 +276,8 @@
             $("#all_search").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
                 $("#customTable tbody tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    var rowText = $(this).find('td:lt(3)').text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(value) > -1);
                 });
             });
         });
