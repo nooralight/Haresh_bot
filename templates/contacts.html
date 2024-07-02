@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Contacts</title>
+    <!-- Favicon icon -->
+    <link rel="icon" sizes="16x16" href="{{ url_for('static', filename= 'logo/eyal_logo.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
+    <style>
+        .scrollable{
+        overflow-y: auto;
+        max-height: 550px;
+        }
+        /* Set a specific height for the table container */
+        .custom-table-container {
+            max-height: 650px; /* Change this value to your desired height */
+            overflow-y: auto;
+        }
+
+        /* Style for the table */
+        .custom-table {
+            width: 100%;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header" style="background-color:  #d8e3f0 ;">
+            <a href="{{ url_for('home') }}" class="brand-logo" style="background-color: white;">
+                
+                <img class="logo-compact" src="{{ url_for('static', filename = 'logo/eyal_logo.png') }}" alt="">
+                <img class="brand-title" src="{{ url_for('static', filename = 'logo/eyal_logo.png') }}" alt="">
+                
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            
+                        </div>
+
+                        <ul class="navbar-nav header-right">
+                            
+                            <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    
+                                    <a href="#" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Logout </span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav">
+            <div class="quixnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Main Menu</li>
+                    <li><a href="{{ url_for('home') }}" aria-expanded="false"><i class="fas fa-home"></i><span
+                        class="nav-text">Dashboard</span></a>
+                    </li>
+
+                    <li class="nav-label">Message History</li>
+                    <li><a href="{{ url_for('contacts') }}" aria-expanded="false"><i class="fas fa-address-book"></i><span
+                        class="nav-text">Contacts</span></a>
+                    </li>
+                    <li class="nav-label">Matches</li>
+                    <li><a href="{{ url_for('bookings') }}" aria-expanded="false"><i class="fas fa-puzzle-piece"></i><span
+                        class="nav-text">Match Bookings</span></a>
+                    </li>
+                    <li class="nav-label">User Database</li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fas fa-user-friends"></i>
+                        <span class="nav-text">Players</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ url_for('players') }}">List of Players</a></li>
+                            <li><a href="#">Add new Player</a></li></ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Contacts & Chat History</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-end mb-2">
+                                    <!-- Search Form -->
+                                    <form class="form-inline mx-2" id="search-form" action="#" method="post">
+                                        <div class="input-group">
+                                            <input type="text" id="all_search" name="all_search" class="form-control" placeholder="Search">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="custom-table-container">
+                                    <table class="table table-bordered custom-table" id="customTable" style="color: black;">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">WhatsApp Number</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {% for user in users %}
+                                            <tr>
+                                                <td style="color: black;" class="text-center">{{user.id}}</td>
+                                                <td style="color: black;" class="text-center">{{user.user_name}}</td>
+                                                <td style="color: black;" class="text-center">{{user.user_number}}</td>
+                                                <!-- icon-notebook -->
+                                                <!-- icon-trash -->
+                                                <td>
+                                                    <div class="d-flex justify-content-center">
+                                                        <span>
+                                                            <!-- add -->
+                                                            <a href="javascript:void(0);" class="mr-4 text-dark" data-toggle="modal" data-placement="top" data-target="#modalHistory{{ user.id }}" title="Message History"><i class="bi bi-chat-dots"></i> History</a>
+                                                            <!-- delete -->
+                                                        </span>
+                                                    </div>
+                                                    
+                                                </td>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modalHistory{{ user.id }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Chat History</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="card" style="max-height: 650px;max-width: auto;">
+                                                                    <div class="scrollable">
+                                                                        <div class="card-body">
+                                                                            {% for block_msg in user.messages %}
+                                                                            {% if block_msg.user_type == "bot" %}
+                                                                            <div class="d-flex justify-content-start">
+                                                                                <div class="card text-dark bg-info">
+                                                                                    <div class="card-body">
+                                                                                        <p>Bot: {{ block_msg.message }}</p>
+                                                                                        <p style="font-size: x-small;">{{ block_msg.message_time }}</p>
+                                                                                    </div>
+                                                                                </div> 
+                                                                            </div>
+                                                                            {% else %}
+                                                                            <div class="d-flex justify-content-end">
+                                                                                <div class="card text-white bg-primary">
+                                                                                    
+                                                                                    <div class="card-body">
+                                                                                        <p>{{ block_msg.message }}</p>
+                                                                                        <p style="font-size: x-small;">{{ block_msg.message_time }}</p>
+                                                                                    </div>
+                                                                                </div>                                                                                   
+                                                                            </div>
+                                                                            {% endif %}
+                                                                                
+                                                                            {% endfor %}
+                                                                            
+                                                                        </div>
+                                        
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+
+                                            </tr>
+                                            {% endfor %}
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script>
+        $(document).ready(function() {
+            $('#all_search').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('#customTable tbody tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+    <!-- Required vendors -->
+    <script src="{{ url_for('static',filename = 'vendor/global/global.min.js') }}"></script>  
+    <script src="{{ url_for('static',filename = 'js/quixnav-init.js') }}"></script> 
+    <script src="{{ url_for('static',filename = 'js/custom.min.js') }}"></script> 
+
+    
+
+</body>
+
+</html>
