@@ -166,11 +166,11 @@
                                         Sex
                                     </button>
                                 </div>
-                                <select id="inputState" class="form-control">
+                                <select id="inputSex" class="form-control">
                                     <option selected>Choose...</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
+                                    <option>-</option>
+                                    <option>Hombre</option>
+                                    <option>Mujer</option>
                                 </select>
                                 
                             </div>
@@ -287,13 +287,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#all_search").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
+            function filterTable() {
+                var searchValue = $("#all_search").val().toLowerCase();
+                var sexValue = $("#inputSex").val().toLowerCase();
+                
                 $("#customTable tbody tr").filter(function() {
                     var rowText = $(this).find('td:lt(3)').text().toLowerCase();
-                    $(this).toggle(rowText.indexOf(value) > -1);
+                    var sexText = $(this).find('td:eq(4)').text().toLowerCase();
+    
+                    var matchSearch = rowText.indexOf(searchValue) > -1;
+                    var matchSex = (sexValue === "choose...") || (sexText.indexOf(sexValue) > -1);
+    
+                    $(this).toggle(matchSearch && matchSex);
                 });
-            });
+            }
+    
+            $("#all_search").on("keyup", filterTable);
+            $("#inputSex").on("change", filterTable);
         });
     </script>
     <!-- Required vendors -->
