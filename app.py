@@ -99,6 +99,17 @@ def players():
     players = Players.objects().order_by('-id')
     return render_template("players.html", players = players)
 
+
+@app.route('/delete_player', methods=['POST','GET'])
+def delete_player():
+
+    referrer = request.referrer
+    player_id = request.form.get('player_id')
+    player = Players.objects(id = player_id).first()
+    player.delete()
+
+    return redirect(referrer)
+
 @app.route('/contacts', methods=['POST','GET'])
 def contacts():
     contacts = Contacts.objects()
