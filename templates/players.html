@@ -9,8 +9,8 @@
     <!-- Favicon icon -->
     <link rel="icon" sizes="16x16" href="{{ url_for('static', filename= 'logo/logotipo.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
     <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
     <style>
         .scrollable{
@@ -200,7 +200,7 @@
                                         <td style="color: black;">{{ player.preferred_position }}</td>
                                         <td style="color: black;">{{ player.dominant_hand }}</td>
                                         <td style="color: black;">{{ player.status }}</td>
-                                        <td style="color: black;"> <i class="fal fa-trash-alt"></i> </td>
+                                        <td style="color: black;"> <i class="fa-regular fa-trash"></i> </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
