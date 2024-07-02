@@ -163,6 +163,34 @@
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary" type="button">
+                                        Level
+                                    </button>
+                                </div>
+                                
+                                <select id="inputLevel" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>segunda baja</option>
+                                    <option>tercera alta</option>
+                                    <option>Tercera media</option>
+                                    <option>Segunda medi</option>
+                                    <option>cuarta baja</option>
+                                    <option>segunda alta</option>
+                                    <option>cuarta alta</option>
+                                    <option>usuario no respo</option>
+                                    <option>Cuarta media</option>
+                                    <option>tercera baja</option>
+                                    <option>No interesado</option>
+                                    <option>undefined</option>
+                                    <option>Extranjero</option>
+                                    <option>Quinta</option>
+                                    <option>primera</option>
+                                    <option>nuevo usuario</option>
+                                </select>
+                                
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" type="button">
                                         Sex
                                     </button>
                                 </div>
@@ -290,20 +318,24 @@
             function filterTable() {
                 var searchValue = $("#all_search").val().toLowerCase();
                 var sexValue = $("#inputSex").val().toLowerCase();
+                var levelValue = $("#inputLevel").val().toLowerCase();
                 
                 $("#customTable tbody tr").filter(function() {
                     var rowText = $(this).find('td:lt(3)').text().toLowerCase();
                     var sexText = $(this).find('td:eq(4)').text().toLowerCase();
+                    var levelText = $(this).find('td:eq(5)').text().toLowerCase();
     
                     var matchSearch = rowText.indexOf(searchValue) > -1;
                     var matchSex = (sexValue === "choose...") || (sexText.indexOf(sexValue) > -1);
+                    var matchLevel = (levelValue === "choose...") || (levelText.indexOf(levelValue) > -1);
     
-                    $(this).toggle(matchSearch && matchSex);
+                    $(this).toggle(matchSearch && matchSex && matchLevel);
                 });
             }
     
             $("#all_search").on("keyup", filterTable);
             $("#inputSex").on("change", filterTable);
+            $("#inputLevel").on("change", filterTable);
         });
     </script>
     <!-- Required vendors -->
