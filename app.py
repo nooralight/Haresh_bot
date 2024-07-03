@@ -3,7 +3,7 @@ from flask_session import Session
 from twilio.rest import Client
 from mongoengine import *
 from datetime import datetime,timedelta
-from db_player import add_new_player
+from db_player import add_new_player, update_player
 
 import os
 from dotenv import load_dotenv
@@ -117,6 +117,23 @@ def create_new_player():
         return redirect(url_for('players'))
     
     return render_template('add_player.html')
+
+@app.route('/edit_player', methods=['POST','GET'])
+def edit_player():
+    referrer = request.referrer # Previous Link
+    # Get player ID
+    player_id = request.form.get('player_id')
+    
+    new_name = request.form.get('new_name')
+    new_mobile = request.form.get('new_mobile')
+    new_age = request.form.get('new_age')
+    new_sex = request.form.get('new_sex')
+    new_level = request.form.get('new_level')
+    new_status = request.form.get('new_status')
+    update_player(player_id, new_name, new_mobile, new_age, new_sex, new_level, new_status)
+
+    return redirect(referrer)
+
 
 @app.route('/delete_player', methods=['POST','GET'])
 def delete_player():

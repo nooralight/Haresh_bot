@@ -246,7 +246,8 @@
                                         <td style="color: black;">{{ player.dominant_hand }}</td>
                                         <td style="color: black;">{{ player.status }}</td>
                                         <td style="color: black;"><button type="button" class="btn btn-sm btn-light text-dark" data-toggle="modal" data-placement="top" data-target="#deletePlayer{{ player.id }}" title="Delete Row"><i class="fa-regular fa-trash-can"></i></button>
-                                            <button type="button" class="btn btn-sm btn-light text-dark ml-2" data-toggle="modal" data-placement="top" data-target="#editPlayer{{ player.id }}" title="Edit Row"><i class="fas fa-edit"></i></button>
+                                            <button type="button" class="btn btn-sm btn-light text-dark ml-2" data-toggle="modal" data-target="#editPlayer{{ player.id }}" title="Edit Row"><i class="fas fa-edit"></i></button>
+                                            <!-- Modal for Delete Player -->
                                             <div class="modal fade" id="deletePlayer{{ player.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm">
                                                     <div class="modal-content">
@@ -271,6 +272,95 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Modal for Editing Player row -->
+                                            <div class="modal fade" id="editPlayer{{ player.id }}">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Edit Employee {{ player.name }}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="container-fluid">
+                                                                <div class="card-body">
+                                                                    <div class="basic-form">
+                                                                        <form action="{{ url_for('edit_player') }}" method="post" id="new_player_form">
+                                                                            <input type="text" name="player_id" value="{{ player.id }}" hidden>
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label style="color: rgb(61, 56, 56);">Player Name</label>
+                                                                                    <input type="text" name="new_name" id="p_name" value="{{ player.name }}" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label style="color: rgb(61, 56, 56);">Phone/WhatsApp number</label>
+                                                                                    <input type="text" name="new_mobile" id="p_mobile" value="{{ player.mobile }}" class="form-control" required>
+                                                                                    <small class="text-dark">* Don't forget to add country code, Example: +88</small>
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label style="color: rgb(61, 56, 56);">Age</label>
+                                                                                    <input type="text" name="new_age" value="{{ player.age }}" id="p_age" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label style="color: rgb(61, 56, 56);">sex</label>
+                                                                                    <select id="inputSex" name="new_sex" class="form-control">
+                                                                                        <option value="Hombre" {% if player.sex == "Hombre" %} selected {% endif %}>Hombre</option>
+                                                                                        <option value="Mujer" {% if player.sex == "Mujer" %} selected {% endif %}>Mujer</option>
+                                                                                    </select>
+                                                                                    <div class="small text-danger" id="sex_error">
+                                            
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label style="color: rgb(61, 56, 56);">Player Level</label>
+                                                                                    <select id="inputLevel" name="new_level" class="form-control">
+                                                                                        <option value="segunda baja" {% if player.level == "segunda baja" %} selected {% endif %}>segunda baja</option>
+                                                                                        <option value="tercera alta" {% if player.level == "tercera alta" %} selected {% endif %}>tercera alta</option>
+                                                                                        <option value="Tercera medi" {% if player.level == "Tercera media" %} selected {% endif %}>Tercera media</option>
+                                                                                        <option value="Segunda medi" {% if player.level == "Segunda medi" %} selected {% endif %}>Segunda medi</option>
+                                                                                        <option value="cuarta baja" {% if player.level == "cuarta baja" %} selected {% endif %}>cuarta baja</option>
+                                                                                        <option value="segunda alta" {% if player.level == "segunda alta" %} selected {% endif %}>segunda alta</option>
+                                                                                        <option value="cuarta alta" {% if player.level == "cuarta alta" %} selected {% endif %}>cuarta alta</option>
+                                                                                        <option value="usuario no respo" {% if player.level == "usuario no respo" %} selected {% endif %}>usuario no respo</option>
+                                                                                        <option value="Cuarta media" {% if player.level == "Cuarta media" %} selected {% endif %}>Cuarta media</option>
+                                                                                        <option value="tercera baja" {% if player.level == "tercera baja" %} selected {% endif %}>tercera baja</option>
+                                                                                        <option value="No interesad" {% if player.level == "No interesado" %} selected {% endif %}>No interesado</option>
+                                                                                        <option value="undefined" {% if player.level == "undefined" %} selected {% endif %}>undefined</option>
+                                                                                        <option value="Extranjero" {% if player.level == "Extranjero" %} selected {% endif %}>Extranjero</option>
+                                                                                        <option value="Quinta" {% if player.level == "Quinta" %} selected {% endif %}>Quinta</option>
+                                                                                        <option value="primera" {% if player.level == "primera" %} selected {% endif %}>primera</option>
+                                                                                        <option value="nuevo usuario" {% if player.level == "nuevo usuario" %} selected {% endif %}>nuevo usuario</option>
+                                                                                    </select>
+                                                                                    <div class="small text-danger" id="level_error">
+                                            
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label style="color: rgb(61, 56, 56);">Status</label>
+                                                                                    <select id="inputStatus" name="new_status" class="form-control">
+                                                                                        <option value="Active" {% if player.status == "Active" %} selected {% endif %}>Active</option>
+                                                                                        <option value="Stopped" {% if player.status == "Stopped" %} selected {% endif %}>Stopped</option>
+                                                                                    </select>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="d-flex justify-content-center">
+                                                                                        <button type="submit" class="btn btn-primary">Save & Add</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                            
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </td>
                                         
                                     </tr>
