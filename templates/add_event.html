@@ -211,10 +211,13 @@
                                     </div>
                                     
                                 </div>
-                                <div class="form-row">
-                                    <!-- Dynamic Player WhatsApp Inputs -->
-                                    <div id="playerInputs"></div>
+                                <!-- Dynamic Player WhatsApp Inputs -->
+                                <div id="playerInputs">
+                                    <div class="form-row">
+                                    
+                                    </div>
                                 </div>
+                                
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="d-flex justify-content-center">
@@ -318,7 +321,7 @@
 
                 for (var i = 2; i <= capacity; i++) {
                     var playerInput = `
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label style="color: rgb(61, 56, 56);">Player ` + i + ` WhatsApp</label>
                             <input type="text" name="player_whatsapp[]" class="form-control" required>
                         </div>
