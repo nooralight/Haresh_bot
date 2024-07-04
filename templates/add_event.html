@@ -203,6 +203,16 @@
     
                                         </div>
                                     </div>
+                                    <!-- Player 1 WhatsApp -->
+                                    <div class="form-group col-md-6">
+                                        <label style="color: rgb(61, 56, 56);">Player 1 WhatsApp</label>
+                                        <input type="text" name="player_whatsapp[]" class="form-control" required>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-row">
+                                    <!-- Dynamic Player WhatsApp Inputs -->
+                                    <div id="playerInputs" class="form-group col-md-12"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -296,6 +306,25 @@
             if (!isValid) {
                 event.preventDefault();
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#inputCapacity').change(function(){
+                var capacity = $(this).val();
+                var playerInputs = $('#playerInputs');
+                playerInputs.empty();
+
+                for (var i = 2; i <= capacity; i++) {
+                    var playerInput = `
+                        <div class="form-group col-md-6">
+                            <label style="color: rgb(61, 56, 56);">Player ` + i + ` WhatsApp</label>
+                            <input type="text" name="player_whatsapp[]" class="form-control" required>
+                        </div>
+                    `;
+                    playerInputs.append(playerInput);
+                }
+            });
         });
     </script>
     <!-- Required vendors -->
