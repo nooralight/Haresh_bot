@@ -64,6 +64,16 @@ class Players(Document):
     created_at = DateTimeField()
     updated_at = DateTimeField()
 
+class Match_booking(Document):
+    id = SequenceField(primary_key=True)
+    booking_datetime = DateTimeField()
+    court_name = StringField()
+    match_number = StringField()
+    player_count = IntField()
+    players_whatsapp = ListField(StringField())
+    state = StringField()
+    created_at = DateTimeField()
+
 def insert_into_message(user_number, message , user_type):
     new_msg = Message_db(
         user_number = user_number,
@@ -73,7 +83,6 @@ def insert_into_message(user_number, message , user_type):
     )
     new_msg.save()
 
-
 def insert_into_contacts(name , whatsapp):
     contact = Contacts(
         name = name,
@@ -82,7 +91,6 @@ def insert_into_contacts(name , whatsapp):
     )
     contact.save()
     return contact
-
 
 
 @app.route('/', methods=['POST','GET'])
@@ -95,6 +103,10 @@ def home():
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
     return render_template("bookings.html")
+
+@app.route('/add_new_booking', methods=['POST','GET'])
+def add_new_booking():
+    return render_template("add_event.html")
 
 @app.route('/players', methods=['POST','GET'])
 def players():
@@ -121,9 +133,8 @@ def create_new_player():
 @app.route('/edit_player', methods=['POST','GET'])
 def edit_player():
     referrer = request.referrer # Previous Link
-    # Get player ID
+    # TODO
     player_id = request.form.get('player_id')
-    
     new_name = request.form.get('new_name')
     new_mobile = request.form.get('new_mobile')
     new_age = request.form.get('new_age')

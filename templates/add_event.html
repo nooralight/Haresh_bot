@@ -111,6 +111,7 @@
                         class="nav-text">Contacts</span></a>
                     </li>
                     <li class="nav-label">Matches</li>
+                    
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fas fa-user-friends"></i>
                         <span class="nav-text">Match Bookings</span></a>
                         <ul aria-expanded="false">
@@ -144,56 +145,62 @@
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                            <form method="post" id="new_player_form">
-
+                            <form method="post" id="new_event_form">
+                                
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label style="color: rgb(61, 56, 56);">Player Name</label>
-                                        <input type="text" name="p_name" id="p_name" class="form-control" required>
+                                        <label style="color: rgb(61, 56, 56);">Event Date</label>
+                                        <input name="event_date" class="datepicker-default form-control" id="datepicker">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label style="color: rgb(61, 56, 56);">Phone/WhatsApp number</label>
-                                        <input type="text" name="p_mobile" id="p_mobile" class="form-control" required>
-                                        <small class="text-dark">* Don't forget to add country code, Example: +88</small>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label style="color: rgb(61, 56, 56);">Age</label>
-                                        <input type="text" name="p_age" id="p_age" class="form-control" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label style="color: rgb(61, 56, 56);">sex</label>
-                                        <select id="inputSex" name="p_sex" class="form-control">
+                                        <label style="color: rgb(61, 56, 56);">Event Time</label>
+                                        <select id="inputTime" name="event_time" class="form-control">
                                             <option value="Choose..." selected>Choose...</option>
-                                            <option value="Hombre">Hombre</option>
-                                            <option value="Mujer">Mujer</option>
+                                            <option value="08:00 - 09:30">08:00 - 09:30</option>
+                                            <option value="09:30 - 11:00">09:30 - 11:00</option>
+                                            <option value="17:30 - 19:30">17:30 - 19:30</option>
+                                            <option value="19:00 - 20:30">19:00 - 20:30</option>
+                                            <option value="20:30 - 22:00">20:30 - 22:00</option>
                                         </select>
-                                        <div class="small text-danger" id="sex_error">
-
+                                        <div class="small text-danger" id="time_error">
+    
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label style="color: rgb(61, 56, 56);">Player Level</label>
-                                        <select id="inputLevel" name="p_level" class="form-control">
+                                    <div class="form-group col-md-4">
+                                        <label style="color: rgb(61, 56, 56);">Court name</label>
+                                        <select id="inputCourt" name="event_court" class="form-control">
                                             <option value="Choose..." selected>Choose...</option>
-                                            <option value="segunda baja">segunda baja</option>
-                                            <option value="tercera alta">tercera alta</option>
-                                            <option value="Tercera medi">Tercera media</option>
-                                            <option value="Segunda medi">Segunda medi</option>
-                                            <option value="cuarta baja">cuarta baja</option>
-                                            <option value="segunda alta">segunda alta</option>
-                                            <option value="cuarta alta">cuarta alta</option>
-                                            <option value="usuario no respo">usuario no respo</option>
-                                            <option value="Cuarta media">Cuarta media</option>
-                                            <option value="tercera baja">tercera baja</option>
-                                            <option value="No interesad">No interesado</option>
-                                            <option value="undefined">undefined</option>
-                                            <option value="Extranjero">Extranjero</option>
-                                            <option value="Quinta">Quinta</option>
-                                            <option value="primera">primera</option>
-                                            <option value="nuevo usuario">nuevo usuario</option>
+                                            <option value="Pádel 1">Pádel 1</option>
+                                            <option value="Pádel 2">Pádel 2</option>
+                                            <option value="Pádel 3">Pádel 3</option>
+                                            <option value="Pádel 4">Pádel 4</option>
+                                            <option value="Pádel 5">Pádel 5</option>
+                                            <option value="Pádel 6">Pádel 6</option>
                                         </select>
-                                        <div class="small text-danger" id="level_error">
-
+                                        <div class="small text-danger" id="court_error">
+    
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label style="color: rgb(61, 56, 56);">Player Capacity</label>
+                                        <select id="inputCapacity" name="event_capacity" class="form-control">
+                                            <option value="Choose..." selected>Choose...</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <div class="small text-danger" id="capacity_error">
+    
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label style="color: rgb(61, 56, 56);">Status</label>
+                                        <select id="inputStatus" name="event_status" class="form-control">
+                                            <option value="Choose..." selected>Choose...</option>
+                                            <option value="Open">Open</option>
+                                            <option value="Closed">Closed</option>
+                                        </select>
+                                        <div class="small text-danger" id="status_error">
+    
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +255,7 @@
         Scripts
     ***********************************-->
     <script>
-        document.getElementById('new_player_form').addEventListener('submit', function(event) {
+        document.getElementById('new_event_form').addEventListener('submit', function(event) {
             let isValid = true;
             const sex = document.getElementById('inputSex').value;
             const level = document.getElementById('inputLevel').value;
