@@ -115,15 +115,13 @@ def add_new_booking():
         event_status = request.form.get('event_status')
         event_match_no = request.form.get('event_match_no')
         players_whatsapp_list = request.form.getlist('player_whatsapp[]')
-        
-        # insert_new_booking(event_date, event_time, event_court, event_match_no, event_capacity, players_whatsapp_list, event_status)
-        print(event_date)
-        print(event_time)
-        print(event_court)
-        print(event_capacity)
-        print(event_status)
-        print(players_whatsapp_list)
-        return render_template("add_event.html")
+        final_player_list = []
+        for item in players_whatsapp_list:
+            if item!= "":
+                final_player_list.append(item)
+        insert_new_booking(event_date, event_time, event_court, event_match_no, event_capacity, final_player_list, event_status)
+
+        return redirect(url_for('bookings'))
     return render_template("add_event.html")
 
 @app.route('/players', methods=['POST','GET'])
