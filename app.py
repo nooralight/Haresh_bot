@@ -106,6 +106,19 @@ def bookings():
 
 @app.route('/add_new_booking', methods=['POST','GET'])
 def add_new_booking():
+    if request.method == "POST":
+        event_date = request.form.get('event_date')
+        event_time = request.form.get('event_time')
+        event_court = request.form.get('event_court')
+        event_capacity = request.form.get('event_capacity')
+        event_status = request.form.get('event_status')
+
+        print(event_date)
+        print(event_time)
+        print(event_court)
+        print(event_capacity)
+        print(event_status)
+        return render_template("add_event.html")
     return render_template("add_event.html")
 
 @app.route('/players', methods=['POST','GET'])
