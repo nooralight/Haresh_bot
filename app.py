@@ -112,14 +112,14 @@ def add_new_booking():
         event_time = request.form.get('event_time')
         event_court = request.form.get('event_court')
         event_capacity = request.form.get('event_capacity')
-        event_status = request.form.get('event_status')
+        event_state = request.form.get('event_state')
         event_match_no = request.form.get('event_match_no')
         players_whatsapp_list = request.form.getlist('player_whatsapp[]')
         final_player_list = []
         for item in players_whatsapp_list:
             if item!= "":
                 final_player_list.append(item)
-        insert_new_booking(event_date, event_time, event_court, event_match_no, event_capacity, final_player_list, event_status)
+        insert_new_booking(event_date, event_time, event_court, event_match_no, event_capacity, final_player_list, event_state)
 
         return redirect(url_for('bookings'))
     return render_template("add_event.html")
