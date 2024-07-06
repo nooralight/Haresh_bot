@@ -103,7 +103,9 @@ def home():
 
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
-    return render_template("bookings.html")
+    today_date = datetime.now()
+    date_str = today_date.strftime('%Y-%m-%d')
+    return render_template("bookings.html", t_date = date_str)
 
 @app.route('/add_new_booking', methods=['POST','GET'])
 def add_new_booking():

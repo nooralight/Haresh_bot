@@ -140,19 +140,23 @@
             <div class="container-fluid">
                 <div class="form-group row">
                     <div class="col-sm-2 mb-2">
-                        <input name="event_date" id="startDate" class="form-control" type="date" required/>
+                        <input name="event_date" id="startDate" class="form-control" type="date" value="{{ t_date }}" required/>
                     </div>
+                    <!-- {
+                        _id: 1,
+                        booking_date: '2024-07-04',
+                        booking_time: '08:00 - 09:30',
+                        court_name: 'Pádel 1',
+                        match_number: '24729',
+                        player_count: 4,
+                        players_whatsapp_list: [ '+34629207560' ],
+                        state: 'Open'
+                      } -->
                     <div class="col-sm-6">
                         <button class="btn btn-primary">Today</button>
                         <button class="btn btn-secondary">Next day</button>
                         <button class="btn btn-secondary">Previous day</button>
                     </div>
-                    <!-- <div class="col-sm-2">
-                        <button class="btn btn-secondary">Next day</button>
-                    </div>
-                    <div class="col-sm-2">
-                        <button class="btn btn-secondary">Previous day</button>
-                    </div> -->
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-lg custom-table p-3" id="customTable" style="color: black;">
