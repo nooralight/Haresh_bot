@@ -51,4 +51,8 @@ def insert_new_player_into_booking(booking_id, new_player_whatsapp):
         print(f"Booking with ID {booking_id} not found")
 
 
+# Fetch all bookings by a day
+def fetch_all_bookings_by_date(date):
+    all_bookings = Match_booking.objects(booking_date = date)
+    return all_bookings
 

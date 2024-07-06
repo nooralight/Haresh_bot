@@ -4,7 +4,7 @@ from twilio.rest import Client
 from mongoengine import *
 from datetime import datetime,timedelta
 from db_player import add_new_player, update_player
-from db_booking import insert_new_booking
+from db_booking import insert_new_booking, fetch_all_bookings_by_date
 
 import os
 from dotenv import load_dotenv
@@ -67,11 +67,12 @@ class Players(Document):
 
 class Match_booking(Document):
     id = SequenceField(primary_key=True)
-    booking_datetime = DateTimeField()
+    booking_date = StringField()
+    booking_time = StringField()
     court_name = StringField()
     match_number = StringField()
     player_count = IntField()
-    players_whatsapp = ListField(StringField())
+    players_whatsapp_list = ListField(StringField())
     state = StringField()
     created_at = DateTimeField()
 
@@ -105,7 +106,22 @@ def home():
 def bookings():
     today_date = datetime.now()
     date_str = today_date.strftime('%Y-%m-%d')
-    return render_template("bookings.html", t_date = date_str)
+
+    today_bookings = fetch_all_bookings_by_date(date_str)
+    
+    booking_dict  = {"08:00 - 09:30":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,},
+                     "09:30 - 11:00":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,},
+                     "17:30 - 19:30":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,},
+                     "19:00 - 20:30":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,},
+                     "20:30 - 22:00":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,}}
+    
+    if today_bookings.count() == 0:
+        return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
+    
+    else:
+        for booking in today_bookings:
+            booking_dict[booking.booking_time][booking.court_name]  = booking.id
+    return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
 
 @app.route('/add_new_booking', methods=['POST','GET'])
 def add_new_booking():
