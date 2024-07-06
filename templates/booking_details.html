@@ -138,13 +138,28 @@
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
-                <div class="card-header">
-                    <h4>Booking Number: {{ booking.match_number }}</h4>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Booking Number: <span class="text-primary">{{ booking.match_number }}</span></h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Booking Date: <span class="text-primary h4">{{ booking.booking_date }}</span></h5>
+                        <h5>Time Period: <span class="text-primary h4">{{ booking.booking_time }}</span></h5>
+                        <h5>Court: <span class="text-primary h4">{{ booking.court_name }}</span></h5>
+                        <h5>Player Capacity: <span class="text-primary h4">{{ booking.player_count }}</span></h5>
+                        <h5>Status: <span class="text-primary h4">{{ booking.state }}</span></h5>
+                    </div>
                 </div>
-                {% for customer in customers %}
-                    <p>Customer name: {{ customer.name }}</p>
-                    <p>Customer name: {{ customer.mobile }}</p><br>
+                <div class="row">
+                    {% for customer in customers %}
+                    <div class="col-md-4">
+                        <p>Customer name: {{ customer.name }}</p>
+                        <p>Customer phone: {{ customer.mobile }}</p>
+                    </div>
+                    
                 {% endfor %}
+                </div>
+                
             </div>
         </div>
         <!--**********************************
