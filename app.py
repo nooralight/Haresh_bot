@@ -121,7 +121,7 @@ def bookings():
     else:
         for booking in today_bookings:
             booking_dict[booking.booking_time][booking.court_name]  = booking.id
-    return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
+    return render_template("bookings.html", t_date = "2024-07-04", booking_dict = booking_dict)
 
 @app.route('/add_new_booking', methods=['POST','GET'])
 def add_new_booking():
