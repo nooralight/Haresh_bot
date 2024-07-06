@@ -183,12 +183,12 @@
                             </tr>
                             <tr>
                                 <th class="text-dark text-center p-4">09:30 - 11:00</th>
-                                <td class="text-dark text-center p-4">{{ booking_dict["09:30 - 11:00"]["Pádel 1"] }}</td>
-                                <td class="text-dark text-center p-4">{{ booking_dict["09:30 - 11:00"]["Pádel 2"] }}</td>
-                                <td class="text-dark text-center p-4">{{ booking_dict["09:30 - 11:00"]["Pádel 3"] }}</td>
-                                <td class="text-dark text-center p-4">{{ booking_dict["09:30 - 11:00"]["Pádel 4"] }}</td>
-                                <td class="text-dark text-center p-4">{{ booking_dict["09:30 - 11:00"]["Pádel 5"] }}</td>
-                                <td class="text-dark text-center p-4">{{ booking_dict["09:30 - 11:00"]["Pádel 6"] }}</td>
+                                <td class="text-dark text-center p-4">{% if booking_dict["09:30 - 11:00"]["Pádel 1"] %} <button class="btn btn-primary text-white"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-dark text-center p-4">{% if booking_dict["09:30 - 11:00"]["Pádel 2"] %} <button class="btn btn-primary text-white"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-dark text-center p-4">{% if booking_dict["09:30 - 11:00"]["Pádel 3"] %} <button class="btn btn-primary text-white"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-dark text-center p-4">{% if booking_dict["09:30 - 11:00"]["Pádel 4"] %} <button class="btn btn-primary text-white"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-dark text-center p-4">{% if booking_dict["09:30 - 11:00"]["Pádel 5"] %} <button class="btn btn-primary text-white"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-dark text-center p-4">{% if booking_dict["09:30 - 11:00"]["Pádel 6"] %} <button class="btn btn-primary text-white"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
                             </tr>
                             <tr>
                                 <th class="text-dark text-center p-4">17:30 - 19:30</th>
