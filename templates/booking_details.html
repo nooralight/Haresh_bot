@@ -138,8 +138,13 @@
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
-                
-
+                <div class="card-header">
+                    <h4>Booking Number: {{ booking.match_number }}</h4>
+                </div>
+                {% for customer in customers %}
+                    <p>Customer name: {customer.name}</p>
+                    <p>Customer name: {customer.mobile}</p><br>
+                {% endfor %}
             </div>
         </div>
         <!--**********************************
