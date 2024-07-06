@@ -116,7 +116,7 @@ def bookings():
                      "20:30 - 22:00":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,}}
     
     if today_bookings.count() == 0:
-        return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
+        return render_template("bookings.html", t_date = "2024-07-04", booking_dict = booking_dict)
     
     else:
         for booking in today_bookings:
