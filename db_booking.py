@@ -56,3 +56,8 @@ def fetch_all_bookings_by_date(date):
     all_bookings = Match_booking.objects(booking_date = date)
     return all_bookings
 
+# Fetch booking by id
+def fetch_booking_by_id(id):
+    exact_boooking = Match_booking.objects(id = id).first()
+    return exact_boooking
+

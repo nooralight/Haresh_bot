@@ -4,7 +4,7 @@ from twilio.rest import Client
 from mongoengine import *
 from datetime import datetime,timedelta
 from db_player import add_new_player, update_player
-from db_booking import insert_new_booking, fetch_all_bookings_by_date
+from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id
 
 import os
 from dotenv import load_dotenv
@@ -158,6 +158,14 @@ def get_bookings_data_byDate(date_str):
             booking_dict[booking.booking_time][booking.court_name] = booking.id
 
     return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
+
+@app.route('/check_booking/<id>', methods=['POST', 'GET'])
+def check_booking(id):
+    booking = fetch_booking_by_id(id)
+    customer_numbers = booking.players_whatsapp_list
+    customers = Players.objects(mobile__in=customer_numbers)
+    return render_template("booking_details.html", booking = booking, customers = customers)
+
 
 @app.route('/add_new_booking', methods=['POST','GET'])
 def add_new_booking():

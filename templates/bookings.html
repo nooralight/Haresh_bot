@@ -170,12 +170,12 @@
                         <tbody>
                             <tr>
                                 <th class="text-dark text-center">08:00 - 09:30</th>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 1"] %} {% set event_id = booking_dict["08:00 - 09:30"]["Pádel 1"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ event_id }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 2"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 2'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 3"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 3'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 4"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 4'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 5"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 5'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 6"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 6'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 1"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00 - 09:30']['Pádel 1']) }}" class="btn btn-primary text-white my-2" title="check event"><i class="fa fa-bars"></i> Booking ID#{{ booking_dict["08:00 - 09:30"]["Pádel 1"] }}</a> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 2"] %} <a href="#" class="btn btn-primary text-white my-2" title="check event"><i class="fa fa-bars"></i> Booking ID#{{ booking_dict["08:00 - 09:30"]["Pádel 2"] }}</a> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 3"] %} <a href="#" class="btn btn-primary text-white my-2" title="check event"><i class="fa fa-bars"></i> Booking ID#{{ booking_dict["08:00 - 09:30"]["Pádel 3"] }}</a> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 4"] %} <a href="#" class="btn btn-primary text-white my-2" title="check event"><i class="fa fa-bars"></i> Booking ID#{{ booking_dict["08:00 - 09:30"]["Pádel 4"] }}</a> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 5"] %} <a href="#" class="btn btn-primary text-white my-2" title="check event"><i class="fa fa-bars"></i> Booking ID#{{ booking_dict["08:00 - 09:30"]["Pádel 5"] }}</a> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 6"] %} <a href="#" class="btn btn-primary text-white my-2" title="check event"><i class="fa fa-bars"></i> Booking ID#{{ booking_dict["08:00 - 09:30"]["Pádel 6"] }}</a> {% endif %}</td>
                             </tr>
                             <tr>
                                 <th class="text-dark text-center">08:30 - 10:00</th>
@@ -298,7 +298,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Event Id = {{ event_id }}</h5>
+                                            <h5 class="modal-title">Booking No. </h5>
                                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                             </button>
                                         </div>
