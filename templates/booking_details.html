@@ -153,8 +153,11 @@
                 <div class="row">
                     {% for customer in customers %}
                     <div class="col-md-4">
-                        <p>Customer name: {{ customer.name }}</p>
-                        <p>Customer phone: {{ customer.mobile }}</p>
+                        <div class="card-body">
+                            <h5>Customer name: {{ customer.name }}</h5>
+                            <h5>Customer h5hone: {{ customer.mobile }}</h5>
+                        </div>
+                        
                     </div>
                     
                 {% endfor %}
