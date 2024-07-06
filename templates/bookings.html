@@ -138,17 +138,23 @@
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
-                <div class="form-group row">
-                    <div class="col-sm-2 mb-2">
-                        <input name="event_date" id="startDate" class="form-control" type="date" value="{{ t_date }}" required/>
-                    </div>
-                    <div class="col-sm-6">
-                        <button id="todayBtn" class="btn btn-primary">Today</button>
-                        <button id="prevDayBtn" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
-                        <button id="nextDayBtn" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
-                        
+                <div class="card-header">
+                    <h4 class="card-title">Add new Player</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-2 mb-2">
+                            <input name="event_date" id="startDate" class="form-control" type="date" value="{{ t_date }}" required/>
+                        </div>
+                        <div class="col-sm-6">
+                            <button id="todayBtn" class="btn btn-primary">Today</button>
+                            <button id="prevDayBtn" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
+                            <button id="nextDayBtn" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
+                            
+                        </div>
                     </div>
                 </div>
+                
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm custom-table" id="customTable" style="color: black;">
                         <thead class="table-dark">
