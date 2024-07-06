@@ -4,7 +4,7 @@ from twilio.rest import Client
 from mongoengine import *
 from datetime import datetime,timedelta
 from db_player import add_new_player, update_player
-from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id
+from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings
 
 import os
 from dotenv import load_dotenv
@@ -100,7 +100,9 @@ def home():
     numOfcontacts = Contacts.objects().count()
     numOfmessages = Message_db.objects().count()
     numOfplayers = Players.objects().count()
-    return render_template("home.html", numOfcontacts = numOfcontacts, numOfmessages = numOfmessages, numOfplayers = numOfplayers)
+    numOfbookings = get_numOfBookings()
+    numOfunfinished = get_numOfunfinishedBookings()
+    return render_template("home.html", numOfcontacts = numOfcontacts, numOfmessages = numOfmessages, numOfplayers = numOfplayers, numOfbookings = numOfbookings, numOfunfinished= numOfunfinished)
 
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():

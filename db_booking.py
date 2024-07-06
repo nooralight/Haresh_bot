@@ -41,6 +41,11 @@ def get_numOfBookings():
     num_of_bookings = Match_booking.objects().count()
     return num_of_bookings
 
+# Number of unfinished Bookings
+def get_numOfunfinishedBookings():
+    num_of_bookings = Match_booking.objects(state = "Seaching").count()
+    return num_of_bookings
+
 # insert new_player into an existing match
 def insert_new_player_into_booking(booking_id, new_player_whatsapp):
     the_booking = Match_booking.objects(id=booking_id).first()
