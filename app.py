@@ -159,9 +159,6 @@ def get_bookings_data_byDate(date_str):
 
     return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
 
-@app.route('/bookings_for_date', methods=['POST','GET'])
-def bookings():
-
 @app.route('/add_new_booking', methods=['POST','GET'])
 def add_new_booking():
     if request.method == "POST":
