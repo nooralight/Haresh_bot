@@ -139,7 +139,7 @@
             <!-- row -->
             <div class="container-fluid">
                 <div class="card-header">
-                    <h4 class="card-title">Add new Player</h4>
+                    <h4 class="card-title">Match Event List</h4>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
@@ -150,7 +150,6 @@
                             <button id="todayBtn" class="btn btn-primary">Today</button>
                             <button id="prevDayBtn" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
                             <button id="nextDayBtn" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
-                            
                         </div>
                     </div>
                 </div>
@@ -171,12 +170,12 @@
                         <tbody>
                             <tr>
                                 <th class="text-dark text-center">08:00 - 09:30</th>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 1"] %} <button class="btn btn-primary text-white my-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 2"] %} <button class="btn btn-primary text-white py-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 3"] %} <button class="btn btn-primary text-white py-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 4"] %} <button class="btn btn-primary text-white py-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 5"] %} <button class="btn btn-primary text-white py-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 6"] %} <button class="btn btn-primary text-white py-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 1"] %} {% set event_id = booking_dict["08:00 - 09:30"]["Pádel 1"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ event_id }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 2"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 2'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 3"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 3'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 4"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 4'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 5"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 5'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
+                                <td class="text-center">{% if booking_dict["08:00 - 09:30"]["Pádel 6"] %} <button type="button" class="btn btn-primary text-white my-2" data-toggle="modal" data-placement="top" data-target="#check_event{{ booking_dict['08:00 - 09:30']['Pádel 6'] }}" title="check event"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
                             </tr>
                             <tr>
                                 <th class="text-dark text-center">08:30 - 10:00</th>
@@ -295,6 +294,25 @@
                                 <td class="text-center">{% if booking_dict["20:30 - 22:00"]["Pádel 5"] %} <button class="btn btn-primary text-white py-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
                                 <td class="text-center">{% if booking_dict["20:30 - 22:00"]["Pádel 6"] %} <button class="btn btn-primary text-white py-2"><i class="fa fa-bars"></i> Event</button> {% endif %}</td>
                             </tr>
+                            <div class="modal fade" id="check_event{{ booking_id }}">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Event Id = {{ booking_id }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="card-body">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
                         </tbody>
                     </table>
                 </div>
