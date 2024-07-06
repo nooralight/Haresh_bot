@@ -107,7 +107,7 @@ def bookings():
     today_date = datetime.now()
     date_str = today_date.strftime('%Y-%m-%d')
 
-    today_bookings = fetch_all_bookings_by_date(date_str)
+    today_bookings = fetch_all_bookings_by_date("2024-07-04")
     
     booking_dict  = {"08:00 - 09:30":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,},
                      "09:30 - 11:00":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,},
