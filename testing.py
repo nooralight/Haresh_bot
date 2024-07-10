@@ -40,7 +40,7 @@ login_button = driver.find_element(By.ID, "btnLogin")
 login_button.click()
 
 # Wait for the new page to load
-WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "box")))
+WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
 # Give additional time for page elements to load if necessary
 time.sleep(5)
@@ -53,13 +53,23 @@ print(driver.title)
 
 # You can also use BeautifulSoup to parse the new page content
 soup = BeautifulSoup(page_source, 'html.parser')
-print(soup.title.text)
 
-# Example: Write all text on the new page to a text file
-with open('output.txt', 'w', encoding='utf-8') as file:
-    file.write(soup.get_text())
+# Find the 'g' tag with id 'CuerpoTabla'
+cuerpo_tabla = soup.find('g', {'id': 'CuerpoTabla'})
 
-print("File has been saved.")
+# Extract all the text within the 'CuerpoTabla' tag
+if cuerpo_tabla:
+    text_contents = cuerpo_tabla.get_text(separator='\n')
+    print(text_contents)
+else:
+    print("The 'CuerpoTabla' tag was not found.")
+
+
+# # Example: Write all text on the new page to a text file
+# with open('output.txt', 'w', encoding='utf-8') as file:
+#     file.write(soup.get_text())
+
+print("File has been")
 
 # Close the browser
 driver.quit()
