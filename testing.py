@@ -55,8 +55,11 @@ print(driver.title)
 soup = BeautifulSoup(page_source, 'html.parser')
 print(soup.title.text)
 
-# Example: Print all text on the new page
-print(soup.get_text())
+# Example: Write all text on the new page to a text file
+with open('output.txt', 'w', encoding='utf-8') as file:
+    file.write(soup.get_text())
+
+print("File has been saved.")
 
 # Close the browser
 driver.quit()
