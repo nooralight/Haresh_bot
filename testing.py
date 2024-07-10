@@ -48,26 +48,18 @@ time.sleep(5)
 # Get the page source of the new page
 page_source = driver.page_source
 
-# Print the page title or any other information you need
-print(driver.title)
+# Extract text from the specified section using XPath
+texts = driver.find_elements_by_xpath('//g[@id="CuerpoTabla"]//text')
 
-# You can also use BeautifulSoup to parse the new page content
-soup = BeautifulSoup(page_source, 'html.parser')
-
-# Find the 'g' tag with id 'CuerpoTabla'
-cuerpo_tabla = soup.find('svg', {'id': 'tablaReserva'})
-
-# Extract all the text within the 'CuerpoTabla' tag
-if cuerpo_tabla:
-    text_contents = cuerpo_tabla.get_text(separator='\n')
-    print(text_contents)
-else:
-    print("The 'CuerpoTabla' tag was not found.")
+# Extract the text values
+extracted_texts = [text.text for text in texts]
 
 
-# # Example: Write all text on the new page to a text file
-# with open('output.txt', 'w', encoding='utf-8') as file:
-#     file.write(soup.get_text())
+# Example: Write all text on the new page to a text file
+with open('output.txt', 'w', encoding='utf-8') as file:
+    # Print the extracted texts
+    for text in extracted_texts:
+        file.write(text+"\n")
 
 print("File has been")
 
