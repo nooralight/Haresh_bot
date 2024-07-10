@@ -2,16 +2,22 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service as ChromeService
 import time
+from bs4 import BeautifulSoup
 
-# Setup the Chrome WebDriver with the path to Chromedriver
+# Setup the Chrome WebDriver with the path to Chromium binary
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # Run in headless mode
 options.add_argument('--disable-gpu')  # Disable GPU acceleration
 options.add_argument('--no-sandbox')  # Bypass OS security model
 options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
 
-driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver', options=options)
+# Specify the path to Chromedriver
+service = ChromeService(executable_path='/usr/bin/chromedriver')
+
+# Initialize the WebDriver
+driver = webdriver.Chrome(service=service, options=options)
 
 # Open the login page
 driver.get("https://app-clubdepadelbida.matchpoint.com.es/Login.aspx")
@@ -51,7 +57,6 @@ page_source = driver.page_source
 print(driver.title)
 
 # You can also use BeautifulSoup to parse the new page content
-from bs4 import BeautifulSoup
 soup = BeautifulSoup(page_source, 'html.parser')
 print(soup.title.text)
 
