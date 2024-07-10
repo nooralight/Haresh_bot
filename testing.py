@@ -2,18 +2,16 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-# Setup the Chrome WebDriver with the path to Chromium binary
+# Setup the Chrome WebDriver with the path to Chromedriver
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # Run in headless mode
 options.add_argument('--disable-gpu')  # Disable GPU acceleration
 options.add_argument('--no-sandbox')  # Bypass OS security model
 options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver', options=options)
 
 # Open the login page
 driver.get("https://app-clubdepadelbida.matchpoint.com.es/Login.aspx")
