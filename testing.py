@@ -49,7 +49,7 @@ time.sleep(5)
 page_source = driver.page_source
 
 # Extract text from the specified section using XPath
-texts = driver.find_elements_by_xpath('//g[@id="CuerpoTabla"]//text')
+texts = driver.find_elements(By.XPATH, '//g[@id="CuerpoTabla"]//text')
 
 # Extract the text values
 extracted_texts = [text.text for text in texts]
