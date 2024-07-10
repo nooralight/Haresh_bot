@@ -34,7 +34,7 @@ password = driver.find_element(By.ID, "password")
 password.send_keys("1a2b3c4d@")
 
 # Select the language
-language = driver.find_element(By.ID, "ddlLenguaje")
+language = driver.find_element(By.ID, "divLenguaje")
 for option in language.find_elements(By.TAG_NAME, "option"):
     if option.get_attribute("value") == "en-US":
         option.click()
