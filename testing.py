@@ -55,7 +55,7 @@ print(driver.title)
 soup = BeautifulSoup(page_source, 'html.parser')
 
 # Find the 'g' tag with id 'CuerpoTabla'
-cuerpo_tabla = soup.find('g', {'id': 'CuerpoTabla'})
+cuerpo_tabla = soup.find('svg', {'id': 'tablaReserva'})
 
 # Extract all the text within the 'CuerpoTabla' tag
 if cuerpo_tabla:
