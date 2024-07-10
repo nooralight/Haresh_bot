@@ -6,11 +6,12 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-# Setup the Chrome WebDriver
+# Setup the Chrome WebDriver with the path to Chromium binary
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # Run in headless mode
 options.add_argument('--disable-gpu')  # Disable GPU acceleration
 options.add_argument('--no-sandbox')  # Bypass OS security model
+options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
