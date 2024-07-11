@@ -38,10 +38,10 @@ login_button = driver.find_element(By.ID, "btnLogin")
 login_button.click()
 
 # Wait for the new page to load
-WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
 # Give additional time for page elements to load if necessary
-time.sleep(5)
+time.sleep(20)
 
 # Get the page source of the new page
 page_source = driver.page_source
