@@ -63,7 +63,7 @@ iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 
 # Example: Write all text on the new page to a text file
 with open('output.txt', 'w', encoding='utf-8') as file:
-    file.write(iframe_soup)
+    file.write(iframe_soup.text)
 
 # # You can also use BeautifulSoup to parse the new page content
 # soup = BeautifulSoup(page_source, 'html.parser')
