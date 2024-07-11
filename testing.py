@@ -44,14 +44,9 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "bo
 
 # Give additional time for page elements to load if necessary
 time.sleep(5)
-texts = driver.find_elements(By.XPATH, '//form[@id="form1"]//text')
+texts = driver.find_elements(By.XPATH, '//div[@id="ContenedorDesplegableCalendario"]//text')
 
-# Extract the text values
-extracted_texts = [text.text for text in texts]
-
-# Print the extracted texts
-for text in extracted_texts:
-    print(text)
+print(texts)
 
 # # Get the page source of the new page
 # page_source = driver.page_source
