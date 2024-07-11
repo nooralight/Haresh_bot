@@ -44,22 +44,27 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "bo
 
 # Give additional time for page elements to load if necessary
 time.sleep(5)
-
-# Get the page source of the new page
-page_source = driver.page_source
-
-# Extract text from the specified section using XPath
-texts = driver.find_elements(By.XPATH, '//div[@id="contenedor"]//text')
+texts = driver.find_elements(By.XPATH, '//form[@id="form1"]//text')
 
 # Extract the text values
 extracted_texts = [text.text for text in texts]
 
+# Print the extracted texts
+for text in extracted_texts:
+    print(text)
 
-# Example: Write all text on the new page to a text file
-with open('output.txt', 'w', encoding='utf-8') as file:
-    # Print the extracted texts
-    for text in extracted_texts:
-        file.write(text+"\n")
+# # Get the page source of the new page
+# page_source = driver.page_source
+
+# # Print the page title or any other information you need
+# print(driver.title)
+
+# # You can also use BeautifulSoup to parse the new page content
+# soup = BeautifulSoup(page_source, 'html.parser')
+
+# # Example: Write all text on the new page to a text file
+# with open('output.txt', 'w', encoding='utf-8') as file:
+#     file.write(soup.get_text())
 
 print("File has been")
 
