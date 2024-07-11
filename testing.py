@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
-import time
 from bs4 import BeautifulSoup
+import time
 
 # Setup the Chrome WebDriver with the path to Chromium binary
 options = webdriver.ChromeOptions()
@@ -33,8 +33,6 @@ username.send_keys("scrap")
 password = driver.find_element(By.ID, "password")
 password.send_keys("1a2b3c4d@")
 
-
-
 # Click the login button
 login_button = driver.find_element(By.ID, "btnLogin")
 login_button.click()
@@ -44,24 +42,25 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "bo
 
 # Give additional time for page elements to load if necessary
 time.sleep(5)
-texts = driver.find_elements(By.XPATH, '//div[@id="ContenedorDesplegableCalendario"]//text')
 
-print(texts)
+# Get the page source of the new page
+page_source = driver.page_source
 
-# # Get the page source of the new page
-# page_source = driver.page_source
+# Print the page title or any other information you need
+print(driver.title)
 
-# # Print the page title or any other information you need
-# print(driver.title)
+# You can also use BeautifulSoup to parse the new page content
+soup = BeautifulSoup(page_source, 'html.parser')
 
-# # You can also use BeautifulSoup to parse the new page content
-# soup = BeautifulSoup(page_source, 'html.parser')
+# Extract the desired text from the HTML
+date_text = soup.find('span', {'id': 'ctl01_CC_LabelFecha'}).text
+occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelPorcentajeOcupacion'}).text
+hours_occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelHorasOcupacion'}).text
 
-# # Example: Write all text on the new page to a text file
-# with open('output.txt', 'w', encoding='utf-8') as file:
-#     file.write(soup.get_text())
+# Print the extracted text
+print("Date:", date_text)
+print("Occupancy Percentage:", occupancy_text)
+print("Hours Occupancy:", hours_occupancy_text)
 
-print("File has been")
-
-# Close the browser
+# Close the WebDriver
 driver.quit()
