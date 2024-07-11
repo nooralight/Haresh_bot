@@ -47,7 +47,7 @@ iframe = driver.find_element(By.ID, "iframeContenido")
 driver.switch_to.frame(iframe)
 
 # Wait for the iframe content to load
-WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "aspnetForm")))
+WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTabla")))
 
 # Get the page source of the iframe content
 iframe_page_source = driver.page_source
