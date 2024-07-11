@@ -52,8 +52,8 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "ht
 # Get the page source of the iframe content
 iframe_page_source = driver.page_source
 
-# Parse the iframe content with BeautifulSoup
-iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
+# # Parse the iframe content with BeautifulSoup
+# iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 
 # Get the page source of the new page
 # page_source = driver.page_source
@@ -63,7 +63,7 @@ iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 
 # Example: Write all text on the new page to a text file
 with open('output.txt', 'w', encoding='utf-8') as file:
-    file.write(iframe_soup.text)
+    file.write(iframe_page_source)
 
 # # You can also use BeautifulSoup to parse the new page content
 # soup = BeautifulSoup(page_source, 'html.parser')
