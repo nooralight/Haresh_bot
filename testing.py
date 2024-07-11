@@ -46,8 +46,12 @@ time.sleep(20)
 # Get the page source of the new page
 page_source = driver.page_source
 
-# Print the page title or any other information you need
-print(page_source)
+# # Print the page title or any other information you need
+# print(page_source)
+
+# Example: Write all text on the new page to a text file
+with open('output.txt', 'w', encoding='utf-8') as file:
+    file.write(page_source)
 
 # # You can also use BeautifulSoup to parse the new page content
 # soup = BeautifulSoup(page_source, 'html.parser')
