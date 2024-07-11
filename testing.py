@@ -47,20 +47,20 @@ time.sleep(20)
 page_source = driver.page_source
 
 # Print the page title or any other information you need
-print(driver.title)
+print(page_source)
 
-# You can also use BeautifulSoup to parse the new page content
-soup = BeautifulSoup(page_source, 'html.parser')
+# # You can also use BeautifulSoup to parse the new page content
+# soup = BeautifulSoup(page_source, 'html.parser')
 
-# Extract the desired text from the HTML
-date_text = soup.find('span', {'id': 'ctl01_CC_LabelFecha'}).text
-occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelPorcentajeOcupacion'}).text
-hours_occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelHorasOcupacion'}).text
+# # Extract the desired text from the HTML
+# date_text = soup.find('span', {'id': 'ctl01_CC_LabelFecha'}).text
+# occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelPorcentajeOcupacion'}).text
+# hours_occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelHorasOcupacion'}).text
 
-# Print the extracted text
-print("Date:", date_text)
-print("Occupancy Percentage:", occupancy_text)
-print("Hours Occupancy:", hours_occupancy_text)
+# # Print the extracted text
+# print("Date:", date_text)
+# print("Occupancy Percentage:", occupancy_text)
+# print("Hours Occupancy:", hours_occupancy_text)
 
 # Close the WebDriver
 driver.quit()
