@@ -41,13 +41,13 @@ login_button.click()
 WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
 # Give additional time for page elements to load if necessary
-time.sleep(20)
+time.sleep(40)
 # Switch to the iframe
 iframe = driver.find_element(By.ID, "iframeContenido")
 driver.switch_to.frame(iframe)
 
 # Wait for the iframe content to load
-WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
 # Get the page source of the iframe content
 iframe_page_source = driver.page_source
