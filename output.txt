@@ -1,248 +1,154 @@
-<div bloqueado="false" class="col01 ui-selectee" id="selectable">
- <div ;="" style="height:0px; width:115.33333333333333px;  ">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="1" horariofijo="" idcentro="2" idrecurso="13" indicecolumna="1" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="08:00" timeend="09:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="1" horariofijo="" idcentro="2" idrecurso="13" indicecolumna="1" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="09:30" timeend="11:00">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24807" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
-   <div class="evento cursorNormal" columna="1" fin="11:00" id="24807" idrecurso="13" inicio="09:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      9:30-11:00  (4p)
-     </div>
-     <span class="eventoTexto1">
-      Joshua Sanchez Santiago
-     </span>
-     <span class="eventoTexto2">
-      Cliente Contado
-      <br/>
-      Cliente Contado
-      <br/>
-      Cliente Contado
-     </span>
-    </div>
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24807" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
+ <div class="evento cursorNormal" columna="1" fin="11:00" id="24807" idrecurso="13" inicio="09:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    9:30-11:00  (4p)
    </div>
-  </div>
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="1" horariofijo="" idcentro="2" idrecurso="13" indicecolumna="1" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="11:00" timeend="12:30">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24950" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_partida">
-   <div class="evento cursorNormal" columna="1" fin="12:30" id="24950" idrecurso="13" inicio="11:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      11:00-12:30  (4/4p)
-     </div>
-     <span class="eventoTexto1">
-      Partida tercera baja mixto
-     </span>
-     <span class="eventoTexto2">
-      Mehdi Saleh
-      <br/>
-      Mehdi Saleh
-      <br/>
-      Erik Marrero
-      <br/>
-      Mónica Hernández del Prado
-      <br/>
-      <br/>
-     </span>
-     <span class="eventoObservaciones">
-      Mehdi y su novia, buscar 2 mas mixto o masculino
-     </span>
-    </div>
-   </div>
-  </div>
- </div>
- <div columna="1" style="height:330px; width:115.33333333333333px;" time="12:30" timeend="18:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="1" horariofijo="" idcentro="2" idrecurso="13" indicecolumna="1" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="18:00" timeend="19:30">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24957" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
-   <div class="evento cursorNormal" columna="1" fin="19:30" id="24957" idrecurso="13" inicio="18:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      18:00-19:30  (4p)
-     </div>
-     <span class="eventoTexto1">
-      Andrew Carvallo Santana
-     </span>
-    </div>
-   </div>
-  </div>
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="1" horariofijo="" idcentro="2" idrecurso="13" indicecolumna="1" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="19:30" timeend="21:00">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24977" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_partida">
-   <div class="evento cursorNormal" columna="1" fin="21:00" id="24977" idrecurso="13" inicio="19:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      19:30-21:00  (4/4p)
-     </div>
-     <span class="eventoTexto1">
-      Partida Quinta - cuarta baja masculino
-     </span>
-     <span class="eventoTexto2">
-      RAOUL MARROCCO
-      <br/>
-      RAOUL MARROCCO
-      <br/>
-      Adrián Gabriele Van Ondenhove
-      <br/>
-      Vinay Bhambani
-      <br/>
-      <br/>
-     </span>
-    </div>
-   </div>
+   <span class="eventoTexto1">
+    Joshua Sanchez Santiago
+   </span>
+   <span class="eventoTexto2">
+    Cliente Contado
+    <br/>
+    Cliente Contado
+    <br/>
+    Cliente Contado
+   </span>
   </div>
  </div>
 </div>
 
 
-<div bloqueado="false" class="col02 ui-selectee" id="selectable">
- <div ;="" style="height:0px; width:115.33333333333333px;  ">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="2" horariofijo="" idcentro="2" idrecurso="14" indicecolumna="2" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="08:00" timeend="09:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="2" horariofijo="" idcentro="2" idrecurso="14" indicecolumna="2" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="09:30" timeend="11:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="2" horariofijo="" idcentro="2" idrecurso="14" indicecolumna="2" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="11:00" timeend="12:30">
- </div>
- <div columna="2" style="height:330px; width:115.33333333333333px;" time="12:30" timeend="18:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="2" horariofijo="" idcentro="2" idrecurso="14" indicecolumna="2" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="18:00" timeend="19:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="2" horariofijo="" idcentro="2" idrecurso="14" indicecolumna="2" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="19:30" timeend="21:00">
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24950" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_partida">
+ <div class="evento cursorNormal" columna="1" fin="12:30" id="24950" idrecurso="13" inicio="11:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    11:00-12:30  (4/4p)
+   </div>
+   <span class="eventoTexto1">
+    Partida tercera baja mixto
+   </span>
+   <span class="eventoTexto2">
+    Mehdi Saleh
+    <br/>
+    Mehdi Saleh
+    <br/>
+    Erik Marrero
+    <br/>
+    Mónica Hernández del Prado
+    <br/>
+    <br/>
+   </span>
+   <span class="eventoObservaciones">
+    Mehdi y su novia, buscar 2 mas mixto o masculino
+   </span>
+  </div>
  </div>
 </div>
 
 
-<div bloqueado="false" class="col03 ui-selectee" id="selectable">
- <div ;="" style="height:0px; width:115.33333333333333px;  ">
- </div>
- <div columna="3" style="height:60px; width:115.33333333333333px;" time="08:00" timeend="09:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="3" horariofijo="" idcentro="2" idrecurso="15" indicecolumna="3" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="09:00" timeend="10:30">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24980" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
-   <div class="evento cursorNormal" columna="3" fin="10:30" id="24980" idrecurso="15" inicio="09:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      9:00-10:30  (4p)
-     </div>
-     <span class="eventoTexto1">
-      bittu chhabria chhabria
-     </span>
-    </div>
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24957" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
+ <div class="evento cursorNormal" columna="1" fin="19:30" id="24957" idrecurso="13" inicio="18:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    18:00-19:30  (4p)
    </div>
+   <span class="eventoTexto1">
+    Andrew Carvallo Santana
+   </span>
   </div>
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="3" horariofijo="" idcentro="2" idrecurso="15" indicecolumna="3" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="10:30" timeend="12:00">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24822" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_partida">
-   <div class="evento cursorNormal" columna="3" fin="12:00" id="24822" idrecurso="15" inicio="10:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      10:30-12:00  (4/4p)
-     </div>
-     <span class="eventoTexto1">
-      Partida segunda baja masculino
-     </span>
-     <span class="eventoTexto2">
-      Matthias Böhmer
-      <br/>
-      Kay Loeschke
-      <br/>
-      Ronak Lalwani
-      <br/>
-      Norman Wilke
-      <br/>
-      <br/>
-     </span>
-    </div>
-   </div>
-  </div>
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="3" horariofijo="" idcentro="2" idrecurso="15" indicecolumna="3" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="12:00" timeend="13:30">
- </div>
- <div columna="3" style="height:270px; width:115.33333333333333px;" time="13:30" timeend="18:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="3" horariofijo="" idcentro="2" idrecurso="15" indicecolumna="3" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="18:00" timeend="19:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="3" horariofijo="" idcentro="2" idrecurso="15" indicecolumna="3" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="19:30" timeend="21:00">
  </div>
 </div>
 
 
-<div bloqueado="false" class="col04 ui-selectee" id="selectable">
- <div ;="" style="height:0px; width:115.33333333333333px;  ">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="4" horariofijo="" idcentro="2" idrecurso="16" indicecolumna="4" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="08:00" timeend="09:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="4" horariofijo="" idcentro="2" idrecurso="16" indicecolumna="4" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="09:30" timeend="11:00">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24940" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
-   <div class="evento cursorNormal" columna="4" fin="11:00" id="24940" idrecurso="16" inicio="09:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      9:30-11:00  (4p)
-     </div>
-     <span class="eventoTexto1">
-      Nigel Kenton-Barnes
-     </span>
-    </div>
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24977" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_partida">
+ <div class="evento cursorNormal" columna="1" fin="21:00" id="24977" idrecurso="13" inicio="19:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    19:30-21:00  (4/4p)
    </div>
+   <span class="eventoTexto1">
+    Partida Quinta - cuarta baja masculino
+   </span>
+   <span class="eventoTexto2">
+    RAOUL MARROCCO
+    <br/>
+    RAOUL MARROCCO
+    <br/>
+    Adrián Gabriele Van Ondenhove
+    <br/>
+    Vinay Bhambani
+    <br/>
+    <br/>
+   </span>
   </div>
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="4" horariofijo="" idcentro="2" idrecurso="16" indicecolumna="4" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="11:00" timeend="12:30">
- </div>
- <div columna="4" style="height:330px; width:115.33333333333333px;" time="12:30" timeend="18:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="4" horariofijo="" idcentro="2" idrecurso="16" indicecolumna="4" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="18:00" timeend="19:30">
-  <div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24897" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
-   <div class="evento cursorNormal" columna="4" fin="19:30" id="24897" idrecurso="16" inicio="18:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
-    <div class="eventoSuperior">
-     <div class="eventoFecha">
-      18:00-19:30  (4p)
-     </div>
-     <span class="eventoTexto1">
-      Jessica Larsson Luzardo
-     </span>
-    </div>
-   </div>
-  </div>
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="4" horariofijo="" idcentro="2" idrecurso="16" indicecolumna="4" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="19:30" timeend="21:00">
  </div>
 </div>
 
 
-<div bloqueado="false" class="col05 ui-selectee" id="selectable">
- <div ;="" style="height:0px; width:115.33333333333333px;  ">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="5" horariofijo="" idcentro="2" idrecurso="17" indicecolumna="5" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="08:00" timeend="09:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="5" horariofijo="" idcentro="2" idrecurso="17" indicecolumna="5" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="09:30" timeend="11:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="5" horariofijo="" idcentro="2" idrecurso="17" indicecolumna="5" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="11:00" timeend="12:30">
- </div>
- <div columna="5" style="height:330px; width:115.33333333333333px;" time="12:30" timeend="18:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="5" horariofijo="" idcentro="2" idrecurso="17" indicecolumna="5" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="18:00" timeend="19:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="5" horariofijo="" idcentro="2" idrecurso="17" indicecolumna="5" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="19:30" timeend="21:00">
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24980" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
+ <div class="evento cursorNormal" columna="3" fin="10:30" id="24980" idrecurso="15" inicio="09:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    9:00-10:30  (4p)
+   </div>
+   <span class="eventoTexto1">
+    bittu chhabria chhabria
+   </span>
+  </div>
  </div>
 </div>
 
 
-<div bloqueado="false" class="col06 ui-selectee" id="selectable">
- <div ;="" style="height:0px; width:115.33333333333333px;  ">
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24822" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_partida">
+ <div class="evento cursorNormal" columna="3" fin="12:00" id="24822" idrecurso="15" inicio="10:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    10:30-12:00  (4/4p)
+   </div>
+   <span class="eventoTexto1">
+    Partida segunda baja masculino
+   </span>
+   <span class="eventoTexto2">
+    Matthias Böhmer
+    <br/>
+    Kay Loeschke
+    <br/>
+    Ronak Lalwani
+    <br/>
+    Norman Wilke
+    <br/>
+    <br/>
+   </span>
+  </div>
  </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="6" horariofijo="" idcentro="2" idrecurso="18" indicecolumna="6" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="08:00" timeend="09:30">
+</div>
+
+
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24940" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
+ <div class="evento cursorNormal" columna="4" fin="11:00" id="24940" idrecurso="16" inicio="09:30" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    9:30-11:00  (4p)
+   </div>
+   <span class="eventoTexto1">
+    Nigel Kenton-Barnes
+   </span>
+  </div>
  </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="6" horariofijo="" idcentro="2" idrecurso="18" indicecolumna="6" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="09:30" timeend="11:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="6" horariofijo="" idcentro="2" idrecurso="18" indicecolumna="6" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="11:00" timeend="12:30">
- </div>
- <div columna="6" style="height:330px; width:115.33333333333333px;" time="12:30" timeend="18:00">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="6" horariofijo="" idcentro="2" idrecurso="18" indicecolumna="6" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="18:00" timeend="19:30">
- </div>
- <div ;="" bloqueado="false" class="division ui-selectee ui-droppable" columna="6" horariofijo="" idcentro="2" idrecurso="18" indicecolumna="6" style="border-top:lightblue solid 0.5px !important; border-bottom:lightblue solid 0.5px !important; height:90px; width:115.33333333333333px" time="19:30" timeend="21:00">
+</div>
+
+
+<div class="imanEvento ui-draggable ui-draggable-handle" evento="true" id="24897" serie="" style="background-color: transparent; height: 0px; max-width: 115.333px; position: relative;" tipo="reserva_individual">
+ <div class="evento cursorNormal" columna="4" fin="19:30" id="24897" idrecurso="16" inicio="18:00" minutos="90" style="border: 1px solid rgb(143, 98, 98); height: 90px; background-color: rgb(238, 164, 164); width: 115.333px; position: absolute;">
+  <div class="eventoSuperior">
+   <div class="eventoFecha">
+    18:00-19:30  (4p)
+   </div>
+   <span class="eventoTexto1">
+    Jessica Larsson Luzardo
+   </span>
+  </div>
  </div>
 </div>
 

@@ -61,22 +61,26 @@ reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div'
 selectable_divs = reservas_container.find('div', {'class': 'ui-selectable'})
 
 another_selectable_divs = selectable_divs.find_all('div', {'id':'selectable'})
-i =0
+i = 0
 for ext_div in another_selectable_divs:
-    each_routine = ext_div.find_all('div', {'class':'imanEvento ui-draggable ui-draggable-handle'})
-    if i==0:
-        # Write the extracted divs' content to a text file
-        with open('output.txt', 'w', encoding='utf-8') as file:
-            for div in each_routine:
-                file.write(div.prettify())
-                file.write('\n\n')
-    else:
-        # Write the extracted divs' content to a text file
-        with open('output.txt', 'a', encoding='utf-8') as file:
-            for div in each_routine:
-                file.write(div.prettify())
-                file.write('\n\n')
-    i+= 1
+    each_routine = ext_div.find_all('div', {'class': 'imanEvento ui-draggable ui-draggable-handle'})
+    for div in each_routine:
+        evento_div = div.find('div', {'class': 'evento cursorNormal'})
+        if evento_div:
+            evento_id = evento_div.get('id')
+            evento_columna = evento_div.get('columna')
+            evento_style = evento_div.get('style')
+            event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
+            if i == 0:
+                # Write the extracted divs' content to a text file
+                with open('output.txt', 'w', encoding='utf-8') as file:
+                    file.write(event_info)
+            else:
+                # Append the extracted divs' content to a text file
+                with open('output.txt', 'a', encoding='utf-8') as file:
+                    file.write(event_info)
+            print(event_info)
+    i += 1
 
 
 
