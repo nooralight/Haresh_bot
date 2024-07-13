@@ -52,31 +52,26 @@ WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTa
 # Get the page source of the iframe content
 iframe_page_source = driver.page_source
 
-# # Parse the iframe content with BeautifulSoup
-# iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 
-# Get the page source of the new page
-# page_source = driver.page_source
+# Parse the iframe content with BeautifulSoup
+iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 
-# # Print the page title or any other information you need
-# print(page_source)
+# Extract the div elements with class 'ui-selectable' inside 'contenedor'
+reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div', {'id': 'contenedor'})
+selectable_divs = reservas_container.find_all('div', {'class': 'ui-selectable'})
+
+
 
 # Example: Write all text on the new page to a text file
+# with open('output.txt', 'w', encoding='utf-8') as file:
+#     file.write(iframe_page_source)
+
+# Write the extracted divs' content to a text file
 with open('output.txt', 'w', encoding='utf-8') as file:
-    file.write(iframe_page_source)
+    for div in selectable_divs:
+        file.write(div.prettify())
+        file.write('\n\n')
 
-# # You can also use BeautifulSoup to parse the new page content
-# soup = BeautifulSoup(page_source, 'html.parser')
-
-# # Extract the desired text from the HTML
-# date_text = soup.find('span', {'id': 'ctl01_CC_LabelFecha'}).text
-# occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelPorcentajeOcupacion'}).text
-# hours_occupancy_text = soup.find('span', {'id': 'ctl01_CC_LabelHorasOcupacion'}).text
-
-# # Print the extracted text
-# print("Date:", date_text)
-# print("Occupancy Percentage:", occupancy_text)
-# print("Hours Occupancy:", hours_occupancy_text)
 
 # Close the WebDriver
 driver.quit()
