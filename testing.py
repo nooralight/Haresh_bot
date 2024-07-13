@@ -59,6 +59,7 @@ iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 # Extract the div elements with class 'ui-selectable' inside 'contenedor'
 reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div', {'id': 'contenedor'})
 selectable_divs = reservas_container.find('div', {'class': 'ui-selectable'})
+
 another_selectable_divs = selectable_divs.find_all('div', {'id':'selectable'})
 i =0
 for ext_div in another_selectable_divs:
@@ -75,6 +76,7 @@ for ext_div in another_selectable_divs:
             for div in each_routine:
                 file.write(div.prettify())
                 file.write('\n\n')
+    i+= 1
 
 
 
@@ -84,10 +86,10 @@ for ext_div in another_selectable_divs:
 #     file.write(iframe_page_source)
 
 # Write the extracted divs' content to a text file
-with open('output.txt', 'a', encoding='utf-8') as file:
-    for div in another_selectable_divs:
-        file.write(div.prettify())
-        file.write('\n\n')
+# with open('output.txt', 'a', encoding='utf-8') as file:
+#     for div in another_selectable_divs:
+#         file.write(div.prettify())
+#         file.write('\n\n')
 
 
 # Close the WebDriver
