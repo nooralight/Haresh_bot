@@ -59,8 +59,23 @@ iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 # Extract the div elements with class 'ui-selectable' inside 'contenedor'
 reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div', {'id': 'contenedor'})
 selectable_divs = reservas_container.find('div', {'class': 'ui-selectable'})
-another_selectable_divs = selectable_divs.find_all('div', {'class':'col01 ui-selectee'})
-# each_routine = another_selectable_divs.find_all('div', {'class':'imanEvento ui-draggable ui-draggable-handle'})
+another_selectable_divs = selectable_divs.find_all('div', {'id':'selectable'})
+i =0
+for ext_div in another_selectable_divs:
+    each_routine = ext_div.find_all('div', {'class':'imanEvento ui-draggable ui-draggable-handle'})
+    if i==0:
+        # Write the extracted divs' content to a text file
+        with open('output.txt', 'w', encoding='utf-8') as file:
+            for div in each_routine:
+                file.write(div.prettify())
+                file.write('\n\n')
+    else:
+        # Write the extracted divs' content to a text file
+        with open('output.txt', 'a', encoding='utf-8') as file:
+            for div in each_routine:
+                file.write(div.prettify())
+                file.write('\n\n')
+
 
 
 
@@ -69,7 +84,7 @@ another_selectable_divs = selectable_divs.find_all('div', {'class':'col01 ui-sel
 #     file.write(iframe_page_source)
 
 # Write the extracted divs' content to a text file
-with open('output.txt', 'w', encoding='utf-8') as file:
+with open('output.txt', 'a', encoding='utf-8') as file:
     for div in another_selectable_divs:
         file.write(div.prettify())
         file.write('\n\n')
