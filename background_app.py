@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from bs4 import BeautifulSoup
 import time
 from datetime import datetime, timedelta
+import pytz
 
 from db_booking import insert_new_another_booking, update_another_booking, check_booking_exist
 
@@ -25,7 +26,9 @@ driver = webdriver.Chrome(service=service, options=options)
 
 def increase_date_by_days(days: int) -> str:
     # Get today's date
-    today_date = datetime.today()
+    # Define the timezone for Spain
+    spain_tz = pytz.timezone('Europe/Madrid')
+    today_date = datetime.today(spain_tz)
     
     # Increase the date by the specified number of days
     future_date = today_date + timedelta(days=days)
@@ -35,7 +38,9 @@ def increase_date_by_days(days: int) -> str:
 
 def check_date(input_date: str) -> bool:
     # Get today's date without time component
-    today_date = datetime.today().date()
+    # Define the timezone for Spain
+    spain_tz = pytz.timezone('Europe/Madrid')
+    today_date = datetime.today(spain_tz).date()
     
     # Convert input_date string to a date object
     input_date_obj = datetime.strptime(input_date, '%Y-%m-%d').date()
@@ -78,7 +83,9 @@ def get_sync_bookings():
     driver.switch_to.frame(iframe)
 
     # Get today's date
-    today_date = datetime.today().strftime('%Y-%m-%d')
+    # Define the timezone for Spain
+    spain_tz = pytz.timezone('Europe/Madrid')
+    today_date = datetime.today(spain_tz).strftime('%Y-%m-%d')
     for ind in range(8):
 
         if ind > 0:
