@@ -67,6 +67,7 @@ for ext_div in another_selectable_divs:
     i = 0
     for div in each_routine:
         evento_div = div.find('div', {'class': 'evento cursorNormal'})
+        booking_text = evento_div.find('div', {'class':'eventoSuperior'})
         if evento_div:
             # if i == 0:
             #     # Write the extracted divs' content to a text file
@@ -87,6 +88,7 @@ for ext_div in another_selectable_divs:
                 state = "Open"
             # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
             print(f"Match number: {evento_id}\n\nCourt: {pedal_dict[evento_columna]}\n\nStatus: {state}")
+            print(booking_text.text)
             
             # print(event_info)
         i += 1
