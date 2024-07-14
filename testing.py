@@ -128,7 +128,7 @@ for ind in range(8):
                     player_occupied = 0
                     if len(player_count[1:-1].split("/")) == 2:
                         player_occupied = int(player_count[1:-1].split("/")[0])
-                    print(player_count)
+                    print(player_occupied)
                     players_lines = []
                     
                     for item in text_list[1:]:
