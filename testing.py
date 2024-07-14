@@ -124,7 +124,7 @@ for ind in range(8):
                     # joined_text = "\n".join(text_list)
                     first_line = text_list[0].strip().split(" ")
                     timetable = first_line[0].strip()
-                    player_count = first_line[-1].strip()
+                    player_count = first_line[-1].strip()[1:-2]
                     player_occupied = 0
                     if len(player_count[1:-1].split("/")) == 2:
                         player_occupied = int(player_count[1:-1].split("/")[0])
@@ -141,7 +141,7 @@ for ind in range(8):
                     print(f"Player capacity: {player_count}")
                     print("Players")
                     print(players_lines)
-                    insert_new_another_booking(today_date, timetable, pedal_dict[evento_columna], evento_id, player_count[1:-1], player_occupied, players_lines, state)
+                    insert_new_another_booking(today_date, timetable, pedal_dict[evento_columna], evento_id, player_count[1:-2], player_occupied, players_lines, state)
                     # is_name_list = booking_text.find('span',{"class":"eventoTexto2"})
                     # print("Players")
                     # if is_name_list:
