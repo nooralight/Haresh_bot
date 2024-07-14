@@ -73,7 +73,7 @@ def update_another_booking(booking_id,booking_date, booking_time, court_name, ma
     the_booking.state = state
     the_booking.created_at = datetime.now()
     the_booking.save()
-    print(f"Booking ID {booking_id} has been updated")
+    # print(f"Booking ID {booking_id} has been updated")
 
 
 def check_booking_exist(match_number):
