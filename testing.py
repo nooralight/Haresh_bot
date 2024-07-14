@@ -61,9 +61,10 @@ reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div'
 selectable_divs = reservas_container.find('div', {'class': 'ui-selectable'})
 
 another_selectable_divs = selectable_divs.find_all('div', {'id':'selectable'})
-i = 0
+
 for ext_div in another_selectable_divs:
     each_routine = ext_div.find_all('div', {'class': 'imanEvento ui-draggable ui-draggable-handle'})
+    i = 0
     for div in each_routine:
         evento_div = div.find('div', {'class': 'evento cursorNormal'})
         if evento_div:
@@ -87,7 +88,7 @@ for ext_div in another_selectable_divs:
                 with open('output.txt', 'a', encoding='utf-8') as file:
                     file.write(evento_div.prettify())
             # print(event_info)
-    i += 1
+        i += 1
 
 
 
