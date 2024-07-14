@@ -81,6 +81,7 @@ for ext_div in another_selectable_divs:
                 state = "Open"
         
             # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
+            print("******   New Booking   ******")
             print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
             if state!= "unknown":
                 # Extract text from each child element within the div
@@ -90,6 +91,12 @@ for ext_div in another_selectable_divs:
                 # Join the text list with newline characters
                 joined_text = "\n".join(text_list)
                 print(joined_text)
+                print()
+            else:
+                # # Join the text list with newline characters
+                # joined_text = "\n".join(text_list)
+                # print(joined_text)
+                print("Not a real booking")
                 print()
 
 
