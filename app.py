@@ -5,7 +5,7 @@ from mongoengine import *
 from datetime import datetime,timedelta
 from db_player import add_new_player, update_player
 from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings
-import zoneinfo
+import pytz
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -23,15 +23,11 @@ phone_number = os.getenv('PHONE_NUMBER')
 messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
-# Get the current UTC time
-utc_now = datetime.now(datetime.timezone.utc)
-# Define the timezone for Madrid, Spain
-madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
+# Define the timezone for Spain
+spain_tz = pytz.timezone('Europe/Madrid')
 
-# Convert UTC time to Madrid time
-madrid_time = utc_now.astimezone(madrid_tz)
-
-current_madrid_time = madrid_time.strftime('%Y-%m-%d')
+# Get the current time in Spain
+spain_time = datetime.now(spain_tz)
 
 # Define the MongoDB connection
 connect(host="mongodb://127.0.0.1:27017/haresh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.10")
@@ -117,10 +113,9 @@ def home():
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
     # Define the timezone for Spain
-    # Define the timezone for Madrid, Spain
-    madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = madrid_time
-    date_str = current_madrid_time
+
+    today_date = spain_time
+    date_str = today_date.strftime('%Y-%m-%d')
 
     today_bookings = fetch_all_bookings_by_date(date_str)
     
