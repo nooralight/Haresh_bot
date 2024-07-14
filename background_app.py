@@ -124,7 +124,7 @@ def get_sync_bookings():
                     evento_style = evento_div.get('style')
                     pedal_dict = {"1": "Pádel 1", "2": "Pádel 2", "3":"Pádel 3", "4": "Pádel 4", "5":"Pádel 5", "6":"Pádel 6"}
                     state = "unknown"
-                    if "rgb(249, 231, 182)" in evento_style:
+                    if "rgb(249, 231, 182)" in evento_style or "rgb(250, 210, 143)" in evento_style:
                         state = "Searching"
                     elif "rgb(238, 164, 164)" in evento_style:
                         state = "Open"
