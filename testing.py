@@ -85,7 +85,7 @@ for ext_div in another_selectable_divs:
             print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
             if state!= "unknown":
                 # Extract text from each child element within the div
-                text_list = [element.get_text(strip=True) for element in booking_text.find_all()]
+                text_list = [element.get_text() for element in booking_text.find_all()]
 
                 
                 # Join the text list with newline characters
