@@ -47,8 +47,8 @@ time.sleep(40)
 iframe = driver.find_element(By.ID, "iframeContenido")
 driver.switch_to.frame(iframe)
 
-for i in range(7):
-    if i > 0:
+for ind in range(7):
+    if ind > 0:
         # Wait for the iframe content to load
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")))
         # Click the login button
