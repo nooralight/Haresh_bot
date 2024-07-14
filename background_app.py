@@ -85,7 +85,7 @@ def get_sync_bookings():
     # Get today's date
     # Define the timezone for Spain
     spain_tz = pytz.timezone('Europe/Madrid')
-    today_date = datetime.today(spain_tz).strftime('%Y-%m-%d')
+    today_date = datetime.now(spain_tz).strftime('%Y-%m-%d')
     for ind in range(8):
 
         if ind > 0:
