@@ -89,10 +89,11 @@ for ext_div in another_selectable_divs:
                     br.replace_with('\n')
                 # Extract text from each child element within the div
                 text_list = [element.get_text(separator='\n', strip=True) for element in booking_text]
-
+                serial = 0
                 for item in text_list:
                     if item.startswith('Partida'):
-                        del text_list[item]
+                        del text_list[serial]
+                    serial+= 1
                 # Join the text list with newline characters
                 # joined_text = "\n".join(text_list)
                 first_line = text_list[0].strip().split(" ")
