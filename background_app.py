@@ -172,10 +172,13 @@ def get_sync_bookings():
 
                         # Check if booking exist in the server
                         is_exist = check_booking_exist(evento_id)
+                        edited_timetable = timetable
+                        if timetable[1] == ":":
+                            edited_timetable = f"0{timetable}"
                         if is_exist:
-                            update_another_booking(is_exist.id,today_date, timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
+                            update_another_booking(is_exist.id,today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
                         else:
-                            insert_new_another_booking(today_date, timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
+                            insert_new_another_booking(today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
 
 
     driver.quit()
