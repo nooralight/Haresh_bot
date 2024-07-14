@@ -68,14 +68,14 @@ for ext_div in another_selectable_divs:
     for div in each_routine:
         evento_div = div.find('div', {'class': 'evento cursorNormal'})
         if evento_div:
-            if i == 0:
-                # Write the extracted divs' content to a text file
-                with open('output.txt', 'w', encoding='utf-8') as file:
-                    file.write(evento_div.preetify())
-            else:
-                # Append the extracted divs' content to a text file
-                with open('output.txt', 'a', encoding='utf-8') as file:
-                    file.write(evento_div.prettify())
+            # if i == 0:
+            #     # Write the extracted divs' content to a text file
+            #     with open('output.txt', 'w', encoding='utf-8') as file:
+            #         file.write(evento_div.preetify())
+            # else:
+            #     # Append the extracted divs' content to a text file
+            #     with open('output.txt', 'a', encoding='utf-8') as file:
+            #         file.write(evento_div.prettify())
             evento_id = evento_div.get('id')
             evento_columna = evento_div.get('columna')
             evento_style = evento_div.get('style')
