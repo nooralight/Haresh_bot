@@ -164,9 +164,9 @@ def get_sync_bookings():
                         print(players_lines)
 
                         # Check if booking exist in the server
-                        is_exist = check_booking_exist(today_date,today_date, timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
+                        is_exist = check_booking_exist(today_date)
                         if is_exist:
-                            update_another_booking(is_exist.id , )
+                            update_another_booking(is_exist.id,today_date, timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
                         else:
                             insert_new_another_booking(today_date, timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
 
