@@ -90,11 +90,25 @@ for ext_div in another_selectable_divs:
                 # Extract text from each child element within the div
                 text_list = [element.get_text(separator='\n', strip=True) for element in booking_text]
 
-                
+                for item in text_list:
+                    if item.startswith('Partida'):
+                        del item
                 # Join the text list with newline characters
-                joined_text = "\n".join(text_list)
-                print(joined_text)
-                print()
+                # joined_text = "\n".join(text_list)
+                first_line = text_list[0].strip().split(" ")
+                timetable = first_line[0]
+                player_count = first_line[1]
+                players_lines = []
+                for item in text_list[1:]:
+                    if item!="":
+                        players_lines.append(item)
+
+                
+                
+                print(f"Time period: {timetable}")
+                print(f"Player capacity: {player_count}")
+                print("Players")
+                print(players_lines)
                 # is_name_list = booking_text.find('span',{"class":"eventoTexto2"})
                 # print("Players")
                 # if is_name_list:
