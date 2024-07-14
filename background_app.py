@@ -86,6 +86,7 @@ def get_sync_bookings():
     # Define the timezone for Spain
     spain_tz = pytz.timezone('Europe/Madrid')
     today_date = datetime.now(spain_tz).strftime('%Y-%m-%d')
+
     for ind in range(8):
 
         if ind > 0:
@@ -95,7 +96,7 @@ def get_sync_bookings():
             # Click the login button
             next_button = driver.find_element(By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")
             next_button.click()
-
+        print(f"Today date: {today_date}")
         # Wait for the iframe content to load
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTabla")))
 
