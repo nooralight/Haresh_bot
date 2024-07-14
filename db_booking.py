@@ -17,6 +17,20 @@ class Match_booking(Document):
     created_at = DateTimeField()
 
 
+# Define the MongoDB document schema using mongoengine
+class Bookings(Document):
+    id = SequenceField(primary_key=True)
+    booking_date = StringField()
+    booking_time = StringField()
+    court_name = StringField()
+    match_number = StringField()
+    player_count = IntField()
+    player_occupied = IntField()
+    players_name_list = ListField(StringField())
+    state = StringField()
+    created_at = DateTimeField()
+
+
 # Create a new booking
 def insert_new_booking(booking_date, booking_time, court_name, match_number, player_count, players_whatsapp_list, state):
     new_booking = Match_booking(
@@ -26,6 +40,21 @@ def insert_new_booking(booking_date, booking_time, court_name, match_number, pla
         match_number = match_number,
         player_count = player_count,
         players_whatsapp_list = players_whatsapp_list,
+        state = state
+    )
+    new_booking.save()
+    return new_booking  #Returning the newly created item
+
+# Create a new booking
+def insert_new_another_booking(booking_date, booking_time, court_name, match_number, player_count, player_occupied, players_name_list, state):
+    new_booking = Bookings(
+        booking_date = booking_date,
+        booking_time = booking_time,
+        court_name = court_name,
+        match_number = match_number,
+        player_count = player_count,
+        player_occupied = player_occupied,
+        players_name_list = players_name_list,
         state = state
     )
     new_booking.save()

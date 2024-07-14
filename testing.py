@@ -5,6 +5,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from bs4 import BeautifulSoup
 import time
+from datetime import datetime
+
+from db_booking import insert_new_another_booking
 
 # Setup the Chrome WebDriver with the path to Chromium binary
 options = webdriver.ChromeOptions()
@@ -18,6 +21,17 @@ service = ChromeService(executable_path='/usr/bin/chromedriver')
 
 # Initialize the WebDriver
 driver = webdriver.Chrome(service=service, options=options)
+
+
+def increase_date_by_days(days: int) -> str:
+    # Get today's date
+    today_date = datetime.today()
+    
+    # Increase the date by the specified number of days
+    future_date = today_date + timedelta(days=days)
+    
+    # Return the new date in 'YYYY-MM-DD' format
+    return future_date.strftime('%Y-%m-%d')
 
 # Open the login page
 driver.get("https://app-clubdepadelbida.matchpoint.com.es/Login.aspx")
@@ -47,14 +61,17 @@ time.sleep(40)
 iframe = driver.find_element(By.ID, "iframeContenido")
 driver.switch_to.frame(iframe)
 
-for ind in range(7):
+# Get today's date
+today_date = datetime.today().strftime('%Y-%m-%d')
+for ind in range(8):
+    
     if ind > 0:
+        today_date = increase_date_by_days(ind)
         # Wait for the iframe content to load
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")))
         # Click the login button
         next_button = driver.find_element(By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")
         next_button.click()
-
 
     # Wait for the iframe content to load
     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTabla")))
@@ -79,7 +96,6 @@ for ind in range(7):
             evento_div = div.find('div', {'class': 'evento cursorNormal'})
             booking_text = evento_div.find('div', {'class':'eventoSuperior'})
             if evento_div:
-
                 evento_id = evento_div.get('id')
                 evento_columna = evento_div.get('columna')
                 evento_style = evento_div.get('style')
@@ -107,12 +123,15 @@ for ind in range(7):
                     # Join the text list with newline characters
                     # joined_text = "\n".join(text_list)
                     first_line = text_list[0].strip().split(" ")
-                    timetable = first_line[0]
-                    player_count = first_line[-1]
+                    timetable = first_line[0].strip()
+                    player_count = first_line[-1].strip()
+                    player_occupied = 0
+                    if len(player_count[1:-1].split("/")) == 2:
+                        player_occupied = player_count[1:-1].split("/")[0]
                     players_lines = []
+                    
                     for item in text_list[1:]:
                         if '\n' in item:
-                            
                             players_lines = item.split("\n")
                         else:
                             players_lines.append(item)
@@ -121,6 +140,7 @@ for ind in range(7):
                     print(f"Player capacity: {player_count}")
                     print("Players")
                     print(players_lines)
+                    insert_new_another_booking(today_date, timetable, pedal_dict[evento_columna], evento_id, player_count, player_occupied, players_lines, state)
                     # is_name_list = booking_text.find('span',{"class":"eventoTexto2"})
                     # print("Players")
                     # if is_name_list:
