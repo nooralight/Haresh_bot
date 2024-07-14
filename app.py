@@ -160,7 +160,7 @@ def get_bookings_data_byDate(date_str):
     if today_bookings:
         for booking in today_bookings:
             booking_dict[booking.booking_time][booking.court_name] = booking.id
-
+    print(booking_dict)
     return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
 
 @app.route('/check_booking/<id>', methods=['POST', 'GET'])
