@@ -5,7 +5,7 @@ from mongoengine import *
 from datetime import datetime,timedelta
 from db_player import add_new_player, update_player
 from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings
-import pytz
+import zoneinfo
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -107,7 +107,9 @@ def home():
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
     # Define the timezone for Spain
-    today_date = datetime.today()
+    # Define the timezone for Madrid, Spain
+    madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
+    today_date = datetime.now(madrid_tz)
     date_str = today_date.strftime('%Y-%m-%d')
 
     today_bookings = fetch_all_bookings_by_date(date_str)
