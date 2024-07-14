@@ -64,7 +64,7 @@ another_selectable_divs = selectable_divs.find_all('div', {'id':'selectable'})
 
 for ext_div in another_selectable_divs:
     each_routine = ext_div.find_all('div', {'class': 'imanEvento ui-draggable ui-draggable-handle'})
-    j = 0
+
     for div in each_routine:
         evento_div = div.find('div', {'class': 'evento cursorNormal'})
         booking_text = evento_div.find('div', {'class':'eventoSuperior'})
@@ -80,7 +80,6 @@ for ext_div in another_selectable_divs:
             else:
                 state = "Open"
             # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
-            print(f"Matching booking No.{j}")
             print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
             if state!= "unknown":
                 # Extract text from each child element within the div
@@ -91,9 +90,6 @@ for ext_div in another_selectable_divs:
                 joined_text = "\n".join(text_list)
                 print(joined_text)
                 print()
-            
-            # print(event_info)
-            j += 1
 
 
 
