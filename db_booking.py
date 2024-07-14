@@ -76,8 +76,8 @@ def update_another_booking(booking_id,booking_date, booking_time, court_name, ma
     print(f"Booking ID {booking_id} has been updated")
 
 
-def check_booking_exist(date_str):
-    is_exist = Bookings.objects(booking_date = date_str).first()
+def check_booking_exist(match_number):
+    is_exist = Bookings.objects(match_number = match_number).first()
     return is_exist
 
 # Fetch all_the bookings, in ascending order
