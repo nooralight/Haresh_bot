@@ -172,3 +172,10 @@ def get_sync_bookings():
 
 
     driver.quit()
+
+
+
+if __name__ == '__main__':
+    while True:
+        get_sync_bookings()
+        time.sleep(1800)
