@@ -24,11 +24,21 @@ service = ChromeService(executable_path='/usr/bin/chromedriver')
 driver = webdriver.Chrome(service=service, options=options)
 
 
+# Get the current UTC time
+utc_now = datetime.now(datetime.timezone.utc)
+# Define the timezone for Madrid, Spain
+madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
+
+# Convert UTC time to Madrid time
+madrid_time = utc_now.astimezone(madrid_tz)
+
+current_madrid_time = madrid_time.strftime('%Y-%m-%d')
+
 def increase_date_by_days(days: int) -> str:
     # Get today's date
     # Define the timezone for Madrid, Spain
     madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = datetime.now()
+    today_date = madrid_time
     
     # Increase the date by the specified number of days
     future_date = today_date + timedelta(days=days)
@@ -40,7 +50,7 @@ def check_date(input_date: str) -> bool:
     # Get today's date without time component
     # Define the timezone for Madrid, Spain
     madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = datetime.now().date()
+    today_date = madrid_time.date()
     
     # Convert input_date string to a date object
     input_date_obj = datetime.strptime(input_date, '%Y-%m-%d').date()
@@ -85,7 +95,7 @@ def get_sync_bookings():
     # Get today's date
     # Define the timezone for Madrid, Spain
     madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = datetime.now().strftime('%Y-%m-%d')
+    today_date = current_madrid_time
     for ind in range(8):
 
         if ind > 0:

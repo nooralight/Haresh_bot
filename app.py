@@ -23,6 +23,16 @@ phone_number = os.getenv('PHONE_NUMBER')
 messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
+# Get the current UTC time
+utc_now = datetime.now(datetime.timezone.utc)
+# Define the timezone for Madrid, Spain
+madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
+
+# Convert UTC time to Madrid time
+madrid_time = utc_now.astimezone(madrid_tz)
+
+current_madrid_time = madrid_time.strftime('%Y-%m-%d')
+
 # Define the MongoDB connection
 connect(host="mongodb://127.0.0.1:27017/haresh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.10")
 
@@ -109,8 +119,8 @@ def bookings():
     # Define the timezone for Spain
     # Define the timezone for Madrid, Spain
     madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = datetime.now()
-    date_str = today_date.strftime('%Y-%m-%d')
+    today_date = madrid_time
+    date_str = current_madrid_time
 
     today_bookings = fetch_all_bookings_by_date(date_str)
     
