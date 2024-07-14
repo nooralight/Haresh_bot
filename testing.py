@@ -100,10 +100,11 @@ for ext_div in another_selectable_divs:
                 player_count = first_line[-1]
                 players_lines = []
                 for item in text_list[1:]:
-                    if item.contains('\n'):
+                    if '\n' in item:
                         
                         players_lines = item.split("\n")
-
+                    else:
+                        players_lines.append(item)
                 
                 print(f"Time period: {timetable}")
                 print(f"Player capacity: {player_count}")
