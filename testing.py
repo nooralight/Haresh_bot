@@ -92,18 +92,18 @@ for ext_div in another_selectable_divs:
 
                 for item in text_list:
                     if item.startswith('Partida'):
-                        del item
+                        del text_list[item]
                 # Join the text list with newline characters
                 # joined_text = "\n".join(text_list)
                 first_line = text_list[0].strip().split(" ")
                 timetable = first_line[0]
-                player_count = first_line[1]
+                player_count = first_line[-1]
                 players_lines = []
                 for item in text_list[1:]:
-                    if item!="":
-                        players_lines.append(item)
+                    if item.contains('\n'):
+                        
+                        players_lines = item.split("\n")
 
-                
                 
                 print(f"Time period: {timetable}")
                 print(f"Player capacity: {player_count}")
