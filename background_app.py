@@ -157,7 +157,7 @@ def get_sync_bookings():
                         # print(f"Player capacity: {player_count}")
                         # print("Players")
                         # print(players_lines)
-                        print()
+                        
 
                         # Check if booking exist in the server
                         is_exist = check_booking_exist(evento_id)
