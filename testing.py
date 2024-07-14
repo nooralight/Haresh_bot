@@ -77,8 +77,9 @@ for ext_div in another_selectable_divs:
             state = "unknown"
             if "rgb(249, 231, 182)" in evento_style:
                 state = "Searching"
-            else:
+            elif "rgb(249, 231, 182)" in evento_style:
                 state = "Open"
+        
             # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
             print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
             if state!= "unknown":
