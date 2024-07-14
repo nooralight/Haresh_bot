@@ -60,6 +60,26 @@ def insert_new_another_booking(booking_date, booking_time, court_name, match_num
     new_booking.save()
     return new_booking  #Returning the newly created item
 
+def update_another_booking(booking_id,booking_date, booking_time, court_name, match_number, player_count, player_occupied, players_name_list, state):
+    the_booking = Bookings.objects(id = booking_id).first()
+
+    the_booking.booking_date = booking_date
+    the_booking.booking_time = booking_time
+    the_booking.court_name = court_name
+    the_booking.match_number = match_number
+    the_booking.player_count = player_count
+    the_booking.player_occupied = player_occupied
+    the_booking.players_name_list = players_name_list
+    the_booking.state = state
+    the_booking.created_at = datetime.now()
+    the_booking.save()
+    print(f"Booking ID {booking_id} has been updated")
+
+
+def check_booking_exist(date_str):
+    is_exist = Bookings.objects(booking_date = date_str).first()
+    return is_exist
+
 # Fetch all_the bookings, in ascending order
 def fetch_all_bookings():
     all_bookings = Match_booking.objects()

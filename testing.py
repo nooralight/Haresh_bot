@@ -146,18 +146,9 @@ for ind in range(8):
                     print(f"Player capacity: {player_count}")
                     print("Players")
                     print(players_lines)
+                    # Check if the booking already existed in the server
                     insert_new_another_booking(today_date, timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
-                    # is_name_list = booking_text.find('span',{"class":"eventoTexto2"})
-                    # print("Players")
-                    # if is_name_list:
-                    #     print(is_name_list.prettify)
-                    # print()
-                else:
-                    # # Join the text list with newline characters
-                    # joined_text = "\n".join(text_list)
-                    # print(joined_text)
-                    print("Not a real booking")
-                    print()
+
 
 
 
