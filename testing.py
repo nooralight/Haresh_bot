@@ -88,7 +88,7 @@ for ext_div in another_selectable_divs:
                 state = "Open"
             # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
             print(f"Match number: {evento_id}\n\nCourt: {pedal_dict[evento_columna]}\n\nStatus: {state}")
-            print(booking_text.text)
+            print(booking_text.get_text())
             
             # print(event_info)
         i += 1
