@@ -28,7 +28,7 @@ def increase_date_by_days(days: int) -> str:
     # Get today's date
     # Define the timezone for Spain
     spain_tz = pytz.timezone('Europe/Madrid')
-    today_date = datetime.today(spain_tz)
+    today_date = datetime.now(spain_tz)
     
     # Increase the date by the specified number of days
     future_date = today_date + timedelta(days=days)
@@ -40,7 +40,7 @@ def check_date(input_date: str) -> bool:
     # Get today's date without time component
     # Define the timezone for Spain
     spain_tz = pytz.timezone('Europe/Madrid')
-    today_date = datetime.today(spain_tz).date()
+    today_date = datetime.now(spain_tz).date()
     
     # Convert input_date string to a date object
     input_date_obj = datetime.strptime(input_date, '%Y-%m-%d').date()
