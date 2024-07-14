@@ -132,8 +132,8 @@ def get_sync_bookings():
                     # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
                     print("******   New Booking   ******")
                     print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
-                    if state!= "unknown":
-                        names = []
+                    if state== "Searching" or state == "Open":
+                        
                         for br in booking_text.find_all('br'):
                             br.replace_with('\n')
                         # Extract text from each child element within the div
