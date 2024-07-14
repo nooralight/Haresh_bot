@@ -131,7 +131,7 @@ for ind in range(8):
                         player_occupied = int(player_count[1:-1].split("/")[0])
                         total_player = int(player_count[1:-1].split("/")[1][0])
                     else:
-                        total_player = int(player_count[1:-1])
+                        total_player = int(player_count[1:-1][0])
                     print(f"player_occupied: {player_occupied}")
                     print(f"player count: {player_count}")
                     players_lines = []
