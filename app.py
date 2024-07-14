@@ -164,29 +164,28 @@ def get_bookings_data_byDate(date_str):
 @app.route('/check_booking/<id>', methods=['POST', 'GET'])
 def check_booking(id):
     booking = fetch_booking_by_id(id)
-    customer_numbers = booking.players_whatsapp_list
-    customers = Players.objects(mobile__in=customer_numbers)
-    return render_template("booking_details.html", booking = booking, customers = customers)
+    
+    return render_template("booking_details.html", booking = booking)
 
 
-@app.route('/add_new_booking', methods=['POST','GET'])
-def add_new_booking():
-    if request.method == "POST":
-        event_date = request.form.get('event_date')
-        event_time = request.form.get('event_time')
-        event_court = request.form.get('event_court')
-        event_capacity = request.form.get('event_capacity')
-        event_state = request.form.get('event_state')
-        event_match_no = request.form.get('event_match_no')
-        players_whatsapp_list = request.form.getlist('player_whatsapp[]')
-        final_player_list = []
-        for item in players_whatsapp_list:
-            if item!= "":
-                final_player_list.append(item)
-        insert_new_booking(event_date, event_time, event_court, event_match_no, event_capacity, final_player_list, event_state)
+# @app.route('/add_new_booking', methods=['POST','GET'])
+# def add_new_booking():
+#     if request.method == "POST":
+#         event_date = request.form.get('event_date')
+#         event_time = request.form.get('event_time')
+#         event_court = request.form.get('event_court')
+#         event_capacity = request.form.get('event_capacity')
+#         event_state = request.form.get('event_state')
+#         event_match_no = request.form.get('event_match_no')
+#         players_whatsapp_list = request.form.getlist('player_whatsapp[]')
+#         final_player_list = []
+#         for item in players_whatsapp_list:
+#             if item!= "":
+#                 final_player_list.append(item)
+#         insert_new_booking(event_date, event_time, event_court, event_match_no, event_capacity, final_player_list, event_state)
 
-        return redirect(url_for('bookings'))
-    return render_template("add_event.html")
+#         return redirect(url_for('bookings'))
+#     return render_template("add_event.html")
 
 @app.route('/players', methods=['POST','GET'])
 def players():

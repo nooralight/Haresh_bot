@@ -82,17 +82,17 @@ def check_booking_exist(date_str):
 
 # Fetch all_the bookings, in ascending order
 def fetch_all_bookings():
-    all_bookings = Match_booking.objects()
+    all_bookings = Bookings.objects()
     return all_bookings
 
 # Number of Total Bookings
 def get_numOfBookings():
-    num_of_bookings = Match_booking.objects().count()
+    num_of_bookings = Bookings.objects().count()
     return num_of_bookings
 
 # Number of unfinished Bookings
 def get_numOfunfinishedBookings():
-    num_of_bookings = Match_booking.objects(state = "Seaching").count()
+    num_of_bookings = Bookings.objects(state = "Seaching").count()
     return num_of_bookings
 
 # insert new_player into an existing match
@@ -107,11 +107,11 @@ def insert_new_player_into_booking(booking_id, new_player_whatsapp):
 
 # Fetch all bookings by a day
 def fetch_all_bookings_by_date(date):
-    all_bookings = Match_booking.objects(booking_date = date)
+    all_bookings = Bookings.objects(booking_date = date)
     return all_bookings
 
 # Fetch booking by id
 def fetch_booking_by_id(id):
-    exact_boooking = Match_booking.objects(id = id).first()
+    exact_boooking = Bookings.objects(id = id).first()
     return exact_boooking
 
