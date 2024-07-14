@@ -70,16 +70,23 @@ for ext_div in another_selectable_divs:
             evento_id = evento_div.get('id')
             evento_columna = evento_div.get('columna')
             evento_style = evento_div.get('style')
-            event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
+            pedal_dict = {"1": "Pádel 1", "2": "Pádel 2", "3":"Pádel 3", "4": "Pádel 4", "5":"Pádel 5", "6":"Pádel 6"}
+            state = ""
+            if "rgb(249, 231, 182)" in evento_style:
+                state = "Searching"
+            else:
+                state = "Open"
+            # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
+            print(f"Match number: {evento_id}\n\nCourt: {pedal_dict[evento_columna]}\n\nStatus: {state}")
             if i == 0:
                 # Write the extracted divs' content to a text file
                 with open('output.txt', 'w', encoding='utf-8') as file:
-                    file.write(event_info)
+                    file.write(evento_div.preetify())
             else:
                 # Append the extracted divs' content to a text file
                 with open('output.txt', 'a', encoding='utf-8') as file:
-                    file.write(event_info)
-            print(event_info)
+                    file.write(evento_div.prettify())
+            # print(event_info)
     i += 1
 
 
