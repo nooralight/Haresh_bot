@@ -129,7 +129,7 @@ for ind in range(8):
                     total_player = 0
                     if len(player_count[1:-1].split("/")) == 2:
                         player_occupied = int(player_count[1:-1].split("/")[0])
-                        total_player = int(player_count[1:-1].split("/")[1])
+                        total_player = int(player_count[1:-1].split("/")[1][0])
                     else:
                         total_player = int(player_count[1:-1])
                     print(f"player_occupied: {player_occupied}")
