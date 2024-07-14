@@ -64,40 +64,36 @@ another_selectable_divs = selectable_divs.find_all('div', {'id':'selectable'})
 
 for ext_div in another_selectable_divs:
     each_routine = ext_div.find_all('div', {'class': 'imanEvento ui-draggable ui-draggable-handle'})
-    i = 0
+    j = 0
     for div in each_routine:
         evento_div = div.find('div', {'class': 'evento cursorNormal'})
         booking_text = evento_div.find('div', {'class':'eventoSuperior'})
         if evento_div:
-            # if i == 0:
-            #     # Write the extracted divs' content to a text file
-            #     with open('output.txt', 'w', encoding='utf-8') as file:
-            #         file.write(evento_div.preetify())
-            # else:
-            #     # Append the extracted divs' content to a text file
-            #     with open('output.txt', 'a', encoding='utf-8') as file:
-            #         file.write(evento_div.prettify())
+
             evento_id = evento_div.get('id')
             evento_columna = evento_div.get('columna')
             evento_style = evento_div.get('style')
             pedal_dict = {"1": "Pádel 1", "2": "Pádel 2", "3":"Pádel 3", "4": "Pádel 4", "5":"Pádel 5", "6":"Pádel 6"}
-            state = ""
+            state = "unknown"
             if "rgb(249, 231, 182)" in evento_style:
                 state = "Searching"
             else:
                 state = "Open"
             # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
-            print(f"Matching booking No.{i}")
+            print(f"Matching booking No.{j}")
             print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
-            # Extract text from each child element within the div
-            text_list = [element.get_text(strip=True) for element in booking_text.find_all()]
-            # Join the text list with newline characters
-            joined_text = "\n".join(text_list)
-            print(joined_text)
-            print()
+            if state!= "unknown":
+                # Extract text from each child element within the div
+                text_list = [element.get_text(strip=True) for element in booking_text.find_all()]
+
+                
+                # Join the text list with newline characters
+                joined_text = "\n".join(text_list)
+                print(joined_text)
+                print()
             
             # print(event_info)
-            i += 1
+            j += 1
 
 
 
