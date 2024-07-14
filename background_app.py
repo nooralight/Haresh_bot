@@ -28,7 +28,7 @@ def increase_date_by_days(days: int) -> str:
     # Get today's date
     # Define the timezone for Madrid, Spain
     madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = datetime.now(madrid_tz)
+    today_date = datetime.now()
     
     # Increase the date by the specified number of days
     future_date = today_date + timedelta(days=days)
@@ -40,7 +40,7 @@ def check_date(input_date: str) -> bool:
     # Get today's date without time component
     # Define the timezone for Madrid, Spain
     madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = datetime.now(madrid_tz).date()
+    today_date = datetime.now().date()
     
     # Convert input_date string to a date object
     input_date_obj = datetime.strptime(input_date, '%Y-%m-%d').date()
@@ -85,7 +85,7 @@ def get_sync_bookings():
     # Get today's date
     # Define the timezone for Madrid, Spain
     madrid_tz = zoneinfo.ZoneInfo('Europe/Madrid')
-    today_date = datetime.now(madrid_tz).strftime('%Y-%m-%d')
+    today_date = datetime.now().strftime('%Y-%m-%d')
     for ind in range(8):
 
         if ind > 0:
