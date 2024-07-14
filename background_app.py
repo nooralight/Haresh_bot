@@ -39,21 +39,6 @@ def increase_date_by_days(days: int) -> str:
     # Return the new date in 'YYYY-MM-DD' format
     return future_date.strftime('%Y-%m-%d')
 
-def check_date(input_date: str) -> bool:
-    # Get today's date without time component
-    today_date = spain_time.date()
-    
-    # Convert input_date string to a date object
-    input_date_obj = datetime.strptime(input_date, '%Y-%m-%d').date()
-    
-    # Compare input date with today's date
-    if input_date_obj == today_date:
-        return True
-    elif input_date_obj > today_date:
-        return True
-    else:
-        return False
-
 def get_sync_bookings():
     # Open the login page
     driver.get("https://app-clubdepadelbida.matchpoint.com.es/Login.aspx")
@@ -87,7 +72,10 @@ def get_sync_bookings():
 
     today_date = spain_time.strftime('%Y-%m-%d')
     for ind in range(8):
-
+        if ind == 0:
+            print("it's zero now.")
+            today_date = spain_time.strftime('%Y-%m-%d')
+            print(today_date)
         if ind > 0:
             today_date = increase_date_by_days(ind)
             # Wait for the iframe content to load
@@ -130,8 +118,8 @@ def get_sync_bookings():
                         state = "Open"
                 
                     # event_info = f"ID: {evento_id}, Columna: {evento_columna}, Style: {evento_style}\n"
-                    print("******   New Booking   ******")
-                    print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
+                    #print("******   New Booking   ******")
+                    #print(f"Match number: {evento_id}\nCourt: {pedal_dict[evento_columna]}\nStatus: {state}")
                     if state!= "unknown":
                         names = []
                         for br in booking_text.find_all('br'):
@@ -155,8 +143,8 @@ def get_sync_bookings():
                             total_player = int(player_count[1:-1].split("/")[1][0])
                         else:
                             total_player = int(player_count[1:-1][0])
-                        print(f"player_occupied: {player_occupied}")
-                        print(f"player count: {player_count}")
+                        #print(f"player_occupied: {player_occupied}")
+                        #print(f"player count: {player_count}")
                         players_lines = []
                         
                         for item in text_list[1:]:
@@ -165,10 +153,11 @@ def get_sync_bookings():
                             else:
                                 players_lines.append(item)
                         
-                        print(f"Time period: {timetable}")
-                        print(f"Player capacity: {player_count}")
-                        print("Players")
-                        print(players_lines)
+                        # print(f"Time period: {timetable}")
+                        # print(f"Player capacity: {player_count}")
+                        # print("Players")
+                        # print(players_lines)
+                        print()
 
                         # Check if booking exist in the server
                         is_exist = check_booking_exist(evento_id)
