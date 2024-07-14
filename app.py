@@ -107,8 +107,7 @@ def home():
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
     # Define the timezone for Spain
-    spain_tz = pytz.timezone('Europe/Madrid')
-    today_date = datetime.now(spain_tz)
+    today_date = datetime.today()
     date_str = today_date.strftime('%Y-%m-%d')
 
     today_bookings = fetch_all_bookings_by_date(date_str)
