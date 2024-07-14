@@ -71,7 +71,7 @@ def get_sync_bookings():
     # Get today's date
 
     today_date = spain_time.strftime('%Y-%m-%d')
-    for ind in range(8):
+    for ind in range(0,7):
         if ind == 0:
             print("it's zero now.")
             today_date = spain_time.strftime('%Y-%m-%d')
