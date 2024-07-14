@@ -69,14 +69,14 @@ def get_sync_bookings():
     driver.switch_to.frame(iframe)
 
     # Get today's date
-
+    k = 0
     today_date = spain_time.strftime('%Y-%m-%d')
     for ind in range(0,7):
-        if ind == 0:
+        if k == 0:
             print("it's zero now.")
             today_date = spain_time.strftime('%Y-%m-%d')
             print(today_date)
-        if ind > 0:
+        if k > 0:
             today_date = increase_date_by_days(ind)
             # Wait for the iframe content to load
             WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")))
@@ -168,7 +168,7 @@ def get_sync_bookings():
                             update_another_booking(is_exist.id,today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
                         else:
                             insert_new_another_booking(today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
-
+        k+= 1   
 
     driver.quit()
 
