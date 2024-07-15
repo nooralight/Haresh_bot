@@ -72,10 +72,6 @@ def get_sync_bookings():
     k = 0
     today_date = spain_time.strftime('%Y-%m-%d')
     for ind in range(0,7):
-        if k == 0:
-            print("it's zero now.")
-            today_date = spain_time.strftime('%Y-%m-%d')
-            print(today_date)
         if k > 0:
             today_date = increase_date_by_days(ind)
             # Wait for the iframe content to load
@@ -83,6 +79,11 @@ def get_sync_bookings():
             # Click the login button
             next_button = driver.find_element(By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")
             next_button.click()
+        elif k == 0:
+            print("it's zero now.")
+            today_date = spain_time.strftime('%Y-%m-%d')
+            print(today_date)
+        
 
         # Wait for the iframe content to load
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTabla")))
