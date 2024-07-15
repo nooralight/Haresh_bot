@@ -72,6 +72,7 @@ def get_sync_bookings():
 
     today_date = spain_time.strftime('%Y-%m-%d')
     for ind in range(0,7):
+
         if k > 0:
             today_date = increase_date_by_days(ind)
             # Wait for the iframe content to load
@@ -95,6 +96,9 @@ def get_sync_bookings():
         # Parse the iframe content with BeautifulSoup
         iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
 
+        date_get_html = iframe_soup.find('input', {'id': 'ctl01_CC_HiddenFieldFechaTabla'})
+        print(date_get_html.get_text())
+
         # Extract the div elements with class 'ui-selectable' inside 'contenedor'
         reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div', {'id': 'contenedor'})
         selectable_divs = reservas_container.find('div', {'class': 'ui-selectable'})
@@ -102,6 +106,7 @@ def get_sync_bookings():
         another_selectable_divs = selectable_divs.find_all('div', {'id':'selectable'})
 
         for ext_div in another_selectable_divs:
+
             each_routine = ext_div.find_all('div', {'class': 'imanEvento ui-draggable ui-draggable-handle'})
 
             for div in each_routine:
