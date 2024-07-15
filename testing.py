@@ -1,12 +1,26 @@
+from mongoengine import *
+from datetime import datetime
 
-from datetime import datetime,timedelta
+# Define the MongoDB connection
+connect(host="mongodb://127.0.0.1:27017/haresh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.10")
 
-import pytz
+class Players(Document):
+    id = SequenceField(primary_key=True)
+    name = StringField()
+    mobile = StringField()
+    age = StringField()
+    sex = StringField()
+    level = StringField()
+    availability = StringField()
+    preferred_position = StringField()
+    dominant_hand = StringField()
+    status = StringField()
+    created_at = DateTimeField()
+    updated_at = DateTimeField()
 
-# Define the timezone for Spain
-spain_tz = pytz.timezone('Europe/Madrid')
 
-# Get the current time in Spain
-spain_time = datetime.now(spain_tz)
-
-print(spain_time.strftime('%Y-%m-%d %H:%M:%S'))
+players = Players.objects(mobile = "nan")
+for player in players:
+    player.mobile = "Not Available"
+    player.save()
+    print("updated")
