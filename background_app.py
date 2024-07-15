@@ -24,6 +24,8 @@ service = ChromeService(executable_path='/usr/bin/chromedriver')
 driver = webdriver.Chrome(service=service, options=options)
 
 
+
+
 def increase_date_by_days(days: int) -> str:
     # Get today's date
     spain_tz = pytz.timezone('Europe/Madrid')
@@ -34,6 +36,18 @@ def increase_date_by_days(days: int) -> str:
     
     # Return the new date in 'YYYY-MM-DD' format
     return future_date.strftime('%Y-%m-%d')
+
+def get_previous_date(date_str):
+    # Convert the input string date to a datetime object
+    date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+    
+    # Subtract one day using timedelta
+    previous_date_obj = date_obj - timedelta(days=1)
+    
+    # Convert the previous date back to a string in the same format
+    previous_date_str = previous_date_obj.strftime('%Y-%m-%d')
+    
+    return previous_date_str
 
 def get_sync_bookings():
     # Open the login page
@@ -92,12 +106,8 @@ def get_sync_bookings():
         # Get the page source of the iframe content
         iframe_page_source = driver.page_source
 
-
         # Parse the iframe content with BeautifulSoup
         iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
-
-        date_get_html = iframe_soup.find('input', {'id': 'ctl01_CC_HiddenFieldFechaTabla'})
-        print(date_get_html.get_text())
 
         # Extract the div elements with class 'ui-selectable' inside 'contenedor'
         reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div', {'id': 'contenedor'})
@@ -170,10 +180,12 @@ def get_sync_bookings():
                         edited_timetable = timetable
                         if timetable[1] == ":":
                             edited_timetable = f"0{timetable}"
+                        exact_date = get_previous_date(today_date)
                         if is_exist:
-                            update_another_booking(is_exist.id,today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
+                            
+                            update_another_booking(is_exist.id,exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
                         else:
-                            insert_new_another_booking(today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
+                            insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
         k+= 1   
 
     driver.quit()
