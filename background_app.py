@@ -23,18 +23,13 @@ service = ChromeService(executable_path='/usr/bin/chromedriver')
 # Initialize the WebDriver
 driver = webdriver.Chrome(service=service, options=options)
 
-
-spain_tz = pytz.timezone('Europe/Madrid')
-# Get the current time in Spain
-spain_time = datetime.now(spain_tz)
-
 def increase_date_by_days(days: int) -> str:
     # Get today's date
-
-    today_date = spain_time
-    
+    spain_tz = pytz.timezone('Europe/Madrid')
+    # Get the current time in Spain
+    spain_time = datetime.now(spain_tz)
     # Increase the date by the specified number of days
-    future_date = today_date + timedelta(days=days)
+    future_date = spain_time + timedelta(days=days)
     
     # Return the new date in 'YYYY-MM-DD' format
     return future_date.strftime('%Y-%m-%d')
@@ -70,6 +65,10 @@ def get_sync_bookings():
 
     # Get today's date
     k = 0
+    spain_tz = pytz.timezone('Europe/Madrid')
+    # Get the current time in Spain
+    spain_time = datetime.now(spain_tz)
+
     today_date = spain_time.strftime('%Y-%m-%d')
     for ind in range(0,7):
         if k > 0:
@@ -81,7 +80,7 @@ def get_sync_bookings():
             next_button.click()
         elif k == 0:
             print("it's zero now.")
-            today_date = spain_time.strftime('%Y-%m-%d')
+        
             print(today_date)
         
 
