@@ -23,6 +23,7 @@ service = ChromeService(executable_path='/usr/bin/chromedriver')
 # Initialize the WebDriver
 driver = webdriver.Chrome(service=service, options=options)
 
+
 def increase_date_by_days(days: int) -> str:
     # Get today's date
     spain_tz = pytz.timezone('Europe/Madrid')
