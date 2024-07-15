@@ -92,7 +92,7 @@ def get_numOfBookings():
 
 # Number of unfinished Bookings
 def get_numOfunfinishedBookings():
-    num_of_bookings = Bookings.objects(state = "Seaching").count()
+    num_of_bookings = Bookings.objects(state = "Searching").count()
     return num_of_bookings
 
 # insert new_player into an existing match
