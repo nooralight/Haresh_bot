@@ -126,13 +126,10 @@
                     <li><a href="{{ url_for('contacts') }}" aria-expanded="false"><i class="fas fa-address-book"></i><span
                         class="nav-text">Contacts</span></a>
                     </li>
-                    <li class="nav-label">Matches</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fas fa-user-friends"></i>
-                        <span class="nav-text">Match Bookings</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ url_for('bookings') }}">List of Bookings</a></li>
-                            <li><a href="{{ url_for('add_new_booking') }}">Add new Booking</a></li></ul>
+                    <li><a href="{{ url_for('bookings') }}" aria-expanded="false"><i class="fas fa-home"></i><span
+                        class="nav-text">List of Bookings</span></a>
                     </li>
+                    
                     <li class="nav-label">User Database</li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fas fa-user-friends"></i>
                         <span class="nav-text">Players</span></a>
