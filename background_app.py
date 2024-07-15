@@ -66,7 +66,7 @@ def get_sync_bookings():
 
     today_date = spain_time.strftime('%Y-%m-%d')
 
-    for ind in range(7):
+    for ind in range(8):
         if ind > 0:
             today_date = increase_date_by_days(spain_time, ind)
             # Wait for the iframe content to load
