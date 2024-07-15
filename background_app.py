@@ -23,13 +23,9 @@ service = ChromeService(executable_path='/usr/bin/chromedriver')
 # Initialize the WebDriver
 driver = webdriver.Chrome(service=service, options=options)
 
-def increase_date_by_days(days: int) -> str:
-    # Get today's date
-    spain_tz = pytz.timezone('Europe/Madrid')
-    # Get the current time in Spain
-    spain_time = datetime.now(spain_tz)
+def increase_date_by_days(start_date: datetime, days: int) -> str:
     # Increase the date by the specified number of days
-    future_date = spain_time + timedelta(days=days)
+    future_date = start_date + timedelta(days=days)
     
     # Return the new date in 'YYYY-MM-DD' format
     return future_date.strftime('%Y-%m-%d')
@@ -64,32 +60,29 @@ def get_sync_bookings():
     driver.switch_to.frame(iframe)
 
     # Get today's date
-    k = 0
     spain_tz = pytz.timezone('Europe/Madrid')
     # Get the current time in Spain
     spain_time = datetime.now(spain_tz)
 
     today_date = spain_time.strftime('%Y-%m-%d')
-    for ind in range(0,7):
-        if k > 0:
-            today_date = increase_date_by_days(ind)
+
+    for ind in range(7):
+        if ind > 0:
+            today_date = increase_date_by_days(spain_time, ind)
             # Wait for the iframe content to load
             WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")))
-            # Click the login button
+            # Click the next button
             next_button = driver.find_element(By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")
             next_button.click()
-        elif k == 0:
+        else:
             print("it's zero now.")
-        
             print(today_date)
-        
 
         # Wait for the iframe content to load
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTabla")))
 
         # Get the page source of the iframe content
         iframe_page_source = driver.page_source
-
 
         # Parse the iframe content with BeautifulSoup
         iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
@@ -158,7 +151,6 @@ def get_sync_bookings():
                         # print("Players")
                         # print(players_lines)
                         
-
                         # Check if booking exist in the server
                         is_exist = check_booking_exist(evento_id)
                         edited_timetable = timetable
@@ -168,11 +160,8 @@ def get_sync_bookings():
                             update_another_booking(is_exist.id,today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
                         else:
                             insert_new_another_booking(today_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
-        k+= 1   
 
     driver.quit()
-
-
 
 if __name__ == '__main__':
     while True:
