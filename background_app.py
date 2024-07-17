@@ -195,7 +195,7 @@ def get_sync_bookings():
                         
                         
 
-                        if match_level and "Partida" in match_level:
+                        if match_level and "Partida" in match_level.get_text():
                             print(f"!!!  Found match level {match_level}")
 
 
