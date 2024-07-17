@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import time
 from datetime import datetime, timedelta
 import pytz
-
+import re
 from db_booking import insert_new_another_booking, update_another_booking, check_booking_exist
 
 # Setup the Chrome WebDriver with the path to Chromium binary
@@ -49,6 +49,11 @@ def get_previous_date(date_str):
     previous_date_str = previous_date_obj.strftime('%Y-%m-%d')
     
     return previous_date_str
+
+def contains_numeric_string(s):
+    # Regular expression to find any numeric string
+    pattern = r'\d+'
+    return bool(re.search(pattern, s))
 
 def get_sync_bookings():
     # Open the login page
@@ -173,10 +178,24 @@ def get_sync_bookings():
                             else:
                                 players_lines.append(item)
                         
-                        # print(f"Time period: {timetable}")
-                        # print(f"Player capacity: {player_count}")
-                        # print("Players")
-                        # print(players_lines)
+                        
+                        # Players validations
+                        player_index = 0
+                        match_level = None
+                        for player in players_lines:
+                            if "Reserva" in player:
+                                players_lines[player_index] = player.strip().split(" ")[-1]
+                            
+                            if player_index == 0 and player.strip().startswith("Match"):
+                                match_level = player
+                                del players_lines[player_index]
+                            
+                            elif contains_numeric_string(player):
+                                del players_lines[player_index]
+                            
+
+
+
                         
 
                         # Check if booking exist in the server
@@ -187,9 +206,9 @@ def get_sync_bookings():
                         exact_date = get_previous_date(today_date)
                         if is_exist:
                             
-                            update_another_booking(is_exist.id,exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
+                            update_another_booking(is_exist.id,exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
                         else:
-                            insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, total_player, player_occupied, players_lines, state)
+                            insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
         k+= 1   
 
     driver.quit()
