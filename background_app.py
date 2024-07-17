@@ -186,9 +186,10 @@ def get_sync_bookings():
                             if "Reserva" in player:
                                 players_lines[player_index] = player.strip().split(" ")[-1]
                             
-                            if "Match" in player:
+                            elif "Partida" in player:
                                 print(player)
                                 match_level = player
+                                del players_lines[player_index]
                             
                             elif contains_numeric_string(player):
                                 del players_lines[player_index]
