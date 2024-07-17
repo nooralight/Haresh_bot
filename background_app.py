@@ -192,6 +192,8 @@ def get_sync_bookings():
                             
                             elif contains_numeric_string(player):
                                 del players_lines[player_index]
+
+                            player_index+= 1
                             
 
 
