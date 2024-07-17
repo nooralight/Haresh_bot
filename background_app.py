@@ -130,10 +130,13 @@ def get_sync_bookings():
             for div in each_routine:
                 evento_div = div.find('div', {'class': 'evento cursorNormal'})
                 booking_text = evento_div.find('div', {'class':'eventoSuperior'})
-                match_level = booking_text.find('span',{'class':'eventoTexto1'})
-                print(match_level.get_text())
-                if match_level and "Partida" in match_level.get_text():
-                            print(f"\n!!!  Found match level {match_level}\n")
+                # match_level = booking_text.find('span',{'class':'eventoTexto1'})
+                # print(match_level.get_text())
+
+                desired_match_level = None
+                # if match_level and "Partida" in match_level.get_text():
+                #     desired_match_level = match_level.get_text()
+                #     print(f"\n!!!  Found match level {match_level}\n")
                 if evento_div:
                     evento_id = evento_div.get('id')
                     evento_columna = evento_div.get('columna')
@@ -154,9 +157,11 @@ def get_sync_bookings():
                             br.replace_with('\n')
                         # Extract text from each child element within the div
                         text_list = [element.get_text(separator='\n', strip=True) for element in booking_text]
+                        match_level = None
                         serial = 0
                         for item in text_list:
-                            if item.startswith('Partida'):
+                            if item.startswith('Partida'):   #  *******************************************************************
+                                match_level = item
                                 del text_list[serial]
                             serial+= 1
                         # Join the text list with newline characters
@@ -185,19 +190,15 @@ def get_sync_bookings():
                         
                         # Players validations
                         player_index = 0
-                        match_level = None
+                        
                         for player in players_lines:
                             if "Reserva" in player:
                                 players_lines[player_index] = player.strip().split(" ")[-1]
-                            
+
                             if contains_numeric_string(player):
                                 del players_lines[player_index]
 
                             player_index+= 1
-                        
-
-
-
                         
 
                         # Check if booking exist in the server
