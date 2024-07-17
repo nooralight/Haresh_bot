@@ -146,7 +146,7 @@ def bookings():
     return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
 
 @app.route('/extra_bookings', methods=['POST','GET'])
-def bookings():
+def extra_bookings():
     # Define the timezone for Spain
 
     today_date = london_time
