@@ -188,6 +188,7 @@ def get_sync_bookings():
                             
                             if player_index == 0 and player.strip().startswith("Match"):
                                 match_level = player
+                                print(match_level)
                                 del players_lines[player_index]
                             
                             elif contains_numeric_string(player):
@@ -195,7 +196,7 @@ def get_sync_bookings():
 
                             player_index+= 1
                             
-
+                        print(match_level)
 
 
                         
