@@ -165,7 +165,8 @@ def get_sync_bookings():
                         #print(f"player_occupied: {player_occupied}")
                         #print(f"player count: {player_count}")
                         players_lines = []
-                        
+                        if total_player>4:
+                            total_player = 0
                         for item in text_list[1:]:
                             if '\n' in item:
                                 players_lines = item.split("\n")
