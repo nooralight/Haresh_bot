@@ -131,7 +131,9 @@ def get_sync_bookings():
                 evento_div = div.find('div', {'class': 'evento cursorNormal'})
                 booking_text = evento_div.find('div', {'class':'eventoSuperior'})
                 match_level = booking_text.find('span',{'class':'eventoTexto1'})
-                print(match_level)
+                print(match_level.get_text())
+                if match_level and "Partida" in match_level.get_text():
+                            print(f"\n!!!  Found match level {match_level}\n")
                 if evento_div:
                     evento_id = evento_div.get('id')
                     evento_columna = evento_div.get('columna')
@@ -193,10 +195,6 @@ def get_sync_bookings():
 
                             player_index+= 1
                         
-                        
-
-                        if match_level and "Partida" in match_level.get_text():
-                            print(f"!!!  Found match level {match_level}")
 
 
 
