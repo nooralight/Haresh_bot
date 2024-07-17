@@ -130,6 +130,7 @@ def get_sync_bookings():
             for div in each_routine:
                 evento_div = div.find('div', {'class': 'evento cursorNormal'})
                 booking_text = evento_div.find('div', {'class':'eventoSuperior'})
+                match_level = booking_text.find('span',{'class':'eventoTexto1'})
                 if evento_div:
                     evento_id = evento_div.get('id')
                     evento_columna = evento_div.get('columna')
@@ -186,18 +187,16 @@ def get_sync_bookings():
                             if "Reserva" in player:
                                 players_lines[player_index] = player.strip().split(" ")[-1]
                             
-                            if "Partida" in player:
-                                print(player)
-                                match_level = player
-                                del players_lines[player_index]
-                            
-                            elif contains_numeric_string(player):
+                            if contains_numeric_string(player):
                                 del players_lines[player_index]
 
                             player_index+= 1
                         
-                        if match_level:
-                            print(match_level)
+                        
+
+                        if match_level and "Partida" in match_level:
+                            print(f"!!!  Found match level {match_level}")
+                            
 
 
                         
