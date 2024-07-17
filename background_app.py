@@ -194,8 +194,9 @@ def get_sync_bookings():
                                 del players_lines[player_index]
 
                             player_index+= 1
-                            
-                        print(match_level)
+                        
+                        if match_level:
+                            print(match_level)
 
 
                         
