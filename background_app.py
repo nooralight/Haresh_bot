@@ -186,7 +186,7 @@ def get_sync_bookings():
                             if "Reserva" in player:
                                 players_lines[player_index] = player.strip().split(" ")[-1]
                             
-                            if player_index == 0 and "Match" in player:
+                            if "Match" in player:
                                 print(player)
                                 match_level = player
                             
