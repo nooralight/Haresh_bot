@@ -167,7 +167,7 @@
                         <tbody>
                             <tr>
                                 <th class="text-center">08:00-09:30</th>
-                                <td class="text-center">{% if booking_dict["08:00-09:30"]["Pádel 1"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 1'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                <td class="text-center" {% if booking_dict['08:00-09:30']['Pádel 1'] %} {% if booking_dict['08:00-09:30']['Pádel 1'].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["08:00-09:30"]["Pádel 1"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 1'].id) }}" class="btn btn-primary text-white my-2" title="check event">
                                     <div class="flex-row">
                                         <span style="font-size: smaller;">{{ booking_dict['08:00-09:30']['Pádel 1'].booking_time }} {% if booking_dict['08:00-09:30']['Pádel 1'].player_count > 0 %}
                                             ({% if booking_dict['08:00-09:30']['Pádel 1'].player_occupied > 0 %}{{ booking_dict['08:00-09:30']['Pádel 1'].player_occupied }}/{{ booking_dict['08:00-09:30']['Pádel 1'].player_count }}p  {% else %} {{ booking_dict['08:00-09:30']['Pádel 1'].player_count }}p{% endif %})
@@ -175,7 +175,7 @@
                                         </span>
 
                                     </div> </a> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00-09:30"]["Pádel 2"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                <td class="text-center" {% if booking_dict['08:00-09:30']['Pádel 2'] %} {% if booking_dict['08:00-09:30']['Pádel 2'].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["08:00-09:30"]["Pádel 2"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
                                     <div class="flex-row">
                                         <span style="font-size: smaller;">{{ booking_dict['08:00-09:30']['Pádel 2'].booking_time }} {% if booking_dict['08:00-09:30']['Pádel 2'].player_count > 0 %}
                                             ({% if booking_dict['08:00-09:30']['Pádel 2'].player_occupied > 0 %}{{ booking_dict['08:00-09:30']['Pádel 2'].player_occupied }}/{{ booking_dict['08:00-09:30']['Pádel 2'].player_count }}p  {% else %} {{ booking_dict['08:00-09:30']['Pádel 2'].player_count }}p{% endif %})
@@ -183,7 +183,7 @@
                                         </span>
 
                                     </div> </a> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00-09:30"]["Pádel 3"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                <td class="text-center" {% if booking_dict['08:00-09:30']['Pádel 3'] %} {% if booking_dict['08:00-09:30']['Pádel 3'].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["08:00-09:30"]["Pádel 3"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
                                     <div class="flex-row">
                                         <span style="font-size: smaller;">{{ booking_dict['08:00-09:30']['Pádel 3'].booking_time }} {% if booking_dict['08:00-09:30']['Pádel 3'].player_count > 0 %}
                                             ({% if booking_dict['08:00-09:30']['Pádel 3'].player_occupied > 0 %}{{ booking_dict['08:00-09:30']['Pádel 3'].player_occupied }}/{{ booking_dict['08:00-09:30']['Pádel 3'].player_count }}p  {% else %} {{ booking_dict['08:00-09:30']['Pádel 3'].player_count }}p{% endif %})
@@ -191,7 +191,7 @@
                                         </span>
 
                                     </div> </a> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00-09:30"]["Pádel 4"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                <td class="text-center" {% if booking_dict['08:00-09:30']['Pádel 4'] %} {% if booking_dict['08:00-09:30']['Pádel 4'].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["08:00-09:30"]["Pádel 4"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
                                     <div class="flex-row">
                                         <span style="font-size: smaller;">{{ booking_dict['08:00-09:30']['Pádel 4'].booking_time }} {% if booking_dict['08:00-09:30']['Pádel 4'].player_count > 0 %}
                                             ({% if booking_dict['08:00-09:30']['Pádel 4'].player_occupied > 0 %}{{ booking_dict['08:00-09:30']['Pádel 4'].player_occupied }}/{{ booking_dict['08:00-09:30']['Pádel 4'].player_count }}p  {% else %} {{ booking_dict['08:00-09:30']['Pádel 4'].player_count }}p{% endif %})
@@ -199,7 +199,7 @@
                                         </span>
 
                                     </div> </a> {% endif %}</td>
-                                <td class="text-center">{% if booking_dict["08:00-09:30"]["Pádel 5"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                <td class="text-center" {% if booking_dict['08:00-09:30']['Pádel 5'] %} {% if booking_dict['08:00-09:30']['Pádel 5'].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["08:00-09:30"]["Pádel 5"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
                                     <div class="flex-row">
                                         <span style="font-size: smaller;">{{ booking_dict['08:00-09:30']['Pádel 5'].booking_time }} {% if booking_dict['08:00-09:30']['Pádel 5'].player_count > 0 %}
                                             ({% if booking_dict['08:00-09:30']['Pádel 5'].player_occupied > 0 %}{{ booking_dict['08:00-09:30']['Pádel 5'].player_occupied }}/{{ booking_dict['08:00-09:30']['Pádel 5'].player_count }}p  {% else %} {{ booking_dict['08:00-09:30']['Pádel 5'].player_count }}p{% endif %})
@@ -207,7 +207,7 @@
                                         </span>
 
                                     </div> </a> {% endif %}</td>
-                                    <td class="text-center">{% if booking_dict["08:00-09:30"]["Pádel 6"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                    <td class="text-center" {% if booking_dict['08:00-09:30']['Pádel 6'] %} {% if booking_dict['08:00-09:30']['Pádel 6'].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["08:00-09:30"]["Pádel 6"] %} <a href="{{ url_for('check_booking', id = booking_dict['08:00-09:30']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
                                         <div class="flex-row">
                                             <span style="font-size: smaller;">{{ booking_dict['08:00-09:30']['Pádel 6'].booking_time }} {% if booking_dict['08:00-09:30']['Pádel 6'].player_count > 0 %}
                                                 ({% if booking_dict['08:00-09:30']['Pádel 6'].player_occupied > 0 %}{{ booking_dict['08:00-09:30']['Pádel 6'].player_occupied }}/{{ booking_dict['08:00-09:30']['Pádel 6'].player_count }}p  {% else %} {{ booking_dict['08:00-09:30']['Pádel 6'].player_count }}p{% endif %})
