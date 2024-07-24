@@ -1086,7 +1086,7 @@
                                                 {% endif %}
                                             </span>
                                             {% if booking_dict['20:00-22:00']['Pádel 6'].match_level %} <br> <span style="font-size: smaller;">Match Level: {{ booking_dict['20:00-22:00']['Pádel 6'].match_level }} </span>{% endif %}
-                                            {% if booking_dict['20:00-22:00']['Pádel 6'].pssh rootlayers_name_list %}
+                                            {% if booking_dict['20:00-22:00']['Pádel 6'].players_name_list %}
                                             {% for name in booking_dict['20:00-22:00']['Pádel 6'].players_name_list %}
                                             <br> <span style="font-size: smaller;">{{ name }}</span>
                                             {% endfor %}
