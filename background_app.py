@@ -213,7 +213,7 @@ def get_sync_bookings():
 
     except:
         print("problem")
-        driver.quite()
+        driver.quit()
 
 
 if __name__ == '__main__':
