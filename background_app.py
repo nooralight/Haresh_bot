@@ -43,22 +43,20 @@ def contains_numeric_string(s):
     # Regular expression to find any numeric string
     pattern = r'\d+'
     return bool(re.search(pattern, s))
-def initialize_driver():
-    # Setup the Chrome WebDriver with the path to Chromium binary
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Run in headless mode
-    options.add_argument('--disable-gpu')  # Disable GPU acceleration
-    options.add_argument('--no-sandbox')  # Bypass OS security model
-    options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
 
-    # Specify the path to Chromedriver
-    service = ChromeService(executable_path='/usr/bin/chromedriver')
-
-    # Initialize the WebDriver
-    return webdriver.Chrome(service=service, options=options)
 
 def get_sync_bookings(driver):
     try:
+        # Setup the Chrome WebDriver with the path to Chromium binary
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')  # Run in headless mode
+        options.add_argument('--disable-gpu')  # Disable GPU acceleration
+        options.add_argument('--no-sandbox')  # Bypass OS security model
+        options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
+
+        # Specify the path to Chromedriver
+        service = ChromeService(executable_path='/usr/bin/chromedriver')
+        driver = webdriver.Chrome(service=service, options=options)
         # Open the login page
         driver.get("https://app-clubdepadelbida.matchpoint.com.es/Login.aspx")
 
@@ -197,8 +195,7 @@ def get_sync_bookings(driver):
 
                                 player_index+= 1
                             
-                            if len(players_lines)>4:
-                                players_lines = players_lines[:-1]
+
                             # Check if booking exist in the server
                             is_exist = check_booking_exist(evento_id)
                             edited_timetable = timetable
@@ -212,16 +209,15 @@ def get_sync_bookings(driver):
                                 insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
             k+= 1   
 
-
+        driver.quit()
 
     except:
         print("problem")
+        driver.quit()
 
 
 
 if __name__ == '__main__':
     while True:
-        driver = initialize_driver()
-        get_sync_bookings(driver)
-        driver.quit()  # Quit the driver to free up resources
+        get_sync_bookings()
         time.sleep(200)
