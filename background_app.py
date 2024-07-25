@@ -111,7 +111,7 @@ def get_sync_bookings():
             # Convert the date format from dd/mm/yyyy to yyyy-mm-dd
             date_object = datetime.strptime(hidden_input_value, '%d/%m/%Y')
             today_date = date_object.strftime('%Y-%m-%d')
-
+            print(f"Current date = {today_date}")
             # Get the page source of the iframe content
             iframe_page_source = driver.page_source
 
