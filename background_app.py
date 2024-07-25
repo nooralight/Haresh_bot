@@ -209,6 +209,7 @@ def get_sync_bookings(driver):
                                 edited_timetable = f"0{timetable}"
                             exact_date = get_previous_date(today_date)
                             if is_exist:
+                                print("Already existed")
                                 update_another_booking(is_exist.id,exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
                             else:
                                 insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
