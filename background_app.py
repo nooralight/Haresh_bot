@@ -133,9 +133,6 @@ def get_sync_bookings(driver):
                 for div in each_routine:
                     evento_div = div.find('div', {'class': 'evento cursorNormal'})
                     booking_text = evento_div.find('div', {'class':'eventoSuperior'})
-                    extra_text = booking_text.find('span', {'class':'eventoObservaciones'})  
-                    
-
                     
                     if evento_div:
                         evento_id = evento_div.get('id')
@@ -187,17 +184,6 @@ def get_sync_bookings(driver):
                                 else:
                                     players_lines.append(item)
                             
-                            # Excluding extra text
-                            if extra_text:
-                                extra_text_to_delete = extra_text.get_text()
-                                delete_index = 0
-                                for item in players_lines:
-                                    if item == extra_text_to_delete:
-                                        del players_lines[delete_index]
-                                    delete_index+= 1
-
-                            
-                            
                             
                             # Players validations
                             player_index = 0
@@ -209,14 +195,12 @@ def get_sync_bookings(driver):
 
                                 if contains_numeric_string(player):
                                     del players_lines[player_index]
-
-                                elif extra_text:
-                                    extra_text_to_delete = extra_text.get_text()
-                                    if player == extra_text_to_delete:
-                                        del players_lines[player_index]
                                 
                                 player_index+= 1
                             
+                            # Removing extra players 
+                            if len(players_lines)>4:
+                                players_lines = players_lines[:-1]
 
                             # Check if booking exist in the server
                             is_exist = check_booking_exist(evento_id)
