@@ -169,7 +169,7 @@
                             <tr>
                                 <td>{{ time_slot }}</td>
                                 {% for court, status in courts.items() %}
-                                <td class="text-center" {% if booking_dict[time_slot][court] %} {% if booking_dict[time_slot][court].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["20:30-22:00"]["Pádel 6"] %} <a href="{{ url_for('check_booking', id = booking_dict['20:30-22:00']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                <td class="text-center" {% if booking_dict[time_slot][court] %} {% if booking_dict[time_slot][court].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict[time_slot][court] %} <a href="{{ url_for('check_booking', id = booking_dict[time_slot][court].id) }}" class="btn btn-primary text-white my-2" title="check event">
                                     <div class="flex-row">
                                         <span style="font-size: smaller;">{{ booking_dict[time_slot][court].booking_time }} {% if booking_dict[time_slot][court].player_count > 0 %}
                                             ({% if booking_dict[time_slot][court].player_occupied > 0 %}{{ booking_dict[time_slot][court].player_occupied }}/{{ booking_dict[time_slot][court].player_count }}p  {% else %} {{ booking_dict[time_slot][court].player_count }}p{% endif %})
