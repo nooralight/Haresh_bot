@@ -142,7 +142,7 @@ def bookings():
         return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
     else:
         for booking in today_bookings:
-            booking_dict[booking.booking_time][booking.court_name]  = booking.id
+            booking_dict[booking.booking_time][booking.court_name]  = booking
     return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
 
 @app.route('/extra_bookings', methods=['POST','GET'])
