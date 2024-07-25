@@ -249,7 +249,7 @@ def check_booking(id):
 @app.route('/players', defaults={'page': 1},methods=['GET','POST'])
 @app.route('/players/page/<int:page>',methods=['GET','POST'])
 def players(page):
-    per_page = 100
+    per_page = 80
     skip = (page - 1) * per_page
     players = Players.objects().skip(skip).limit(per_page)
     total_players = Players.objects.count()
