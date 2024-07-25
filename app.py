@@ -175,7 +175,7 @@ def extra_bookings():
                      "20:30-22:00":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,}}
     
     if today_bookings.count() == 0:
-        return render_template("another_bookings.html", t_date = date_str, booking_dict = booking_dict)
+        return render_template("another_booking.html", t_date = date_str, booking_dict = booking_dict)
     else:
         for booking in today_bookings:
             booking_dict[booking.booking_time][booking.court_name]  = booking
