@@ -195,7 +195,8 @@ def get_sync_bookings():
 
                                 player_index+= 1
                             
-
+                            if len(players_lines)>4:
+                                players_lines = players_lines[:-1]
                             # Check if booking exist in the server
                             is_exist = check_booking_exist(evento_id)
                             edited_timetable = timetable
