@@ -81,7 +81,10 @@ def update_another_booking(booking_id,booking_date, booking_time, court_name, ma
 
 def check_booking_exist(match_number):
     is_exist = Bookings.objects(match_number = match_number).first()
-    return is_exist
+    if is_exist:
+        return is_exist
+    else:
+        return None
 
 # Fetch all_the bookings, in ascending order
 def fetch_all_bookings():
