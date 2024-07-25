@@ -241,11 +241,27 @@ def check_booking(id):
 #         return redirect(url_for('bookings'))
 #     return render_template("add_event.html")
 
-@app.route('/players', methods=['POST','GET'])
-def players():
-    players = Players.objects().order_by('-id')
-    return render_template("players.html", players = players)
+# @app.route('/players', methods=['POST','GET'])
+# def players():
+#     players = Players.objects().order_by('-id')
+#     return render_template("players.html", players = players)
 
+@app.route('/players', defaults={'page': 1},methods=['GET','POST'])
+@app.route('/players/page/<int:page>',methods=['GET','POST'])
+def players(page):
+    per_page = 100
+    skip = (page - 1) * per_page
+    players = Players.objects().skip(skip).limit(per_page)
+    total_players = Players.objects.count()
+    # Calculate the total pages
+    total_pages = (total_players + per_page - 1) // per_page
+    pagination = {
+        'page': page,
+        'per_page': per_page,
+        'total': total_players,
+    }
+
+    return render_template('players.html', players=players, pagination=pagination, total_pages = total_pages)
 
 
 @app.route('/add_new_player', methods=['POST','GET'])

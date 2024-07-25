@@ -368,6 +368,44 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Pagination  -->
+                    {% if pagination %}
+                    <div class="d-flex justify-content-center">
+                        <div class="pagination my-2">
+
+                            {% if pagination.page > 1 %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ url_for('players', page=pagination.page - 1) }}">Prev</a>
+                                        </li>
+                                {% endif %}
+
+                                {% if pagination.page >= 4 %}
+                                    <li class="page-item"><a class="page-link" href="{{ url_for('players', page=1) }}">1</a></li>
+                                    <li class="page-item"><span class="page-link">...</span></li>
+                                {% endif %}
+
+                                {% for page_num in range(pagination.page - 2, pagination.page + 3) %}
+                                    {% if 1 <= page_num <= total_pages %}
+                                        <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                                            <a class="page-link" href="{{ url_for('players', page=page_num) }}">{{ page_num }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if pagination.page < total_pages - 2 %}
+                                    <li class="page-item"><span class="page-link">...</span></li>
+                                    <li class="page-item"><a class="page-link" href="{{ url_for('players', page=total_pages) }}">{{ total_pages }}</a></li>
+                                {% endif %}
+
+                                
+                                {% if pagination.page < total_pages %}
+                                <a href="{{ url_for('players', page=pagination.page + 1) }}" class="btn btn-primary">Next</a>
+                                {% endif %}
+
+                        </div>
+                    </div>
+                    {% endif %}
                     
                 </div>
             </div>
