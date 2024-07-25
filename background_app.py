@@ -11,19 +11,6 @@ import re
 from db_booking import insert_new_another_booking, update_another_booking, check_booking_exist
 
 
-def initialize_driver():
-    # Setup the Chrome WebDriver with the path to Chromium binary
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Run in headless mode
-    options.add_argument('--disable-gpu')  # Disable GPU acceleration
-    options.add_argument('--no-sandbox')  # Bypass OS security model
-    options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
-
-    # Specify the path to Chromedriver
-    service = ChromeService(executable_path='/usr/bin/chromedriver')
-
-    # Initialize the WebDriver
-    return webdriver.Chrome(service=service, options=options)
 
 
 
@@ -56,6 +43,19 @@ def contains_numeric_string(s):
     # Regular expression to find any numeric string
     pattern = r'\d+'
     return bool(re.search(pattern, s))
+def initialize_driver():
+    # Setup the Chrome WebDriver with the path to Chromium binary
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # Run in headless mode
+    options.add_argument('--disable-gpu')  # Disable GPU acceleration
+    options.add_argument('--no-sandbox')  # Bypass OS security model
+    options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
+
+    # Specify the path to Chromedriver
+    service = ChromeService(executable_path='/usr/bin/chromedriver')
+
+    # Initialize the WebDriver
+    return webdriver.Chrome(service=service, options=options)
 
 def get_sync_bookings(driver):
     try:
@@ -133,7 +133,7 @@ def get_sync_bookings(driver):
                 for div in each_routine:
                     evento_div = div.find('div', {'class': 'evento cursorNormal'})
                     booking_text = evento_div.find('div', {'class':'eventoSuperior'})
-                    
+
                     if evento_div:
                         evento_id = evento_div.get('id')
                         evento_columna = evento_div.get('columna')
@@ -189,19 +189,16 @@ def get_sync_bookings(driver):
                             player_index = 0
                             
                             for player in players_lines:
-                                
                                 if "Reserva" in player:
                                     players_lines[player_index] = player.strip().split(" ")[-1]
 
                                 if contains_numeric_string(player):
                                     del players_lines[player_index]
-                                
+
                                 player_index+= 1
                             
-                            # Removing extra players 
                             if len(players_lines)>4:
                                 players_lines = players_lines[:-1]
-
                             # Check if booking exist in the server
                             is_exist = check_booking_exist(evento_id)
                             edited_timetable = timetable
@@ -209,15 +206,17 @@ def get_sync_bookings(driver):
                                 edited_timetable = f"0{timetable}"
                             exact_date = get_previous_date(today_date)
                             if is_exist:
-                                print("Already existed")
+                                
                                 update_another_booking(is_exist.id,exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
                             else:
                                 insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
             k+= 1   
 
+
+
     except:
         print("problem")
-        
+
 
 
 if __name__ == '__main__':
