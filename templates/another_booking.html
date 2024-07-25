@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" sizes="16x16" href="{{ url_for('static', filename= 'logo/logotipo.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    
+    <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet"> 
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <a href="{{ url_for('home') }}" class="brand-logo" style="background-color: white;">
+                
+                <img class="logo-compact" src="" style="color: black;font-size: small;" alt="Pedal Club">
+                <img class="brand-title" src="" style="color: black;font-size: small;" alt="Pedal Club">
+                
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            
+                        </div>
+
+                        <ul class="navbar-nav header-right">
+                            
+                            <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Profile </span>
+                                    </a>
+                                    
+                                    <a href="#" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Logout </span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav">
+            <div class="quixnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Main Menu</li>
+                    <li><a href="{{ url_for('home') }}" aria-expanded="false"><i class="fas fa-home"></i><span
+                        class="nav-text">Dashboard</span></a>
+                    </li>
+
+                    <li class="nav-label">Message History</li>
+                    <li><a href="{{ url_for('contacts') }}" aria-expanded="false"><i class="fas fa-address-book"></i><span
+                        class="nav-text">Contacts</span></a>
+                    </li>
+                    <li><a href="{{ url_for('bookings') }}" aria-expanded="false"><i class="fas fa-home"></i><span
+                        class="nav-text">List of Bookings</span></a>
+                    </li>
+                    
+                    <li class="nav-label">User Database</li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fas fa-user-friends"></i>
+                        <span class="nav-text">Players</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ url_for('players') }}">List of Players</a></li>
+                            <li><a href="{{ url_for('create_new_player') }}">Add new Player</a></li></ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="card-header">
+                    <h2 class="card-title">Match Event List</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-2 mb-2">
+                            <input name="event_date" id="startDate" class="form-control" type="date" value="{{ t_date }}" required/>
+                        </div>
+                        <div class="col-sm-6">
+                            <button id="todayBtn" class="btn btn-primary">Today</button>
+                            <button id="prevDayBtn" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
+                            <button id="nextDayBtn" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm custom-table" id="customTable" style="color: black;">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="text-center">Time Periods</th>
+                                <th class="text-center">Pádel 1</th>
+                                <th class="text-center">Pádel 2</th>
+                                <th class="text-center">Pádel 3</th>
+                                <th class="text-center">Pádel 4</th>
+                                <th class="text-center">Pádel 5</th>
+                                <th class="text-center">Pádel 6</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for time_slot, courts in booking_dict.items() %}
+                            <tr>
+                                <td>{{ time_slot }}</td>
+                                {% for court, status in courts.items() %}
+                                <td class="text-center" {% if booking_dict[time_slot][court] %} {% if booking_dict[time_slot][court].state == "Open" %} style="background-color: rgb(238, 164, 164);"  {% else %}  style="background-color: rgb(249, 231, 182);"  {% endif %} {% endif %}>{% if booking_dict["20:30-22:00"]["Pádel 6"] %} <a href="{{ url_for('check_booking', id = booking_dict['20:30-22:00']['Pádel 2'].id) }}" class="btn btn-primary text-white my-2" title="check event">
+                                    <div class="flex-row">
+                                        <span style="font-size: smaller;">{{ booking_dict[time_slot][court].booking_time }} {% if booking_dict[time_slot][court].player_count > 0 %}
+                                            ({% if booking_dict[time_slot][court].player_occupied > 0 %}{{ booking_dict[time_slot][court].player_occupied }}/{{ booking_dict[time_slot][court].player_count }}p  {% else %} {{ booking_dict[time_slot][court].player_count }}p{% endif %})
+                                            {% endif %}
+                                        </span>
+                                        {% if booking_dict[time_slot][court].match_level %} <br> <span style="font-size: smaller;">Match Level: {{ booking_dict[time_slot][court].match_level }} </span>{% endif %}
+                                        {% for player in booking_dict[time_slot][court].players_name_list %}
+                                        <br> <span style="font-size: smaller;">{{ player }} </span>
+                                        {% endfor %}
+                                    </div> </a> {% endif %}</td>
+                                {% endfor %}
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <!-- <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="https://yatezzitos.com/" target="_blank">Yatezzitos</a></p>
+            </div>
+        </div> -->
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const todayBtn = document.getElementById('todayBtn');
+            const nextDayBtn = document.getElementById('nextDayBtn');
+            const prevDayBtn = document.getElementById('prevDayBtn');
+            const startDateInput = document.getElementById('startDate');
+    
+            todayBtn.addEventListener('click', function() {
+                const today = new Date().toISOString().split('T')[0];
+                startDateInput.value = today;
+                redirectToBookings(today);
+            });
+    
+            nextDayBtn.addEventListener('click', function() {
+                const currentDate = new Date(startDateInput.value);
+                const nextDay = new Date(currentDate);
+                nextDay.setDate(currentDate.getDate() + 1);
+                const nextDayStr = nextDay.toISOString().split('T')[0];
+                startDateInput.value = nextDayStr;
+                redirectToBookings(nextDayStr);
+            });
+    
+            prevDayBtn.addEventListener('click', function() {
+                const currentDate = new Date(startDateInput.value);
+                const prevDay = new Date(currentDate);
+                prevDay.setDate(currentDate.getDate()-1);
+                const prevDayStr = prevDay.toISOString().split('T')[0];
+                startDateInput.value = prevDayStr;
+                redirectToBookings(prevDayStr);
+            });
+    
+            startDateInput.addEventListener('change', function() {
+                const selectedDate = startDateInput.value;
+                redirectToBookings(selectedDate);
+            });
+    
+            function redirectToBookings(dateStr) {
+                window.location.href = `/bookings/${dateStr}`;
+            }
+        });
+    </script>
+    <!-- Required vendors -->
+    <script src="{{ url_for('static',filename = 'vendor/global/global.min.js') }}"></script>  
+    <script src="{{ url_for('static',filename = 'js/quixnav-init.js') }}"></script> 
+    <script src="{{ url_for('static',filename = 'js/custom.min.js') }}"></script> 
+
+</body>
+
+</html>
