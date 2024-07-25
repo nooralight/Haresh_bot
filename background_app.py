@@ -10,18 +10,20 @@ import pytz
 import re
 from db_booking import insert_new_another_booking, update_another_booking, check_booking_exist
 
-# Setup the Chrome WebDriver with the path to Chromium binary
-options = webdriver.ChromeOptions()
-options.add_argument('--headless')  # Run in headless mode
-options.add_argument('--disable-gpu')  # Disable GPU acceleration
-options.add_argument('--no-sandbox')  # Bypass OS security model
-options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
 
-# Specify the path to Chromedriver
-service = ChromeService(executable_path='/usr/bin/chromedriver')
+def initialize_driver():
+    # Setup the Chrome WebDriver with the path to Chromium binary
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # Run in headless mode
+    options.add_argument('--disable-gpu')  # Disable GPU acceleration
+    options.add_argument('--no-sandbox')  # Bypass OS security model
+    options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium binary
 
-# Initialize the WebDriver
-driver = webdriver.Chrome(service=service, options=options)
+    # Specify the path to Chromedriver
+    service = ChromeService(executable_path='/usr/bin/chromedriver')
+
+    # Initialize the WebDriver
+    return webdriver.Chrome(service=service, options=options)
 
 
 
@@ -55,7 +57,7 @@ def contains_numeric_string(s):
     pattern = r'\d+'
     return bool(re.search(pattern, s))
 
-def get_sync_bookings():
+def get_sync_bookings(driver):
     try:
         # Open the login page
         driver.get("https://app-clubdepadelbida.matchpoint.com.es/Login.aspx")
@@ -229,14 +231,16 @@ def get_sync_bookings():
                                 insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
             k+= 1   
 
-        driver.quit()
+        
 
     except:
         print("problem")
-        driver.quit()
+        
 
 
 if __name__ == '__main__':
     while True:
-        get_sync_bookings()
+        driver = initialize_driver()
+        get_sync_bookings(driver)
+        driver.quit()  # Quit the driver to free up resources
         time.sleep(200)
