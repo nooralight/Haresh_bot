@@ -111,13 +111,17 @@ def get_sync_bookings():
 
             # Wait for the iframe content to load
             WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTabla")))
-
+            check_time = driver.find_element(By.ID, "ctl01_CC_HiddenFieldFechaTabla")
+            if check_time:
+                # Get the value of the hidden input
+                hidden_input_value = check_time.get_attribute('value')
+                print(f"Hidden date is = {hidden_input_value}")
             # Get the page source of the iframe content
             iframe_page_source = driver.page_source
 
             # Parse the iframe content with BeautifulSoup
             iframe_soup = BeautifulSoup(iframe_page_source, 'html.parser')
-
+            
             # Extract the div elements with class 'ui-selectable' inside 'contenedor'
             reservas_container = iframe_soup.find('div', {'class': 'myReservas'}).find('div', {'id': 'contenedor'})
             selectable_divs = reservas_container.find('div', {'class': 'ui-selectable'})
