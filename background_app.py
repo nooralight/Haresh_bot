@@ -45,7 +45,7 @@ def contains_numeric_string(s):
     return bool(re.search(pattern, s))
 
 
-def get_sync_bookings(driver):
+def get_sync_bookings():
     try:
         # Setup the Chrome WebDriver with the path to Chromium binary
         options = webdriver.ChromeOptions()
