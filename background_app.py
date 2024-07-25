@@ -133,7 +133,7 @@ def get_sync_bookings(driver):
                 for div in each_routine:
                     evento_div = div.find('div', {'class': 'evento cursorNormal'})
                     booking_text = evento_div.find('div', {'class':'eventoSuperior'})
-                    extra_text = evento_div.find('span', {'class':'eventoObservaciones'})  
+                    extra_text = booking_text.find('span', {'class':'eventoObservaciones'})  
                     
 
                     
