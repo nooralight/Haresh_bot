@@ -213,9 +213,10 @@ def get_sync_bookings():
 
     except:
         print("problem")
+        driver.quite()
 
 
 if __name__ == '__main__':
     while True:
         get_sync_bookings()
-        time.sleep(30000)
+        time.sleep(200)
