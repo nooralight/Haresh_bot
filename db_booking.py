@@ -117,8 +117,3 @@ def fetch_all_bookings_by_date(date):
 def fetch_booking_by_id(id):
     exact_boooking = Bookings.objects(id = id).first()
     return exact_boooking
-
-
-bookings = Bookings.objects().order_by('-id')
-for booking in bookings:
-    print(booking.player_count)
