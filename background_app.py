@@ -87,35 +87,31 @@ def get_sync_bookings():
 
         # Get today's date
         k = 0
-        # Define the timezone for London
-        london_tz = pytz.timezone('Europe/London')
 
-        # Get the current time in London
-        london_time = datetime.now(london_tz)
-
-        today_date = london_time.strftime('%Y-%m-%d')
         for ind in range(0,7):
 
             if k > 0:
-                today_date = increase_date_by_days(ind)
-                # Wait for the iframe content to load
                 WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")))
-                # Click the login button
+                # Click the next button
                 next_button = driver.find_element(By.ID, "ctl01_CC_ImageButtonAvanzarFechaDrch")
                 next_button.click()
-            elif k == 0:
-                print("it's zero now.")
             
-                print(today_date)
+            
             
 
             # Wait for the iframe content to load
             WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "CuerpoTabla")))
+
+            ########### First of all, getting today's date #################
+
             check_time = driver.find_element(By.ID, "ctl01_CC_HiddenFieldFechaTabla")
-            if check_time:
-                # Get the value of the hidden input
-                hidden_input_value = check_time.get_attribute('value')
-                print(f"Hidden date is = {hidden_input_value}")
+            # Get the value of the hidden input
+            hidden_input_value = check_time.get_attribute('value')
+            
+            # Convert the date format from dd/mm/yyyy to yyyy-mm-dd
+            date_object = datetime.strptime(hidden_input_value, '%d/%m/%Y')
+            today_date = date_object.strftime('%Y-%m-%d')
+
             # Get the page source of the iframe content
             iframe_page_source = driver.page_source
 
