@@ -359,7 +359,7 @@ def handle_incoming_message():
             session['context'] = 'ask_availability'
             return "okay", 200
         
-        elif not already_user.dominant_hand and not session.get('context') == "ask_dominant_hand":
+        elif not already_user.dominant_hand and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability":
             #dominant hand
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
@@ -374,7 +374,7 @@ def handle_incoming_message():
             session['context'] = 'ask_dominant_hand'
             return "okay", 200
         
-        elif not already_user.preferred_position and not session.get('context') == "ask_preferred_position":
+        elif not already_user.preferred_position and not session.get('context') == "ask_preferred_position" and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability":
             #pref_pos
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
