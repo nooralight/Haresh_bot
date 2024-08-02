@@ -330,7 +330,7 @@ def handle_incoming_message():
     sender = request.form.get('From')
     profile_name = request.form.get('ProfileName')
     media_url = request.form.get('MediaUrl0')
-    print("hello")
+    print(message)
     # Checking if user already available
     already_user = Players.objects(mobile = sender[9:]).first()
     if not already_user:
@@ -392,178 +392,48 @@ def handle_incoming_message():
             session['context'] = 'ask_preferred_position'
             return "okay", 200
         
-        
-    if media_url:
+    if session.get('context') == None or 'context' not in session:
         message_send = twilio_client.messages.create(
-            from_ = phone_number,
-            body=f"Hi {profile_name}, I am Haresh from Pedal Court. It seems like you sent a media file to me. New version will come very soon.",
-            to= sender
-        )
-    else:
-        if session.get('context') == None or 'context' not in session:
-            message_send = twilio_client.messages.create(
-                    from_= messaging_sid,
-                    content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
-                    to = sender
-                )
-            
-            body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
-1. Match Reservations
-2. FAQ'''
-            insert_into_message(sender[9:], body, "bot")
-            session['context'] = "started"
-            return "okay",200
-        elif session.get('context') == "started":
-            message_send = twilio_client.messages.create(
-                    from_ = phone_number,
-                    body=f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!",
-                    to= sender
-                )
-            body= f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!"
-            insert_into_message(sender[9:], body, "bot")
-            session['context'] = None
-            return "okay",200
+                from_= messaging_sid,
+                content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
+                to = sender
+            )
         
-        elif session.get('context') == "ask_availability":
-            if message in ['8 AM - 12 PM', '5 PM - 8 PM', '8 PM - 10 PM']:
-                if message == '8 AM - 12 PM':
-                    already_user.availability = '8 AM - 12 PM'
-                elif message == '5 PM - 8 PM':
-                    already_user.availability = '5 PM - 8 PM'
-                else:
-                    already_user.availability = '8 PM - 10 PM'
-                already_user.save()
-                
-                ######  If preferred position is not given  ####
-                if not already_user.preferred_position:
-
-                    first_message = twilio_client.messages.create(
-                        from_= phone_number,
-                        body= 'Thanks for providing your availibility timetable.'
-                    )
-                    time.sleep(1)
-                    #dominant hand
-                    message_send = twilio_client.messages.create(
-                            from_= messaging_sid,
-                            content_sid="HXdcde334dc5cd1476b5b1a4600b850b53",
-                            to = sender
-                        )
-                    
-                    body = '''Please select which one is your dominant hand?
-1. Left Hand
-2. Right Hand'''
-                    insert_into_message(sender[9:], body, "bot")
-                    session['context'] = 'ask_dominant_hand'
-                    return "okay", 200
-                
-                elif not already_user.preferred_position:
-
-                    first_message = twilio_client.messages.create(
-                        from_= phone_number,
-                        body= 'Thanks for providing your availibility timetable.'
-                    )
-                    insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
-
-                    #pref_pos
-                    message_send = twilio_client.messages.create(
-                            from_= messaging_sid,
-                            content_sid="HXc3849bee8ebdc174f14e1bdf13c29df0",
-                            to = sender
-                        )
-                    
-                    body = '''Please select the preferred position of your playing from the list.
-1. Left Side Player
-2. Right Side Player
-3. Net Position
-4. Baseline Position
-5. Mixed Position'''
-                    insert_into_message(sender[9:], body, "bot")
-                    session['context'] = 'ask_preferred_position'
-                    return "okay", 200
-                
-                else:
-                    first_message = twilio_client.messages.create(
-                        from_= phone_number,
-                        body= 'Thanks for providing your availibility timetable.'
-                    )
-                    insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
-
-                    message_send = twilio_client.messages.create(
-                        from_= messaging_sid,
-                        content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
-                        to = sender
-                    )
-                    
-                    body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
+        body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
 1. Match Reservations
 2. FAQ'''
-                    insert_into_message(sender[9:], body, "bot")
-                    session['context'] = "started"
-                    return "okay",200
+        insert_into_message(sender[9:], body, "bot")
+        session['context'] = "started"
+        return "okay",200
+    elif session.get('context') == "started":
+        message_send = twilio_client.messages.create(
+                from_ = phone_number,
+                body=f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!",
+                to= sender
+            )
+        body= f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!"
+        insert_into_message(sender[9:], body, "bot")
+        session['context'] = None
+        return "okay",200
+    
+    elif session.get('context') == "ask_availability":
+        if message in ['8 AM - 12 PM', '5 PM - 8 PM', '8 PM - 10 PM']:
+            if message == '8 AM - 12 PM':
+                already_user.availability = '8 AM - 12 PM'
+            elif message == '5 PM - 8 PM':
+                already_user.availability = '5 PM - 8 PM'
             else:
-                body = '''Please tell us your available time for playing Pedal Matches. Choose the perfect timetable which is suitable for your availability.
-1. 8 AM - 12 PM
-2. 5 PM - 8 PM
-3. 8 PM - 10 PM'''
-                insert_into_message(sender[9:], body, "bot")
-                session['context'] = 'ask_availability'
-                return "okay", 200
+                already_user.availability = '8 PM - 10 PM'
+            already_user.save()
+            
+            ######  If preferred position is not given  ####
+            if not already_user.preferred_position:
 
-        elif session.get('context') == "ask_dominant_hand":
-            if message in ['Left hand', 'Right hand']:
-                if message == 'Left hand':
-                    already_user.dominant_hand = 'Left hand'
-                    
-                elif message == 'Right hand':
-                    already_user.dominant_hand = 'Right hand'
-
-                already_user.save()
-                if not already_user.preferred_position:
-
-                    first_message = twilio_client.messages.create(
-                        from_= phone_number,
-                        body= 'Thanks for providing your availibility timetable.'
-                    )
-                    insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
-
-                    #pref_pos
-                    message_send = twilio_client.messages.create(
-                            from_= messaging_sid,
-                            content_sid="HXc3849bee8ebdc174f14e1bdf13c29df0",
-                            to = sender
-                        )
-                    
-                    body = '''Please select the preferred position of your playing from the list.
-1. Left Side Player
-2. Right Side Player
-3. Net Position
-4. Baseline Position
-5. Mixed Position'''
-                    insert_into_message(sender[9:], body, "bot")
-                    session['context'] = 'ask_preferred_position'
-                    return "okay", 200
-                
-                else:
-                    first_message = twilio_client.messages.create(
-                        from_= phone_number,
-                        body= 'Thanks for providing info about your dominant hand.'
-                    )
-                    insert_into_message(sender[9:], 'Thanks for providing info about your dominant hand.', "bot")
-
-                    message_send = twilio_client.messages.create(
-                        from_= messaging_sid,
-                        content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
-                        to = sender
-                    )
-                    
-                    body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
-1. Match Reservations
-2. FAQ'''
-                    insert_into_message(sender[9:], body, "bot")
-                    session['context'] = "started"
-                    return "okay",200
-
-            else:
+                first_message = twilio_client.messages.create(
+                    from_= phone_number,
+                    body= 'Thanks for providing your availibility timetable.'
+                )
+                time.sleep(1)
                 #dominant hand
                 message_send = twilio_client.messages.create(
                         from_= messaging_sid,
@@ -578,29 +448,14 @@ def handle_incoming_message():
                 session['context'] = 'ask_dominant_hand'
                 return "okay", 200
             
-        elif session.get('context') == "ask_preferred_position":
-            if message in ['Left Side Player', 'Right Side Player', 'Net Position', 'Baseline Position', 'Mixed Position']:
-                already_user.preferred_position = message
-                already_user.save()
+            elif not already_user.preferred_position:
+
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
-                    body= 'Thanks for providing info about your dominant hand.'
+                    body= 'Thanks for providing your availibility timetable.'
                 )
-                insert_into_message(sender[9:], 'Thanks for providing info about your preferred position.', "bot")
+                insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
 
-                message_send = twilio_client.messages.create(
-                    from_= messaging_sid,
-                    content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
-                    to = sender
-                )
-                
-                body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
-1. Match Reservations
-2. FAQ'''
-                insert_into_message(sender[9:], body, "bot")
-                session['context'] = "started"
-                return "okay",200
-            else:
                 #pref_pos
                 message_send = twilio_client.messages.create(
                         from_= messaging_sid,
@@ -617,5 +472,142 @@ def handle_incoming_message():
                 insert_into_message(sender[9:], body, "bot")
                 session['context'] = 'ask_preferred_position'
                 return "okay", 200
+            
+            else:
+                first_message = twilio_client.messages.create(
+                    from_= phone_number,
+                    body= 'Thanks for providing your availibility timetable.'
+                )
+                insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
+
+                message_send = twilio_client.messages.create(
+                    from_= messaging_sid,
+                    content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
+                    to = sender
+                )
+                
+                body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
+1. Match Reservations
+2. FAQ'''
+                insert_into_message(sender[9:], body, "bot")
+                session['context'] = "started"
+                return "okay",200
+        else:
+            body = '''Please tell us your available time for playing Pedal Matches. Choose the perfect timetable which is suitable for your availability.
+1. 8 AM - 12 PM
+2. 5 PM - 8 PM
+3. 8 PM - 10 PM'''
+            insert_into_message(sender[9:], body, "bot")
+            session['context'] = 'ask_availability'
+            return "okay", 200
+
+    elif session.get('context') == "ask_dominant_hand":
+        if message in ['Left hand', 'Right hand']:
+            if message == 'Left hand':
+                already_user.dominant_hand = 'Left hand'
+                
+            elif message == 'Right hand':
+                already_user.dominant_hand = 'Right hand'
+
+            already_user.save()
+            if not already_user.preferred_position:
+
+                first_message = twilio_client.messages.create(
+                    from_= phone_number,
+                    body= 'Thanks for providing your availibility timetable.'
+                )
+                insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
+
+                #pref_pos
+                message_send = twilio_client.messages.create(
+                        from_= messaging_sid,
+                        content_sid="HXc3849bee8ebdc174f14e1bdf13c29df0",
+                        to = sender
+                    )
+                
+                body = '''Please select the preferred position of your playing from the list.
+1. Left Side Player
+2. Right Side Player
+3. Net Position
+4. Baseline Position
+5. Mixed Position'''
+                insert_into_message(sender[9:], body, "bot")
+                session['context'] = 'ask_preferred_position'
+                return "okay", 200
+            
+            else:
+                first_message = twilio_client.messages.create(
+                    from_= phone_number,
+                    body= 'Thanks for providing info about your dominant hand.'
+                )
+                insert_into_message(sender[9:], 'Thanks for providing info about your dominant hand.', "bot")
+
+                message_send = twilio_client.messages.create(
+                    from_= messaging_sid,
+                    content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
+                    to = sender
+                )
+                
+                body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
+1. Match Reservations
+2. FAQ'''
+                insert_into_message(sender[9:], body, "bot")
+                session['context'] = "started"
+                return "okay",200
+
+        else:
+            #dominant hand
+            message_send = twilio_client.messages.create(
+                    from_= messaging_sid,
+                    content_sid="HXdcde334dc5cd1476b5b1a4600b850b53",
+                    to = sender
+                )
+            
+            body = '''Please select which one is your dominant hand?
+1. Left Hand
+2. Right Hand'''
+            insert_into_message(sender[9:], body, "bot")
+            session['context'] = 'ask_dominant_hand'
+            return "okay", 200
+        
+    elif session.get('context') == "ask_preferred_position":
+        if message in ['Left Side Player', 'Right Side Player', 'Net Position', 'Baseline Position', 'Mixed Position']:
+            already_user.preferred_position = message
+            already_user.save()
+            first_message = twilio_client.messages.create(
+                from_= phone_number,
+                body= 'Thanks for providing info about your dominant hand.'
+            )
+            insert_into_message(sender[9:], 'Thanks for providing info about your preferred position.', "bot")
+
+            message_send = twilio_client.messages.create(
+                from_= messaging_sid,
+                content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
+                to = sender
+            )
+            
+            body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
+1. Match Reservations
+2. FAQ'''
+            insert_into_message(sender[9:], body, "bot")
+            session['context'] = "started"
+            return "okay",200
+        else:
+            #pref_pos
+            message_send = twilio_client.messages.create(
+                    from_= messaging_sid,
+                    content_sid="HXc3849bee8ebdc174f14e1bdf13c29df0",
+                    to = sender
+                )
+            
+            body = '''Please select the preferred position of your playing from the list.
+1. Left Side Player
+2. Right Side Player
+3. Net Position
+4. Baseline Position
+5. Mixed Position'''
+            insert_into_message(sender[9:], body, "bot")
+            session['context'] = 'ask_preferred_position'
+            return "okay", 200
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True,port=8000)
