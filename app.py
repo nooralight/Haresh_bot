@@ -347,12 +347,12 @@ def handle_incoming_message():
             #available time
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
-                    content_sid="HXe628d0c10ea863fe947078c25f0c153f",
+                    content_sid="HX7e7b31309eeef968224013f06deb12a9",
                     to = sender
                 )
             
             body = '''Please tell us your available time for playing Pedal Matches. Choose the perfect timetable which is suitable for your availability.
-1. 8 AM - 12 PM
+1. 8 AM - 12:30 PM
 2. 5 PM - 8 PM
 3. 8 PM - 10 PM'''
             insert_into_message(sender[9:], body, "bot")
@@ -417,9 +417,9 @@ def handle_incoming_message():
         return "okay",200
     
     elif session.get('context') == "ask_availability":
-        if message in ['8 AM - 12 PM', '5 PM - 8 PM', '8 PM - 10 PM']:
-            if message == '8 AM - 12 PM':
-                already_user.availability = '8 AM - 12 PM'
+        if message in ['8 AM - 12:30 PM', '5 PM - 8 PM', '8 PM - 10 PM']:
+            if message == '8 AM - 12:30 PM':
+                already_user.availability = '8 AM - 12:30 PM'
             elif message == '5 PM - 8 PM':
                 already_user.availability = '5 PM - 8 PM'
             else:
@@ -493,6 +493,12 @@ def handle_incoming_message():
                 session['context'] = "started"
                 return "okay",200
         else:
+            #available time
+            message_send = twilio_client.messages.create(
+                    from_= messaging_sid,
+                    content_sid="HX7e7b31309eeef968224013f06deb12a9",
+                    to = sender
+                )
             body = '''Please tell us your available time for playing Pedal Matches. Choose the perfect timetable which is suitable for your availability.
 1. 8 AM - 12 PM
 2. 5 PM - 8 PM
