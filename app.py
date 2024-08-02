@@ -332,7 +332,7 @@ def handle_incoming_message():
     media_url = request.form.get('MediaUrl0')
     print("hello")
     # Checking if user already available
-    already_user = Contacts.objects(whatsapp = sender[9:]).first()
+    already_user = Players.objects(mobile = sender[9:]).first()
     if not already_user:
         message_send = twilio_client.messages.create(
             from_= phone_number,
