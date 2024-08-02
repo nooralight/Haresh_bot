@@ -431,7 +431,8 @@ def handle_incoming_message():
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
-                    body= 'Thanks for providing your availibility timetable.'
+                    body= 'Thanks for providing your availibility timetable.',
+                    to= sender
                 )
                 time.sleep(1)
                 #dominant hand
@@ -452,7 +453,8 @@ def handle_incoming_message():
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
-                    body= 'Thanks for providing your availibility timetable.'
+                    body= 'Thanks for providing your availibility timetable.',
+                    to = sender
                 )
                 insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
 
@@ -476,7 +478,8 @@ def handle_incoming_message():
             else:
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
-                    body= 'Thanks for providing your availibility timetable.'
+                    body= 'Thanks for providing your availibility timetable.',
+                    to= sender
                 )
                 insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
 
@@ -520,7 +523,8 @@ def handle_incoming_message():
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
-                    body= 'Thanks for providing your availibility timetable.'
+                    body= 'Thanks for providing your availibility timetable.',
+                    to= sender
                 )
                 insert_into_message(sender[9:], 'Thanks for providing your availibility timetable.', "bot")
 
@@ -544,7 +548,8 @@ def handle_incoming_message():
             else:
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
-                    body= 'Thanks for providing info about your dominant hand.'
+                    body= 'Thanks for providing info about your dominant hand.',
+                    to= sender
                 )
                 insert_into_message(sender[9:], 'Thanks for providing info about your dominant hand.', "bot")
 
@@ -582,7 +587,8 @@ def handle_incoming_message():
             already_user.save()
             first_message = twilio_client.messages.create(
                 from_= phone_number,
-                body= 'Thanks for providing info about your dominant hand.'
+                body= 'Thanks for providing info about your dominant hand.',
+                to= sender
             )
             insert_into_message(sender[9:], 'Thanks for providing info about your preferred position.', "bot")
 
