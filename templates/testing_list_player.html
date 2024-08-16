@@ -59,61 +59,59 @@
     <section id="main_body">
         <div class="container container-fluid">
             <div class="card-body">
-                <div class="d-flex justify-content-end mb-2">
-                    <!-- Search Form -->
-                    <form class="form-inline mx-2" id="search-form" action="#" method="post">
-                        <div class="input-group mr-2">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button">
-                                    Level
-                                </button>
-                            </div>
-                            
-                            <select id="inputLevel" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>segunda baja</option>
-                                <option>tercera alta</option>
-                                <option>Tercera media</option>
-                                <option>Segunda medi</option>
-                                <option>cuarta baja</option>
-                                <option>segunda alta</option>
-                                <option>cuarta alta</option>
-                                <option>usuario no respo</option>
-                                <option>Cuarta media</option>
-                                <option>tercera baja</option>
-                                <option>No interesado</option>
-                                <option>undefined</option>
-                                <option>Extranjero</option>
-                                <option>Quinta</option>
-                                <option>primera</option>
-                                <option>nuevo usuario</option>
-                            </select>
-                            
+                <!-- Search Form -->
+                <form class="d-flex flex-row justify-content-end mb-2" id="search-form" action="#" method="post">
+                    <div class="input-group mr-2">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button">
+                                Level
+                            </button>
                         </div>
-                        <div class="input-group mr-2">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button">
-                                    Sex
-                                </button>
-                            </div>
-                            <select id="inputSex" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>-</option>
-                                <option>Hombre</option>
-                                <option>Mujer</option>
-                            </select>
-                            
+                        
+                        <select id="inputLevel" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>segunda baja</option>
+                            <option>tercera alta</option>
+                            <option>Tercera media</option>
+                            <option>Segunda medi</option>
+                            <option>cuarta baja</option>
+                            <option>segunda alta</option>
+                            <option>cuarta alta</option>
+                            <option>usuario no respo</option>
+                            <option>Cuarta media</option>
+                            <option>tercera baja</option>
+                            <option>No interesado</option>
+                            <option>undefined</option>
+                            <option>Extranjero</option>
+                            <option>Quinta</option>
+                            <option>primera</option>
+                            <option>nuevo usuario</option>
+                        </select>
+                        
+                    </div>
+                    <div class="input-group mr-2">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button">
+                                Sex
+                            </button>
                         </div>
-                        <div class="input-group">
-                            <input type="text" id="all_search" name="all_search" class="form-control" placeholder="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
+                        <select id="inputSex" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>-</option>
+                            <option>Hombre</option>
+                            <option>Mujer</option>
+                        </select>
+                        
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="all_search" name="all_search" class="form-control" placeholder="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
                 <div class="custom-table-container">
                     <table class="table table-bordered table-sm custom-table p-3" id="customTable" style="color: black;">
                         <thead class="table-dark">
