@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <style>
+        .scrollable{
+        overflow-y: auto;
+        max-height: 550px;
+        }
+        /* Set a specific height for the table container */
+        .custom-table-container {
+            max-height: 600px; /* Change this value to your desired height */
+            overflow-y: auto;
+        }
+
+        /* Style for the table */
+        .custom-table {
+            width: 100%;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{ url_for('home') }}">Pedal Club</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url_for('home') }}">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('contacts') }}">Contacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('extra_bookings') }}">List of Bookings</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Players
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ url_for('players') }}">List of Players</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{{ url_for('create_new_player') }}">Add new Player</a></li>
+                </ul>
+            </ul>
+          </div>
+        </div>
+    </nav> 
+    <section id="main_body">
+        <div class="container container-fluid">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-2">
+                    <!-- Search Form -->
+                    <form class="form-inline mx-2" id="search-form" action="#" method="post">
+                        <div class="input-group mr-2">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button">
+                                    Level
+                                </button>
+                            </div>
+                            
+                            <select id="inputLevel" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>segunda baja</option>
+                                <option>tercera alta</option>
+                                <option>Tercera media</option>
+                                <option>Segunda medi</option>
+                                <option>cuarta baja</option>
+                                <option>segunda alta</option>
+                                <option>cuarta alta</option>
+                                <option>usuario no respo</option>
+                                <option>Cuarta media</option>
+                                <option>tercera baja</option>
+                                <option>No interesado</option>
+                                <option>undefined</option>
+                                <option>Extranjero</option>
+                                <option>Quinta</option>
+                                <option>primera</option>
+                                <option>nuevo usuario</option>
+                            </select>
+                            
+                        </div>
+                        <div class="input-group mr-2">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button">
+                                    Sex
+                                </button>
+                            </div>
+                            <select id="inputSex" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>-</option>
+                                <option>Hombre</option>
+                                <option>Mujer</option>
+                            </select>
+                            
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="all_search" name="all_search" class="form-control" placeholder="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="custom-table-container">
+                    <table class="table table-bordered table-sm custom-table p-3" id="customTable" style="color: black;">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th>Name</th>
+                                <th class="text-center">Phone</th>
+                                <th class="text-center">Age</th>
+                                <th class="text-center">Sex</th>
+                                <th class="text-center">Level</th>
+                                <th class="text-center">Availability</th>
+                                <th class="text-center">Preferred Position</th>
+                                <th class="text-center">Dominant Hand</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for player in players %}
+                                <tr>
+                                    <td style="color: black;">{{ player.id }}</td>
+                                    <td style="color: black;">{{ player.name }}</td>
+                                    {% if player.mobile == "Not Available" %}<td class="text-light bg-danger">{{ player.mobile }}{% else %}<td class="text-dark">{{ player.mobile }}{% endif %}</td>
+                                    <td style="color: black;">{{ player.age }}</td>
+                                    <td style="color: black;">{{ player.sex }}</td>
+                                    <td style="color: black;">{{ player.level }}</td>
+                                    <td style="color: black;">{{ player.availability }}</td>
+                                    <td style="color: black;">{{ player.preferred_position }}</td>
+                                    <td style="color: black;">{{ player.dominant_hand }}</td>
+                                    <td style="color: black;">{{ player.status }}</td>
+                                    <td style="color: black;"><button type="button" class="btn btn-sm btn-light text-dark" data-toggle="modal" data-placement="top" data-target="#deletePlayer{{ player.id }}" title="Delete Row"><i class="fa-regular fa-trash-can"></i></button>
+                                        <button type="button" class="btn btn-sm btn-light text-dark ml-2" data-toggle="modal" data-target="#editPlayer{{ player.id }}" title="Edit Row"><i class="fas fa-edit"></i></button>
+                                        <!-- Modal for Delete Player -->
+                                        <div class="modal fade" id="deletePlayer{{ player.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Delete Player {{ player.name }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-dark p-3">
+                                                        <h5 class="my-3">Are you sure want to delete the Player?</h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="d-flex justify-content-center">
+                                                            <form action="{{ url_for('delete_player') }}" method="post">
+                                                                <input type="text" name="player_id" value="{{ player.id }}" hidden>
+                                                                <div class="d-flex justify-content-center">
+                                                                    <button type="submit" class="btn btn-square btn-danger">Delete</button>
+                                                                </div>
+                                                            </form>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal for Editing Player row -->
+                                        <div class="modal fade" id="editPlayer{{ player.id }}">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Edit Employee {{ player.name }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            <div class="card-body">
+                                                                <div class="basic-form">
+                                                                    <form action="{{ url_for('edit_player') }}" method="post" id="new_player_form">
+                                                                        <input type="text" name="player_id" value="{{ player.id }}" hidden>
+                                                                        <div class="form-row">
+                                                                            <div class="form-group col-md-6">
+                                                                                <label style="color: rgb(61, 56, 56);">Player Name</label>
+                                                                                <input type="text" name="new_name" id="p_name" value="{{ player.name }}" class="form-control" required>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label style="color: rgb(61, 56, 56);">Phone/WhatsApp number</label>
+                                                                                <input type="text" name="new_mobile" id="p_mobile" value="{{ player.mobile }}" class="form-control" required>
+                                                                                <small class="text-dark">* Don't forget to add country code, Example: +88</small>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label style="color: rgb(61, 56, 56);">Age</label>
+                                                                                <input type="text" name="new_age" value="{{ player.age }}" id="p_age" class="form-control" required>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label style="color: rgb(61, 56, 56);">sex</label>
+                                                                                <select id="inputSex" name="new_sex" class="form-control">
+                                                                                    <option value="Hombre" {% if player.sex == "Hombre" %} selected {% endif %}>Hombre</option>
+                                                                                    <option value="Mujer" {% if player.sex == "Mujer" %} selected {% endif %}>Mujer</option>
+                                                                                </select>
+                                                                                <div class="small text-danger" id="sex_error">
+                                        
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label style="color: rgb(61, 56, 56);">Player Level</label>
+                                                                                <select id="inputLevel" name="new_level" class="form-control">
+                                                                                    <option value="segunda baja" {% if player.level == "segunda baja" %} selected {% endif %}>segunda baja</option>
+                                                                                    <option value="tercera alta" {% if player.level == "tercera alta" %} selected {% endif %}>tercera alta</option>
+                                                                                    <option value="Tercera medi" {% if player.level == "Tercera media" %} selected {% endif %}>Tercera media</option>
+                                                                                    <option value="Segunda medi" {% if player.level == "Segunda medi" %} selected {% endif %}>Segunda medi</option>
+                                                                                    <option value="cuarta baja" {% if player.level == "cuarta baja" %} selected {% endif %}>cuarta baja</option>
+                                                                                    <option value="segunda alta" {% if player.level == "segunda alta" %} selected {% endif %}>segunda alta</option>
+                                                                                    <option value="cuarta alta" {% if player.level == "cuarta alta" %} selected {% endif %}>cuarta alta</option>
+                                                                                    <option value="usuario no respo" {% if player.level == "usuario no respo" %} selected {% endif %}>usuario no respo</option>
+                                                                                    <option value="Cuarta media" {% if player.level == "Cuarta media" %} selected {% endif %}>Cuarta media</option>
+                                                                                    <option value="tercera baja" {% if player.level == "tercera baja" %} selected {% endif %}>tercera baja</option>
+                                                                                    <option value="No interesad" {% if player.level == "No interesado" %} selected {% endif %}>No interesado</option>
+                                                                                    <option value="undefined" {% if player.level == "undefined" %} selected {% endif %}>undefined</option>
+                                                                                    <option value="Extranjero" {% if player.level == "Extranjero" %} selected {% endif %}>Extranjero</option>
+                                                                                    <option value="Quinta" {% if player.level == "Quinta" %} selected {% endif %}>Quinta</option>
+                                                                                    <option value="primera" {% if player.level == "primera" %} selected {% endif %}>primera</option>
+                                                                                    <option value="nuevo usuario" {% if player.level == "nuevo usuario" %} selected {% endif %}>nuevo usuario</option>
+                                                                                </select>
+                                                                                <div class="small text-danger" id="level_error">
+                                        
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label style="color: rgb(61, 56, 56);">Status</label>
+                                                                                <select id="inputStatus" name="new_status" class="form-control">
+                                                                                    <option value="Active" {% if player.status == "Active" %} selected {% endif %}>Active</option>
+                                                                                    <option value="Stopped" {% if player.status == "Stopped" %} selected {% endif %}>Stopped</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="d-flex justify-content-center">
+                                                                                    <button type="submit" class="btn btn-primary">Save & Add</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination  -->
+                {% if pagination %}
+                <div class="d-flex justify-content-center">
+                    <div class="pagination my-2">
+
+                        {% if pagination.page > 1 %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ url_for('players', page=pagination.page - 1) }}">Prev</a>
+                                    </li>
+                            {% endif %}
+
+                            {% if pagination.page >= 4 %}
+                                <li class="page-item"><a class="page-link" href="{{ url_for('players', page=1) }}">1</a></li>
+                                <li class="page-item"><span class="page-link">...</span></li>
+                            {% endif %}
+
+                            {% for page_num in range(pagination.page - 2, pagination.page + 3) %}
+                                {% if 1 <= page_num <= total_pages %}
+                                    <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                                        <a class="page-link" href="{{ url_for('players', page=page_num) }}">{{ page_num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if pagination.page < total_pages - 2 %}
+                                <li class="page-item"><span class="page-link">...</span></li>
+                                <li class="page-item"><a class="page-link" href="{{ url_for('players', page=total_pages) }}">{{ total_pages }}</a></li>
+                            {% endif %}
+
+                            
+                            {% if pagination.page < total_pages %}
+                            <a href="{{ url_for('players', page=pagination.page + 1) }}" class="btn btn-primary">Next</a>
+                            {% endif %}
+
+                    </div>
+                </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            function filterTable() {
+                var searchValue = $("#all_search").val().toLowerCase();
+                var sexValue = $("#inputSex").val().toLowerCase();
+                var levelValue = $("#inputLevel").val().toLowerCase();
+                
+                $("#customTable tbody tr").filter(function() {
+                    var rowText = $(this).find('td:lt(3)').text().toLowerCase();
+                    var sexText = $(this).find('td:eq(4)').text().toLowerCase();
+                    var levelText = $(this).find('td:eq(5)').text().toLowerCase();
+    
+                    var matchSearch = rowText.indexOf(searchValue) > -1;
+                    var matchSex = (sexValue === "choose...") || (sexText.indexOf(sexValue) > -1);
+                    var matchLevel = (levelValue === "choose...") || (levelText.indexOf(levelValue) > -1);
+    
+                    $(this).toggle(matchSearch && matchSex && matchLevel);
+                });
+            }
+    
+            $("#all_search").on("keyup", filterTable);
+            $("#inputSex").on("change", filterTable);
+            $("#inputLevel").on("change", filterTable);
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
