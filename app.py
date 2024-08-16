@@ -224,7 +224,7 @@ def get_bookings_data_byDate(date_str):
 def check_booking(id):
     booking = fetch_booking_by_id(id)
     
-    return render_template("booking_details.html", booking = booking)
+    return render_template("testing_booking_details.html", booking = booking)
 
 
 # @app.route('/add_new_booking', methods=['POST','GET'])
