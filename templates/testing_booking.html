@@ -9,10 +9,10 @@
         /* Increase width and height of <td> elements */
         td {
             width: 80px; /* Adjust this value as needed */
-            height: 15px; /* Adjust this value as needed */
+            height: 12px; /* Adjust this value as needed */
             max-width: 80px;
-            max-height: 15px;
-            min-height: 15px;
+            max-height: 12px;
+            min-height: 12px;
         }
 
         /* Ensure text is centered vertically and horizontally */
@@ -85,7 +85,7 @@
                 <tbody>
                     {% for time_slot, courts in booking_dict.items() %}
                     <tr>
-                        <td style="font-size: 10px;">{{ time_slot }}</td>
+                        <td style="font-size: 14px;">{{ time_slot }}</td>
                         {% for court, status in courts.items() %}
                         <td class="text-center" {% if booking_dict[time_slot][court] %} {% if booking_dict[time_slot][court].state == "Open" %} style="background-color: rgb(238, 164, 164);font-size: 10px;" {% else %}  style="background-color: rgb(249, 231, 182);font-size: 10px;"  {% endif %} {% endif %}>{% if booking_dict[time_slot][court] %} <a href="{{ url_for('check_booking', id = booking_dict[time_slot][court].id) }}" class="btn text-dark my-2" {% if booking_dict[time_slot][court].state == "Open" %} style="background-color: rgb(238, 164, 164);font-size: 10px;"  {% else %}  style="background-color: rgb(249, 231, 182);font-size: 10px;"  {% endif %} title="check event">
                             <div class="d-flex flex-column">
