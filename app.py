@@ -140,11 +140,11 @@ def bookings():
                      "20:30-22:00":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,}}
     
     if today_bookings.count() == 0:
-        return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
+        return render_template("testing_booking.html", t_date = date_str, booking_dict = booking_dict)
     else:
         for booking in today_bookings:
             booking_dict[booking.booking_time][booking.court_name]  = booking
-    return render_template("bookings.html", t_date = date_str, booking_dict = booking_dict)
+    return render_template("testing_booking.html", t_date = date_str, booking_dict = booking_dict)
 
 @app.route('/extra_bookings', methods=['POST','GET'])
 def extra_bookings():
@@ -176,11 +176,11 @@ def extra_bookings():
                      "20:30-22:00":{"Pádel 1":None,"Pádel 2":None,"Pádel 3":None,"Pádel 4":None,"Pádel 5":None,"Pádel 6":None,}}
     
     if today_bookings.count() == 0:
-        return render_template("another_booking.html", t_date = date_str, booking_dict = booking_dict)
+        return render_template("testing_booking.html", t_date = date_str, booking_dict = booking_dict)
     else:
         for booking in today_bookings:
             booking_dict[booking.booking_time][booking.court_name]  = booking
-    return render_template("another_booking.html", t_date = date_str, booking_dict = booking_dict)
+    return render_template("testing_booking.html", t_date = date_str, booking_dict = booking_dict)
 
 @app.route('/bookings/<date_str>', methods=['POST', 'GET'])
 def get_bookings_data_byDate(date_str):
@@ -214,7 +214,7 @@ def get_bookings_data_byDate(date_str):
             print(booking.booking_date)
             booking_dict[booking.booking_time][booking.court_name] = booking
     
-    return render_template("another_booking.html", t_date = date_str, booking_dict = booking_dict)
+    return render_template("testing_booking.html", t_date = date_str, booking_dict = booking_dict)
 
 @app.route('/check_booking/<id>', methods=['POST', 'GET'])
 def check_booking(id):
