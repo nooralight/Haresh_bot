@@ -266,7 +266,7 @@ def players(page):
         'total': total_players,
     }
 
-    return render_template('players.html', players=players, pagination=pagination, total_pages = total_pages)
+    return render_template('testing_list_player.html', players=players, pagination=pagination, total_pages = total_pages)
 
 
 @app.route('/add_new_player', methods=['POST','GET'])
