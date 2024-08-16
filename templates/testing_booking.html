@@ -90,9 +90,9 @@
                                     ({% if booking_dict[time_slot][court].player_occupied > 0 %}{{ booking_dict[time_slot][court].player_occupied }}/{{ booking_dict[time_slot][court].player_count }}p  {% else %} {{ booking_dict[time_slot][court].player_count }}p{% endif %})
                                     {% endif %}
                                 </span>
-                                {% if booking_dict[time_slot][court].match_level %} <br> <span style="font-size: smaller;">Match Level: {{ booking_dict[time_slot][court].match_level }} </span> <br> {% endif %}
+                                {% if booking_dict[time_slot][court].match_level %} <span style="font-size: smaller;">Match Level: {{ booking_dict[time_slot][court].match_level }} </span>{% endif %}
                                 {% for player in booking_dict[time_slot][court].players_name_list %}
-                                <br> <span style="font-size: smaller;">{{ player }} </span>
+                                 <span style="font-size: smaller;">{{ player }} </span>
                                 {% endfor %}
                             </div> </a> {% endif %}</td>
                         {% endfor %}
