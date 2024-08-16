@@ -282,7 +282,7 @@ def create_new_player():
 
         return redirect(url_for('players'))
     
-    return render_template('add_player.html')
+    return render_template('testing_add_new.html')
 
 @app.route('/edit_player', methods=['POST','GET'])
 def edit_player():
