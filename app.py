@@ -109,7 +109,7 @@ def home():
     numOfplayers = Players.objects().count()
     numOfbookings = get_numOfBookings()
     numOfunfinished = get_numOfunfinishedBookings()
-    return render_template("home.html", numOfcontacts = numOfcontacts, numOfmessages = numOfmessages, numOfplayers = numOfplayers, numOfbookings = numOfbookings, numOfunfinished= numOfunfinished)
+    return render_template("testing_index.html", numOfcontacts = numOfcontacts, numOfmessages = numOfmessages, numOfplayers = numOfplayers, numOfbookings = numOfbookings, numOfunfinished= numOfunfinished)
 
 @app.route('/bookings', methods=['POST','GET'])
 def bookings():
