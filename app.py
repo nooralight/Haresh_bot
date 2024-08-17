@@ -334,6 +334,10 @@ def handle_incoming_message():
     sender = request.form.get('From')
     profile_name = request.form.get('ProfileName')
     media_url = request.form.get('MediaUrl0')
+    if media_url:
+        insert_into_message(sender[9:], "media_message", "user")
+    else:
+        insert_into_message(sender[9:], message, "user")
     print(message)
     # Checking if user already available
     already_user = Players.objects(mobile = sender[9:]).first()
