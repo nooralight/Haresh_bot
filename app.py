@@ -342,7 +342,7 @@ def handle_incoming_message():
         insert_into_message(sender[9:], message, "user")
     print(message)
     # Checking if user already available
-    already_user = Players.objects(mobile = sender[9:])
+    already_user = Players.objects(mobile = sender[9:]).first()
     if not already_user:
         message_send = twilio_client.messages.create(
             from_= phone_number,
