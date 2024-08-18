@@ -351,8 +351,6 @@ def handle_incoming_message():
         )
         return "okay", 200
     else:
-        already_user.last_message = message
-        already_user.save()
         if not already_user.availability_session  and not session.get('context') == "ask_availability":
             #available time
             message_send = twilio_client.messages.create(
