@@ -342,8 +342,8 @@ def handle_incoming_message():
         insert_into_message(sender[9:], message, "user")
     print(message)
     # Checking if user already available
-    already_user = Players.objects(mobile = sender[9:]).first()
-    if not already_user:
+    already_user = Players.objects(mobile = sender[9:])
+    if not already_user.count() == 0:
         message_send = twilio_client.messages.create(
             from_= phone_number,
             body= "You are not a member of this padel community. Please register an account first through our management team",
@@ -608,11 +608,6 @@ def handle_incoming_message():
             insert_into_message(sender[9:], body, "bot")
             session['context'] = 'ask_availability'
             return "okay", 200
-
-
-
-
-
 
     elif session.get('context') == "ask_dominant_hand":
         if message in ['Left hand', 'Right hand']:
