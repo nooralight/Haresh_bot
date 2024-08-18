@@ -12,6 +12,8 @@ class Players(Document):
     sex = StringField()
     level = StringField()
     availability = StringField()
+    availability_session = StringField()
+    availability_time = StringField()
     preferred_position = StringField()
     dominant_hand = StringField()
     status = StringField()
