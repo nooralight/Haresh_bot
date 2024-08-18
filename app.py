@@ -343,7 +343,7 @@ def handle_incoming_message():
     print(message)
     # Checking if user already available
     already_user = Players.objects(mobile = sender[9:])
-    if not already_user.count() == 0:
+    if not already_user:
         message_send = twilio_client.messages.create(
             from_= phone_number,
             body= "You are not a member of this padel community. Please register an account first through our management team",
