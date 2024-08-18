@@ -433,7 +433,7 @@ def handle_incoming_message():
                     content_sid= "HXa2a7e2453ee63195ffb0666832918996",
                     to= sender
                 )
-
+                session['evening_time'] = "yes"
                 session['context'] = "evening_extra"
                 body = '''In the evening, in which time range you are available?'''
                 insert_into_message(sender[9:], body, "bot")
@@ -524,6 +524,7 @@ def handle_incoming_message():
 
     elif session.get('context') == "evening_extra":
         if message in ['17:00 - 20:00', '20:00 - 22:00','All Evening']:
+            already_user.availability_session = session.get("evening_time")
             already_user.availability_time = "08:00 - 12:30"
             already_user.save()
             
