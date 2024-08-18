@@ -525,7 +525,7 @@ def handle_incoming_message():
     ## Second One
 
     elif session.get('context') == "evening_extra":
-        if message in ['17:00 - 20:00', '20:00 - 22:00']:
+        if message in ['17:00 - 20:00', '20:00 - 22:00','All Evening']:
             already_user.availability_time = "08:00 - 12:30"
             already_user.save()
             
