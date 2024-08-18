@@ -7,6 +7,7 @@ import time
 from db_player import add_new_player, update_player
 from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings
 import pytz
+from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -23,6 +24,8 @@ auth_token = os.getenv('AUTH_TOKEN')
 phone_number = os.getenv('PHONE_NUMBER')
 messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
+
+ASSISTANT_ID = "asst_aWNRkZ7hyEPkwjfHEgKtsMjr"
 
 # Define the timezone for London
 london_tz = pytz.timezone('Europe/London')
@@ -410,16 +413,97 @@ def handle_incoming_message():
         session['context'] = "started"
         return "okay",200
     elif session.get('context') == "started":
-        message_send = twilio_client.messages.create(
-                from_ = phone_number,
-                body=f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!",
+        if message in ["Match Reservations","FAQ"]:
+            if message == "Match Reservations":
+                message_send = twilio_client.messages.create(
+                    from_ = phone_number,
+                    body=f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!",
+                    to= sender
+                )
+                body= f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!"
+                insert_into_message(sender[9:], body, "bot")
+                session['context'] = None
+                return "okay",200
+            
+            else:
+                message_send = twilio_client.messages.create(
+                    from_ = phone_number,
+                    body=f"Ask any question of yours. To exit from FAQ, type *quit* or type *exit*",
+                    to= sender
+                )
+                body= f"Ask any question of yours. To exit from FAQ, type quit or type exit"
+                insert_into_message(sender[9:], body, "bot")
+                session['context'] = "chatgpt"
+                return "okay",200
+        
+        else:
+
+            message_send = twilio_client.messages.create(
+                from_= messaging_sid,
+                content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
+                to = sender
+            )
+        
+            body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
+1. Match Reservations
+2. FAQ'''
+            insert_into_message(sender[9:], body, "bot")
+            session['context'] = "started"
+            return "okay",200
+        
+    elif session.get('context') == "chatgpt":
+
+        if message.lower() == "quit" or message.lower() == "exit":
+            message_send = twilio_client.messages.create(
+                from_= messaging_sid,
+                content_sid="HXf277f17ed523bd7e6cbecc9388fc1912",
+                to = sender
+            )
+        
+            body = '''Welcome to our Pedal Match making virtual agent. Please select your choice from the below menu. Thanks.
+1. Match Reservations
+2. FAQ'''
+            insert_into_message(sender[9:], body, "bot")
+            session['context'] = "started"
+            return "okay",200
+        
+        else:
+
+            final_response = None
+
+            if 'my_thread_id' not in session:
+                my_thread_id = initiate_interaction(message)
+                session['my_thread_id'] = my_thread_id
+            else:
+                my_thread_id = session.get('my_thread_id')
+                sendNewMessage_to_existing_thread(my_thread_id, message)
+
+            run = trigger_assistant(my_thread_id, ASSISTANT_ID)
+
+            while True:
+                run_status = checkRunStatus(my_thread_id , run.id)
+                print(f"Run status: {run_status.status}")
+                if run_status.status == "failed":
+                    final_response = "No response now"
+                    break
+                elif run_status.status == "completed":
+                    # Extract the bot's response
+                    final_response = retrieveResponse(my_thread_id)
+                    break
+                time.sleep(1)
+            
+            body = final_response
+
+            message_created = twilio_client.messages.create(
+                from_= phone_number,
+                body= final_response,
                 to= sender
             )
-        body= f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!"
-        insert_into_message(sender[9:], body, "bot")
-        session['context'] = None
-        return "okay",200
+            insert_into_message(sender[9:], body, "bot")
+            session['context'] = "chatgpt"
+            return "okay",200
 
+        
     # First One
 
     elif session.get('context') == "ask_availability":
