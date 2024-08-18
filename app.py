@@ -351,7 +351,7 @@ def handle_incoming_message():
         )
         return "okay", 200
     else:
-        if not already_user.availability_session  and not session.get('context') == "ask_availability":
+        if not already_user.availability_session and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
             #available time
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
@@ -366,7 +366,7 @@ def handle_incoming_message():
             session['context'] = 'ask_availability'
             return "okay", 200
         
-        elif not already_user.dominant_hand and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability":
+        elif not already_user.dominant_hand and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
             #dominant hand
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
@@ -381,7 +381,7 @@ def handle_incoming_message():
             session['context'] = 'ask_dominant_hand'
             return "okay", 200
         
-        elif not already_user.preferred_position and not session.get('context') == "ask_preferred_position" and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability":
+        elif not already_user.preferred_position and not session.get('context') == "ask_preferred_position" and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
             #pref_pos
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
