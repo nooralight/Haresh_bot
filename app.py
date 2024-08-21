@@ -25,7 +25,7 @@ phone_number = os.getenv('PHONE_NUMBER')
 messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
-ASSISTANT_ID = "asst_aWNRkZ7hyEPkwjfHEgKtsMjr"
+ASSISTANT_ID = "asst_rlyXRePpNMxXYcCO7GK64jX4"
 
 # Define the timezone for London
 london_tz = pytz.timezone('Europe/London')

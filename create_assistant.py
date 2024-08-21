@@ -16,7 +16,7 @@ your knowledge that you gained from data files.
 
 # print(create_vector_store("haresh_faq"))
 # upload_file_into_vector_store("vs_HnhdsOwjx5Y0JgTPPsJKoHw2", ['file-GXbLsUN0dogIOpHZ2G3iCyaM'])
-updateAssistantVectorDB("asst_rlyXRePpNMxXYcCO7GK64jX4","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
+# updateAssistantVectorDB("asst_rlyXRePpNMxXYcCO7GK64jX4","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
 
 
 # Server = asst_rlyXRePpNMxXYcCO7GK64jX4
