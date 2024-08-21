@@ -9,7 +9,7 @@ your knowledge that you gained from data files.
 2. If there is any questions not related to Padel Club, you will nicely tell the customer that you don't have knowledge over this, and to try talking about the club.
 3. Try to make shorter answer, within 1400 characters. The shorter answer, the better!'''
 
-print(updateAssistantInstruction("asst_aWNRkZ7hyEPkwjfHEgKtsMjr", instruction)) 
+# print(updateAssistantInstruction("asst_aWNRkZ7hyEPkwjfHEgKtsMjr", instruction)) 
 # print(saveFile_intoOpenAI("faq chatbot.docx"))
 
 # print(create_vector_store("haresh_faq"))
