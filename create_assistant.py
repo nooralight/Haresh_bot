@@ -12,7 +12,7 @@ your knowledge that you gained from data files.
 # print(updateAssistantInstruction("asst_aWNRkZ7hyEPkwjfHEgKtsMjr", instruction)) 
 # print(saveFile_intoOpenAI("faq chatbot.docx"))
 
-create_assistant("haresh", instruction)
+print(create_assistant("haresh", instruction))
 
 # print(create_vector_store("haresh_faq"))
 # upload_file_into_vector_store("vs_5ADy3AEuORnW0qcuN53WNnJF", ['file-Ex1tK7pDPGQuR6zltRrschdz'])
