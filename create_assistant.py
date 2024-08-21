@@ -10,10 +10,13 @@ your knowledge that you gained from data files.
 3. Try to make shorter answer, within 1400 characters. The shorter answer, the better!'''
 
 # print(updateAssistantInstruction("asst_aWNRkZ7hyEPkwjfHEgKtsMjr", instruction)) 
-# print(saveFile_intoOpenAI("faq chatbot.docx"))
+print(saveFile_intoOpenAI("faq chatbot.docx"))
 
-print(create_assistant("haresh", instruction))
+# print(create_assistant("haresh", instruction))
 
 # print(create_vector_store("haresh_faq"))
 # upload_file_into_vector_store("vs_5ADy3AEuORnW0qcuN53WNnJF", ['file-Ex1tK7pDPGQuR6zltRrschdz'])
 # updateAssistantVectorDB("asst_aWNRkZ7hyEPkwjfHEgKtsMjr","vs_5ADy3AEuORnW0qcuN53WNnJF")
+
+
+# Server = asst_rlyXRePpNMxXYcCO7GK64jX4
