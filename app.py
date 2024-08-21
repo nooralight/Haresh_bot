@@ -108,6 +108,14 @@ def insert_into_contacts(name , whatsapp):
     return contact
 
 
+def send_content_message(content_sid, to):
+    message_created = twilio_client.messages.create(
+        from_= messaging_sid,
+        content_sid= content_sid,
+        to= to
+    )
+
+
 @app.route('/', methods=['POST','GET'])
 def home():
     numOfcontacts = Contacts.objects().count()
@@ -416,15 +424,13 @@ def handle_incoming_message():
     elif session.get('context') == "started":
         if message in ["Match Reservations","FAQ"]:
             if message == "Match Reservations":
-                message_send = twilio_client.messages.create(
-                    from_ = phone_number,
-                    body=f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!",
-                    to= sender
-                )
-                body= f"Hi {profile_name}, I am Haresh from Pedal Court. Right now it's in testing stage. We will update the chatbot shortly. Thank you!"
-                insert_into_message(sender[9:], body, "bot")
-                session['context'] = None
+                
+                ## Date input for match ##
+                send_content_message("HXa393ea5fc23b1aea289f1a00d802de62", sender)  # timeline_event
+                session['context'] = "timeline_event"
                 return "okay",200
+            
+                ## END ##
             
             else:
                 message_send = twilio_client.messages.create(
@@ -507,12 +513,43 @@ def handle_incoming_message():
                 body= cleaned_response,
                 to= sender
             )
-            
+
             insert_into_message(sender[9:], body, "bot")
             session['context'] = "chatgpt"
             return "okay",200
+    
 
-        
+    elif session.get("context") == "timetable_event":
+        session.get("timetable_event") = message
+
+        send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
+
+        session['context'] = "timeline_event"
+        return "okay", 200
+
+    elif session.get("context") == "timeline_event":
+        session['timeline_event'] = message
+
+        send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
+
+        session['context'] = "hand_event"
+        return "okay", 200
+    
+    elif session.get("context") == "hand_event":
+        session['hand_event'] = message
+
+        send_content_message("HX8e8c68ddf7ffc649deece44dc6a3d735", sender) # padel_court_event
+
+        session['context'] = "padel_court_event"
+        return "okay", 200
+    
+    elif session.get("context") == "padel_court_event":
+        session['padel_court_event'] = message
+
+        send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender)
+
+        session["context"] = None
+        return "okay", 200
     # First One
 
     elif session.get('context') == "ask_availability":
