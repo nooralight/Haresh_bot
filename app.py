@@ -7,6 +7,7 @@ import time
 from db_player import add_new_player, update_player
 from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings
 import pytz
+import re
 from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
 import os
 from dotenv import load_dotenv
@@ -492,13 +493,21 @@ def handle_incoming_message():
                     break
                 time.sleep(1)
             
-            body = final_response
+
+            # Regex pattern to match the reference
+            pattern = r'【\d+:\d+†source】'
+
+            # Replace the reference with an empty string
+            cleaned_response = re.sub(pattern, '', final_response)
+
+            body = cleaned_response
 
             message_created = twilio_client.messages.create(
                 from_= phone_number,
-                body= final_response,
+                body= cleaned_response,
                 to= sender
             )
+            
             insert_into_message(sender[9:], body, "bot")
             session['context'] = "chatgpt"
             return "okay",200
