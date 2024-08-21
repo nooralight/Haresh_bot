@@ -426,8 +426,8 @@ def handle_incoming_message():
             if message == "Match Reservations":
                 
                 ## Date input for match ##
-                send_content_message("HXa393ea5fc23b1aea289f1a00d802de62", sender)  # timeline_event
-                session['context'] = "timeline_event"
+                send_content_message("HXa393ea5fc23b1aea289f1a00d802de62", sender)  # timetable_event
+                session['context'] = "timetable_event"
                 return "okay",200
             
                 ## END ##
