@@ -520,7 +520,7 @@ def handle_incoming_message():
     
 
     elif session.get("context") == "timetable_event":
-        session.get("timetable_event") = message
+        session["timetable_event"] = message
 
         send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
 
