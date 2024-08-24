@@ -5,7 +5,7 @@ from mongoengine import *
 from datetime import datetime,timedelta
 import time
 from db_player import add_new_player, update_player
-from db_booking import fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
+from db_booking import insert_new_another_booking,fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
 import pytz
 import re
 from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
@@ -13,6 +13,12 @@ from utils import validate_date , validate_time_range
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
+import random
+import string
+import time
+
+
 
 app = Flask(__name__)
 app.config['secret_key'] = '5800d5d9e4405020d527f0587538abbe'
@@ -108,6 +114,14 @@ def insert_into_contacts(name , whatsapp):
     contact.save()
     return contact
 
+def generate_random_string(length):
+    # Define the possible characters (uppercase, lowercase, and digits)
+    characters = string.ascii_letters + string.digits
+    
+    # Generate a random string of the specified length
+    random_string = ''.join(random.choice(characters) for _ in range(length))
+    
+    return random_string
 
 def send_content_message(content_sid, to):
     message_created = twilio_client.messages.create(
@@ -356,14 +370,17 @@ def handle_incoming_message():
     sender = request.form.get('From')
     profile_name = request.form.get('ProfileName')
     media_url = request.form.get('MediaUrl0')
+    contact = Contacts.objects(whatsapp = sender[9:]).first()
+    if not contact:
+        contact = insert_into_contacts(profile_name, sender[9:])
     if media_url:
         insert_into_message(sender[9:], "media_message", "user")
     else:
         insert_into_message(sender[9:], message, "user")
     print(message)
     # Checking if user already available
-    already_user = Players.objects(mobile = sender[9:]).first()
-    if not already_user:
+    already_player = Players.objects(mobile = sender[9:]).first()
+    if not already_player:
         message_send = twilio_client.messages.create(
             from_= phone_number,
             body= "You are not a member of this padel community. Please register an account first through our management team",
@@ -371,7 +388,7 @@ def handle_incoming_message():
         )
         return "okay", 200
     else:
-        if not already_user.availability_session and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
+        if not already_player.availability_session and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
             #available time
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
@@ -386,7 +403,7 @@ def handle_incoming_message():
             session['context'] = 'ask_availability'
             return "okay", 200
         
-        elif not already_user.dominant_hand and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
+        elif not already_player.dominant_hand and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
             #dominant hand
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
@@ -401,7 +418,7 @@ def handle_incoming_message():
             session['context'] = 'ask_dominant_hand'
             return "okay", 200
         
-        elif not already_user.preferred_position and not session.get('context') == "ask_preferred_position" and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
+        elif not already_player.preferred_position and not session.get('context') == "ask_preferred_position" and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
             #pref_pos
             message_send = twilio_client.messages.create(
                     from_= messaging_sid,
@@ -626,20 +643,71 @@ def handle_incoming_message():
             return "okay", 200
     
     elif session.get("context") == "hand_event":
-        session['hand_event'] = message
+        if message in ["Right Hand Player", "Left Hand Player"]:
+            session['hand_event'] = message
+            send_content_message("HXe7eb1d6e61e60528b0983a3c8481795d", sender)
 
-        send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender) # padel_court_event
+            session['context'] = "position_event"
+            return "okay", 200
+        else:
+            body= "Wrong input"
+            send_plain_message(body, sender)
 
-        session['context'] = None
-        return "okay", 200
+            time.sleep(2)
+            send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
+
+            session["context"] = "hand_event"
+            return "okay", 200
+
+    elif session.get("context") == "position_event":
+        if message in ["Right side player", "Left side player"]:
+            session['position_event'] = message
+            send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender) 
+
+            session['context'] = "specific_player"
+            return "okay", 200
+        else:
+            body= "Wrong input"
+            send_plain_message(body, sender)
+
+            time.sleep(2)
+            send_content_message("HXe7eb1d6e61e60528b0983a3c8481795d", sender)
+
+            session["context"] = "position_event"
+            return "okay", 200
+        
+    elif session.get("context") == "specific_player":
+        if message in ["Yes", "No"]:
+            if message == "No":
+                # TODO
+                random_number = generate_random_string(4)
+                match_number = f"{random_number}{get_numOfBookings()}"
+                new_booking = insert_new_another_booking(session.get("timetable_event"), session.get("timeline_event"), session.get("padel_court_event"), match_number, already_player.level, 4, 1,[already_player.name],"Searching")
+                body = f"Match number *{match_number}* has been opened. Invitation request has been sent to player based on your choices that you have given."
+                send_plain_message(body, sender)
+
+                session['context'] = None
+                return "okay", 200
+            elif message == "Yes":
+                pass
+        else:
+            body= "Wrong input"
+            send_plain_message(body, sender)
+
+            time.sleep(2)
+            send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender) 
+
+            session['context'] = "specific_player"
+            return "okay", 200
+                
     
     # First One
 
     elif session.get('context') == "ask_availability":
         if message in ['Morning', 'Evening']:
             if message == 'Morning':
-                already_user.availability_session = 'Morning'
-                already_user.availability_time = "08:00 - 12:30"
+                already_player.availability_session = 'Morning'
+                already_player.availability_time = "08:00 - 12:30"
             elif message == 'Evening':
                 message_created = twilio_client.messages.create(
                     from_= messaging_sid,
@@ -651,10 +719,10 @@ def handle_incoming_message():
                 body = '''In the evening, in which time range you are available?'''
                 insert_into_message(sender[9:], body, "bot")
                 return "okay", 200
-            already_user.save()
+            already_player.save()
             
             ######  If preferred position is not given  ####
-            if not already_user.preferred_position:
+            if not already_player.preferred_position:
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
@@ -676,7 +744,7 @@ def handle_incoming_message():
                 session['context'] = 'ask_dominant_hand'
                 return "okay", 200
             
-            elif not already_user.preferred_position:
+            elif not already_player.preferred_position:
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
@@ -737,12 +805,12 @@ def handle_incoming_message():
 
     elif session.get('context') == "evening_extra":
         if message in ['17:00 - 20:00', '20:00 - 22:00','All Evening']:
-            already_user.availability_session = session.get("evening_time")
-            already_user.availability_time = "08:00 - 12:30"
-            already_user.save()
+            already_player.availability_session = session.get("evening_time")
+            already_player.availability_time = "08:00 - 12:30"
+            already_player.save()
             
             ######  If preferred position is not given  ####
-            if not already_user.dominant_hand:
+            if not already_player.dominant_hand:
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
@@ -764,7 +832,7 @@ def handle_incoming_message():
                 session['context'] = 'ask_dominant_hand'
                 return "okay", 200
             
-            elif not already_user.preferred_position:
+            elif not already_player.preferred_position:
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
@@ -824,13 +892,13 @@ def handle_incoming_message():
     elif session.get('context') == "ask_dominant_hand":
         if message in ['Left hand', 'Right hand']:
             if message == 'Left hand':
-                already_user.dominant_hand = 'Left hand'
+                already_player.dominant_hand = 'Left hand'
                 
             elif message == 'Right hand':
-                already_user.dominant_hand = 'Right hand'
+                already_player.dominant_hand = 'Right hand'
 
-            already_user.save()
-            if not already_user.preferred_position:
+            already_player.save()
+            if not already_player.preferred_position:
 
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
@@ -891,8 +959,8 @@ def handle_incoming_message():
         
     elif session.get('context') == "ask_preferred_position":
         if message in ['Left Side Player', 'Right Side Player']:
-            already_user.preferred_position = message
-            already_user.save()
+            already_player.preferred_position = message
+            already_player.save()
             first_message = twilio_client.messages.create(
                 from_= phone_number,
                 body= 'Thanks for providing info about your preferred position.',

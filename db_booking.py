@@ -67,7 +67,7 @@ def fetch_all_bookings():
 
 # Number of Total Bookings
 def get_numOfBookings():
-    num_of_bookings = Bookings.objects().count()
+    num_of_bookings = Bookings.objects.count()
     return num_of_bookings
 
 # Number of unfinished Bookings
