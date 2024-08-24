@@ -116,7 +116,7 @@ def insert_into_contacts(name , whatsapp):
 
 def generate_random_string(length):
     # Define the possible characters (uppercase, lowercase, and digits)
-    characters = string.ascii_letters + string.digits
+    characters = string.digits
     
     # Generate a random string of the specified length
     random_string = ''.join(random.choice(characters) for _ in range(length))
