@@ -567,7 +567,7 @@ def handle_incoming_message():
 
     elif session.get("context") == "timeline_event":
         
-        if message in ["08:00 - 9:30", "09:30 - 11:00", "11:00 - 12:30", "17:00 - 18:30", "18:30 - 20:00", "20:00 - 21:30"]:
+        if message in ["08:00-9:30", "09:30-11:00", "11:00-12:30", "17:00-18:30", "18:30-20:00", "20:00-21:30"]:
 
             session['timeline_event'] = message
 
