@@ -554,7 +554,7 @@ def handle_incoming_message():
 
             session['padel_court_event'] = message
 
-            send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender)
+            send_content_message("HX8e8c68ddf7ffc649deece44dc6a3d735", sender)
 
             session["context"] = "padel_court_event"
             return "okay", 200
