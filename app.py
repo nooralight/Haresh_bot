@@ -554,7 +554,7 @@ def handle_incoming_message():
 
             session['timeline_event'] = message
 
-            send_content_message("HX876357671ebe51c6e83874d054abb4ca", sender)
+            send_content_message("HXc51f7b87cf7088412cba39559aaba34c", sender)
 
             session["context"] = "padel_court_event"
             return "okay", 200
@@ -577,7 +577,7 @@ def handle_incoming_message():
             return "okay", 200
     
     elif session.get("context") == "padel_court_event":
-        if message in ["PADEL 1","PADEL 2","PADEL 3","PADEL 4","PADEL 5"]:
+        if message in ["Pádel 1","Pádel 2","Pádel 3","Pádel 4","Pádel 5"]:
             is_available = check_availability(session.get("timetable_event"), session.get("timeline_event"), message)
             if is_available:
                 session['padel_court_event'] = message
@@ -597,7 +597,7 @@ def handle_incoming_message():
             send_plain_message(body, sender)
 
             time.sleep(2)
-            send_content_message("HX876357671ebe51c6e83874d054abb4ca", sender)
+            send_content_message("HXc51f7b87cf7088412cba39559aaba34c", sender)
 
             session["context"] = "padel_court_event"
             return "okay", 200
@@ -615,7 +615,7 @@ def handle_incoming_message():
             session['context'] = "timetable_event"
             return "okay",200
         elif message == "Change Padel Court":
-            send_content_message("HX876357671ebe51c6e83874d054abb4ca", sender)
+            send_content_message("HXc51f7b87cf7088412cba39559aaba34c", sender)
 
             session["context"] = "padel_court_event"
             return "okay", 200
