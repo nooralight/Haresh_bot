@@ -687,7 +687,8 @@ def handle_incoming_message():
                 # TODO
                 random_number = generate_random_string(4)
                 match_number = f"{random_number}{get_numOfBookings()}"
-                new_booking = insert_new_another_booking(session.get("timetable_event"), session.get("timeline_event"), session.get("padel_court_event"), match_number, already_player.level, 4, 1,[already_player.name],"Searching")
+                formatted_date = datetime.strptime(session.get("timetable_event"), "%d-%m-%Y").strftime("%Y-%m-%d")
+                new_booking = insert_new_another_booking(formatted_date, session.get("timeline_event"), session.get("padel_court_event"), match_number, already_player.level, 4, 1,[already_player.name],"Searching")
                 body = f"Match number *{match_number}* has been opened. Invitation request has been sent to player based on your choices that you have given."
                 send_plain_message(body, sender)
 

@@ -17,7 +17,7 @@ class Bookings(Document):
     player_count = IntField()
     player_occupied = IntField()
     players_name_list = ListField(StringField())
-    state = StringField()
+    state = StringField()  # Searching, Open, 
     created_at = DateTimeField()
 
 # Create a new booking
