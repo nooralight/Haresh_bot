@@ -5,7 +5,7 @@ from mongoengine import *
 from datetime import datetime,timedelta
 import time
 from db_player import add_new_player, update_player
-from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings
+from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
 import pytz
 import re
 from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
@@ -552,9 +552,9 @@ def handle_incoming_message():
         val_time_range = validate_time_range(message)
         if validate_time_range:
 
-            session['padel_court_event'] = message
+            session['timeline_event'] = message
 
-            send_content_message("HX8e8c68ddf7ffc649deece44dc6a3d735", sender)
+            send_content_message("HX876357671ebe51c6e83874d054abb4ca", sender)
 
             session["context"] = "padel_court_event"
             return "okay", 200
@@ -577,12 +577,30 @@ def handle_incoming_message():
             return "okay", 200
     
     elif session.get("context") == "padel_court_event":
-        session['padel_court_event'] = message
+        if message in ["PADEL 1","PADEL 2","PADEL 3","PADEL 4","PADEL 5"]:
+            is_available = check_availability(session.get("timetable_event"), session.get("timeline_event"), message)
+            if is_available:
+                session['padel_court_event'] = message
 
-        send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
+                send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
 
-        session['context'] = "hand_event"
-        return "okay", 200
+                session['context'] = "hand_event"
+                return "okay", 200
+            else:
+                send_content_message("HXcad8d3decc44313287a86d61e24e8f20", sender)
+
+                session['context'] = "change_action"
+                return "okay", 200
+        
+        else:
+            body= "Wrong input"
+            send_plain_message(body, sender)
+
+            time.sleep(2)
+            send_content_message("HX876357671ebe51c6e83874d054abb4ca", sender)
+
+            session["context"] = "padel_court_event"
+            return "okay", 200
     
     elif session.get("context") == "hand_event":
         session['hand_event'] = message
