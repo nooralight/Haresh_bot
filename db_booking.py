@@ -1,5 +1,6 @@
 from mongoengine import *
 from datetime import datetime,timedelta
+from utils import validate_input
 
 # Define the MongoDB connection
 connect(host="mongodb://127.0.0.1:27017/haresh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.10")
@@ -120,3 +121,32 @@ def fetch_all_bookings_by_date(date):
 def fetch_booking_by_id(id):
     exact_boooking = Bookings.objects(id = id).first()
     return exact_boooking
+
+def is_time_conflict(existing_time, input_start_time, input_end_time):
+    existing_start_time, existing_end_time = existing_time.split('-')
+    existing_start_time = datetime.strptime(existing_start_time.strip(), "%H:%M")
+    existing_end_time = datetime.strptime(existing_end_time.strip(), "%H:%M")
+    input_start_time = datetime.strptime(input_start_time, "%H:%M")
+    input_end_time = datetime.strptime(input_end_time, "%H:%M")
+
+    return max(existing_start_time, input_start_time) < min(existing_end_time, input_end_time)
+
+def check_availability(input_date, input_time_range):
+    # Convert input date from DD-MM-YYYY to YYYY-MM-DD
+    input_date = datetime.strptime(input_date, "%d-%m-%Y").strftime("%Y-%m-%d")
+    
+    # Parse the input time range
+    input_start_time, input_end_time = input_time_range.split('-')
+    input_start_time = input_start_time.strip()
+    input_end_time = input_end_time.strip()
+    
+    # Query the database for bookings on the same date
+    existing_bookings = Bookings.objects(booking_date=input_date)
+
+    for booking in existing_bookings:
+        if is_time_conflict(booking.booking_time, input_start_time, input_end_time):
+            print(f"Time conflict found with booking ID: {booking.id}")
+            return False  # Time conflict found
+    
+    print("No time conflict, booking is available.")
+    return True  # No time conflict

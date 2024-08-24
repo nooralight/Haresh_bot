@@ -9,6 +9,7 @@ from db_booking import insert_new_booking, fetch_all_bookings_by_date, fetch_boo
 import pytz
 import re
 from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
+from utils import validate_date , validate_time_range
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -112,6 +113,13 @@ def send_content_message(content_sid, to):
     message_created = twilio_client.messages.create(
         from_= messaging_sid,
         content_sid= content_sid,
+        to= to
+    )
+
+def send_plain_message(body, to):
+    message_created = twilio_client.messages.create(
+        from_= messaging_sid,
+        body= body,
         to= to
     )
 
@@ -520,15 +528,56 @@ def handle_incoming_message():
     
 
     elif session.get("context") == "timetable_event":
-        session["timetable_event"] = message
+        val_date = validate_date(message)
+        if val_date:
+            session["timetable_event"] = message
 
-        send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
+            send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
 
-        session['context'] = "timeline_event"
-        return "okay", 200
+            session['context'] = "timeline_event"
+            return "okay", 200
+        else:
+            body= "Wrong input"
+            send_plain_message(body, sender)
+
+            time.sleep(2)
+            ## Date input for match ##
+            send_content_message("HXa393ea5fc23b1aea289f1a00d802de62", sender)  # timetable_event
+
+            session['context'] = "timetable_event"
+            return "okay",200
+
 
     elif session.get("context") == "timeline_event":
-        session['timeline_event'] = message
+        val_time_range = validate_time_range(message)
+        if validate_time_range:
+
+            session['padel_court_event'] = message
+
+            send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender)
+
+            session["context"] = "padel_court_event"
+            return "okay", 200
+            # session['timeline_event'] = message
+
+            # send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
+
+            # session['context'] = "hand_event"
+            # return "okay", 200
+        
+        else:
+            body= "Wrong input"
+            send_plain_message(body, sender)
+
+            time.sleep(2)
+
+            send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
+
+            session['context'] = "timeline_event"
+            return "okay", 200
+    
+    elif session.get("context") == "padel_court_event":
+        session['padel_court_event'] = message
 
         send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
 
@@ -538,18 +587,11 @@ def handle_incoming_message():
     elif session.get("context") == "hand_event":
         session['hand_event'] = message
 
-        send_content_message("HX8e8c68ddf7ffc649deece44dc6a3d735", sender) # padel_court_event
+        send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender) # padel_court_event
 
-        session['context'] = "padel_court_event"
+        session['context'] = None
         return "okay", 200
     
-    elif session.get("context") == "padel_court_event":
-        session['padel_court_event'] = message
-
-        send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender)
-
-        session["context"] = None
-        return "okay", 200
     # First One
 
     elif session.get('context') == "ask_availability":
