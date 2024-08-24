@@ -602,6 +602,29 @@ def handle_incoming_message():
             session["context"] = "padel_court_event"
             return "okay", 200
     
+    elif session.get('context') == "change_action":
+        if message == "Change Time":
+            send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
+
+            session['context'] = "timeline_event"
+            return "okay", 200
+        elif message == "Change Date":
+            ## Date input for match ##
+            send_content_message("HXa393ea5fc23b1aea289f1a00d802de62", sender)  # timetable_event
+
+            session['context'] = "timetable_event"
+            return "okay",200
+        elif message == "Change Padel Court":
+            send_content_message("HX876357671ebe51c6e83874d054abb4ca", sender)
+
+            session["context"] = "padel_court_event"
+            return "okay", 200
+        else:
+            send_content_message("HXcad8d3decc44313287a86d61e24e8f20", sender)
+
+            session['context'] = "change_action"
+            return "okay", 200
+    
     elif session.get("context") == "hand_event":
         session['hand_event'] = message
 
