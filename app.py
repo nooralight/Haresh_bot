@@ -549,7 +549,7 @@ def handle_incoming_message():
         if val_date:
             session["timetable_event"] = message
 
-            send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
+            send_content_message("HX55b180f16617309d33be663fb93bfbe5", sender) # timeline_event
 
             session['context'] = "timeline_event"
             return "okay", 200
@@ -566,8 +566,8 @@ def handle_incoming_message():
 
 
     elif session.get("context") == "timeline_event":
-        val_time_range = validate_time_range(message)
-        if validate_time_range:
+        
+        if message in ["08:00 - 9:30", "09:30 - 11:00", "11:00 - 12:30", "17:00 - 18:30", "18:30 - 20:00", "20:00 - 21:30"]:
 
             session['timeline_event'] = message
 
@@ -588,7 +588,7 @@ def handle_incoming_message():
 
             time.sleep(2)
 
-            send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
+            send_content_message("HX55b180f16617309d33be663fb93bfbe5", sender) # timeline_event
 
             session['context'] = "timeline_event"
             return "okay", 200
@@ -620,21 +620,26 @@ def handle_incoming_message():
             return "okay", 200
     
     elif session.get('context') == "change_action":
+
+
         if message == "Change Time":
-            send_content_message("HX468c8998bec4930e5bc8ae386cda593a", sender) # timeline_event
+            send_content_message("HX55b180f16617309d33be663fb93bfbe5", sender) # timeline_event
 
             session['context'] = "timeline_event"
+            session['changing'] = "okay"
             return "okay", 200
         elif message == "Change Date":
             ## Date input for match ##
             send_content_message("HXa393ea5fc23b1aea289f1a00d802de62", sender)  # timetable_event
 
             session['context'] = "timetable_event"
+            session['changing'] = "okay"
             return "okay",200
         elif message == "Change Padel Court":
             send_content_message("HXc51f7b87cf7088412cba39559aaba34c", sender)
 
             session["context"] = "padel_court_event"
+            session['changing'] = "okay"    # TODO
             return "okay", 200
         else:
             send_content_message("HXcad8d3decc44313287a86d61e24e8f20", sender)
