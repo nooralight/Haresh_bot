@@ -195,20 +195,20 @@
                                                                     <form action="{{ url_for('edit_player') }}" method="post" id="new_player_form">
                                                                         <input type="text" name="player_id" value="{{ player.id }}" hidden>
                                                                         <div class="form-row">
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label style="color: rgb(61, 56, 56);">Player Name</label>
                                                                                 <input type="text" name="new_name" id="p_name" value="{{ player.name }}" class="form-control" required>
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label style="color: rgb(61, 56, 56);">Phone/WhatsApp number</label>
                                                                                 <input type="text" name="new_mobile" id="p_mobile" value="{{ player.mobile }}" class="form-control" required>
                                                                                 <small class="text-dark">* Don't forget to add country code, Example: +88</small>
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label style="color: rgb(61, 56, 56);">Age</label>
                                                                                 <input type="text" name="new_age" value="{{ player.age }}" id="p_age" class="form-control" required>
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label style="color: rgb(61, 56, 56);">sex</label>
                                                                                 <select id="inputSex" name="new_sex" class="form-control">
                                                                                     <option value="Hombre" {% if player.sex == "Hombre" %} selected {% endif %}>Hombre</option>
@@ -218,7 +218,7 @@
                                         
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label style="color: rgb(61, 56, 56);">Player Level</label>
                                                                                 <select id="inputLevel" name="new_level" class="form-control">
                                                                                     <option value="segunda baja" {% if player.level == "segunda baja" %} selected {% endif %}>segunda baja</option>
@@ -242,7 +242,7 @@
                                         
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label style="color: rgb(61, 56, 56);">Status</label>
                                                                                 <select id="inputStatus" name="new_status" class="form-control">
                                                                                     <option value="Active" {% if player.status == "Active" %} selected {% endif %}>Active</option>
