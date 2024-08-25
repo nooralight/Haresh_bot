@@ -146,6 +146,7 @@
                                     <td style="color: black;">{{ player.status }}</td>
                                     <td style="color: black;"><button type="button" class="btn btn-sm btn-light text-dark" data-toggle="modal" data-placement="top" data-target="#deletePlayer{{ player.id }}" title="Delete Row"><i class="fa-regular fa-trash-can"></i></button>
                                         <button type="button" class="btn btn-sm btn-light text-dark ml-2" data-toggle="modal" data-target="#editPlayer{{ player.id }}" title="Edit Row"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-light text-dark ml-2" data-bs-toggle="modal" data-bs-target="#editPlayer{{ player.id }}"><i class="fas fa-edit"></i></button>
                                         <!-- Modal for Delete Player -->
                                         <div class="modal fade" id="deletePlayer{{ player.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-sm">
@@ -172,8 +173,8 @@
                                             </div>
                                         </div>
                                         <!-- Modal for Editing Player row -->
-                                        <div class="modal fade" id="editPlayer{{ player.id }}">
-                                            <div class="modal-dialog" role="document">
+                                        <div class="modal fade" id="editPlayer{{ player.id }}" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                                            <div class="modal-dialog" >
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Edit Employee {{ player.name }}</h5>
