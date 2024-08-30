@@ -651,7 +651,7 @@ def handle_incoming_message():
             return "okay", 200
     
     elif session.get("context") == "hand_event":
-        if message in ["Right Hand Player", "Left Hand Player"]:
+        if message in ["Right hand", "Left hand"]:
             session['hand_event'] = message
             send_content_message("HXc8ef84da57a3692901a04b7dd33c6b11", sender)
 
@@ -668,7 +668,7 @@ def handle_incoming_message():
             return "okay", 200
 
     elif session.get("context") == "position_event":
-        if message in ["Right side player", "Left side player"]:
+        if message in ["Right Side Player", "Left Side Player"]:
             session['position_event'] = message
             send_content_message("HX207a883979d099a7b93d7d55a91ee565", sender) 
 
