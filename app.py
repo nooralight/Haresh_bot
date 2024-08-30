@@ -83,6 +83,7 @@ class Players(Document):
     preferred_position = StringField()
     dominant_hand = StringField()
     status = StringField()
+    last_invite_match = ListField()
     created_at = DateTimeField()
     updated_at = DateTimeField()
 
