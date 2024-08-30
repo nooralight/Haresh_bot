@@ -580,7 +580,7 @@ def handle_incoming_message():
             return "okay", 200
             # session['timeline_event'] = message
 
-            # send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
+            # send_content_message("HX1b2b35758c72d212f1f1dd5b0b350423", sender)
 
             # session['context'] = "hand_event"
             # return "okay", 200
@@ -602,7 +602,7 @@ def handle_incoming_message():
             if is_available:
                 session['padel_court_event'] = message
 
-                send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
+                send_content_message("HX1b2b35758c72d212f1f1dd5b0b350423", sender)
 
                 session['context'] = "hand_event"
                 return "okay", 200
@@ -653,7 +653,7 @@ def handle_incoming_message():
     elif session.get("context") == "hand_event":
         if message in ["Right Hand Player", "Left Hand Player"]:
             session['hand_event'] = message
-            send_content_message("HXe7eb1d6e61e60528b0983a3c8481795d", sender)
+            send_content_message("HXc8ef84da57a3692901a04b7dd33c6b11", sender)
 
             session['context'] = "position_event"
             return "okay", 200
@@ -662,7 +662,7 @@ def handle_incoming_message():
             send_plain_message(body, sender)
 
             time.sleep(2)
-            send_content_message("HX4da1ef2ae45f9ff2f5764e3624c6a899", sender)
+            send_content_message("HX1b2b35758c72d212f1f1dd5b0b350423", sender)
 
             session["context"] = "hand_event"
             return "okay", 200
@@ -679,7 +679,7 @@ def handle_incoming_message():
             send_plain_message(body, sender)
 
             time.sleep(2)
-            send_content_message("HXe7eb1d6e61e60528b0983a3c8481795d", sender)
+            send_content_message("HXc8ef84da57a3692901a04b7dd33c6b11", sender)
 
             session["context"] = "position_event"
             return "okay", 200
