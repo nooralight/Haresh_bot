@@ -1015,6 +1015,7 @@ def handle_incoming_message():
                 return "okay", 200
 
         elif session.get('context') == "ask_dominant_hand":
+            print(message)
             if message in ['Left hand', 'Right hand']:
                 if message == 'Left hand':
                     already_player.dominant_hand = 'Left hand'
