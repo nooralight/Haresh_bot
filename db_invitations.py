@@ -71,7 +71,6 @@ def send_message_to_matched_users(invitation_id):
         Q(dominant_hand=searched_hand.strip()) &
         Q(preferred_position=searched_position.strip()) &
         Q(level=searched_level.strip()) &
-        Q(mobile = "+8801301807991") &
         Q(status = "Active")
     )
     print(players.count())

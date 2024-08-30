@@ -412,7 +412,7 @@ def handle_incoming_message():
                         message_created = twilio_client.messages.create(
                             from_= phone_number,
                             body= body,
-                            to = already_player.mobile
+                            to= f"whatsapp:{already_player.mobile}"
                         )
                         insert_into_message(already_player.mobile, body, "bot")
 
@@ -423,9 +423,9 @@ def handle_incoming_message():
                     else:
                         body = '''Sorry the booking has already been closed. Thank you for showing interest'''
                         message_created = twilio_client.messages.create(
-                            from_= messaging_sid,
+                            from_= phone_number,
                             body= body,
-                            to= already_player.mobile
+                            to= f"whatsapp:{already_player.mobile}"
                         )
                         insert_into_message(already_player.mobile, body, "bot")
 
@@ -437,9 +437,9 @@ def handle_incoming_message():
             elif message == "No, reject":
                 body = '''Thank you for your response. You won't be invited for this match anymore.'''
                 message_created = twilio_client.messages.create(
-                    from_= messaging_sid,
+                    from_= phone_number,
                     body= body,
-                    to= already_player.mobile
+                    to= f"whatsapp:{already_player.mobile}"
                 )
                 insert_into_message(already_player.mobile, body, "bot")
 
@@ -449,9 +449,9 @@ def handle_incoming_message():
             elif message == "Unsubscribe me":
                 body = '''You have been unsubscribed from getting match invitations.'''
                 message_created = twilio_client.messages.create(
-                    from_= messaging_sid,
+                    from_= phone_number,
                     body= body,
-                    to= already_player.mobile
+                    to= f"whatsapp:{already_player.mobile}"
                 )
                 insert_into_message(already_player.mobile, body, "bot")
 
