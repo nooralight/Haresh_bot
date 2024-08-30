@@ -699,6 +699,7 @@ def handle_incoming_message():
                 if invitation_sending_players.count()>0:
                     for item in invitation_sending_players:
                         try:
+                            total_timeline = f"{formatted_date} , {session.get("timeline_event")}"
                             message_created = twilio_client.messages.create(
                                 from_= messaging_sid, 
                                 content_sid= "HXe9c3a08640af9c1c4c71f8dc78a913ca",
@@ -708,7 +709,7 @@ def handle_incoming_message():
                                     "3": session.get('hand_event'),
                                     "4": session.get('position_event'),
                                     "5":already_player.level,
-                                    "6": f"{formatted_date} , {session.get("timeline_event")}"
+                                    "6": total_timeline
                                 }),
                                 to = item.mobile
                             )
