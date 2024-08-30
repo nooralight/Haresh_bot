@@ -694,7 +694,7 @@ def handle_incoming_message():
                 send_plain_message(body, sender)
                 insert_into_message(already_player.mobile, body, "bot")
                 # Create invitation in the database
-                invitation_create = create_new_invitation(match_number, already_player.id, already_player.name, session.get('hand_event'),session.get('position_event'), formatted_date, session.get("timeline_event"),session.get("padel_court_event"))
+                invitation_create = create_new_invitation(match_number, already_player.id, already_player.name, session.get('hand_event'),session.get('position_event'), formatted_date, session.get("timeline_event"),session.get("padel_court_event"), already_player.level)
                 invitation_sending_players = send_message_to_matched_users(invitation_create.id)
                 if invitation_sending_players.count()>0:
                     for item in invitation_sending_players:

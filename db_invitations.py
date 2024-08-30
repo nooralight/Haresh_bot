@@ -39,7 +39,7 @@ class Players(Document):
 
 
 
-def create_new_invitation(match_id, player_id, player_name, searched_hand, searched_position, match_date, match_time_range, pedal):
+def create_new_invitation(match_id, player_id, player_name, searched_hand, searched_position, match_date, match_time_range, pedal, searched_level):
     new_invitation = Invitations(
         match_id = match_id,
         created_by_player_id = player_id,
@@ -49,6 +49,7 @@ def create_new_invitation(match_id, player_id, player_name, searched_hand, searc
         match_date = match_date,
         match_time_range = match_time_range,
         pedal = pedal,
+        searched_level = searched_level,
         created_at = datetime.now()
     )
     new_invitation.save()
