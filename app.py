@@ -698,24 +698,22 @@ def handle_incoming_message():
                 invitation_sending_players = send_message_to_matched_users(invitation_create.id)
                 if invitation_sending_players.count()>0:
                     for item in invitation_sending_players:
-                        try:
-                            total_timeline = f"{formatted_date} , {session.get('timeline_event')}"
+                        
+                        total_timeline = f"{formatted_date} , {session.get('timeline_event')}"
 
-                            message_created = twilio_client.messages.create(
-                                from_= messaging_sid, 
-                                content_sid= "HXe9c3a08640af9c1c4c71f8dc78a913ca",
-                                content_variables= json.dumps({
-                                    "1": already_player.name,
-                                    "2": match_number,
-                                    "3": session.get('hand_event'),
-                                    "4": session.get('position_event'),
-                                    "5":already_player.level,
-                                    "6": total_timeline
-                                }),
-                                to = item.mobile
-                            )
-                        except:
-                            print("error message sending for ", item.mobile)
+                        message_created = twilio_client.messages.create(
+                            from_= messaging_sid, 
+                            content_sid= "HXe9c3a08640af9c1c4c71f8dc78a913ca",
+                            content_variables= json.dumps({
+                                "1": already_player.name,
+                                "2": match_number,
+                                "3": session.get('hand_event'),
+                                "4": session.get('position_event'),
+                                "5":already_player.level,
+                                "6": total_timeline
+                            }),
+                            to = item.mobile
+                        )
 
                 session['context'] = None
                 return "okay", 200

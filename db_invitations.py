@@ -71,6 +71,7 @@ def send_message_to_matched_users(invitation_id):
         Q(mobile = "+8801301807991") &
         Q(status = "Active")
     )
+    print(players.count())
 
     return players
 
