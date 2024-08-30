@@ -16,7 +16,7 @@ class Invitations(Document):
     match_time_range = StringField()
     pedal = StringField()
     status = StringField(default = "searching") # Either "Searching" or closed
-    last_sent = DateTimeField() # Becayse every 6 hours later, the invitation will be sent, 4 times a day
+    last_sent = DateTimeField() # Because every 8 hours later, the invitation will be sent, 3 times a day
     created_at = DateTimeField()
 
 class Players(Document):
@@ -78,4 +78,6 @@ def send_message_to_matched_users(invitation_id):
 
     return players
 
-    
+
+def get_invitation_by_matchID(match_id):
+    invitation = Invitations.objects(match_id = match_id).first()
