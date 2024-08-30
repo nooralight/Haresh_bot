@@ -1033,7 +1033,7 @@ def handle_incoming_message():
                     #pref_pos
                     message_send = twilio_client.messages.create(
                             from_= messaging_sid,
-                            content_sid="HXe1f8691aa5ec2b8a9065d0734c388e78",
+                            content_sid="HXe7eb1d6e61e60528b0983a3c8481795d",
                             to = sender
                         )
                     
@@ -1107,7 +1107,7 @@ def handle_incoming_message():
                 #pref_pos
                 message_send = twilio_client.messages.create(
                         from_= messaging_sid,
-                        content_sid="HXe1f8691aa5ec2b8a9065d0734c388e78",
+                        content_sid="HXe7eb1d6e61e60528b0983a3c8481795d",
                         to = sender
                     )
                 
