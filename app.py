@@ -3,13 +3,14 @@ from flask_session import Session
 from twilio.rest import Client
 from mongoengine import *
 from datetime import datetime,timedelta
-import time
+import time, json
 from db_player import add_new_player, update_player
 from db_booking import insert_new_another_booking,fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
 import pytz
 import re
 from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
 from utils import validate_date , validate_time_range
+from db_invitations import create_new_invitation, send_message_to_matched_users
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -691,6 +692,28 @@ def handle_incoming_message():
                 new_booking = insert_new_another_booking(formatted_date, session.get("timeline_event"), session.get("padel_court_event"), match_number, already_player.level, 4, 1,[already_player.name],"Searching")
                 body = f"Match number *{match_number}* has been opened. Invitation request has been sent to player based on your choices that you have given."
                 send_plain_message(body, sender)
+                insert_into_message(already_player.mobile, body, "bot")
+                # Create invitation in the database
+                invitation_create = create_new_invitation(match_number, already_player.id, already_player.name, session.get('hand_event'),session.get('position_event'), formatted_date, session.get("timeline_event"),session.get("padel_court_event"))
+                invitation_sending_players = send_message_to_matched_users(invitation_create.id)
+                if invitation_sending_players.count()>0:
+                    for item in invitation_sending_players:
+                        try:
+                            message_created = twilio_client.messages.create(
+                                from_= messaging_sid, 
+                                content_sid= "HXe9c3a08640af9c1c4c71f8dc78a913ca",
+                                content_variables= json.dumps({
+                                    "1": already_player.name,
+                                    "2": match_number,
+                                    "3": session.get('hand_event'),
+                                    "4": session.get('position_event'),
+                                    "5":already_player.level,
+                                    "6": f"{formatted_date} , {session.get("timeline_event")}"
+                                }),
+                                to = item.mobile
+                            )
+                        except:
+                            print("error message sending for ", item.mobile)
 
                 session['context'] = None
                 return "okay", 200
@@ -722,6 +745,7 @@ def handle_incoming_message():
                 )
                 session['evening_time'] = "yes"
                 session['context'] = "evening_extra"
+                already_player.availability_session = message
                 body = '''In the evening, in which time range you are available?'''
                 insert_into_message(sender[9:], body, "bot")
                 return "okay", 200
@@ -811,8 +835,7 @@ def handle_incoming_message():
 
     elif session.get('context') == "evening_extra":
         if message in ['17:00 - 20:00', '20:00 - 22:00','All Evening']:
-            already_player.availability_session = session.get("evening_time")
-            already_player.availability_time = "08:00 - 12:30"
+            already_player.availability_time =message
             already_player.save()
             
             ######  If preferred position is not given  ####

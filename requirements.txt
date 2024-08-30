@@ -1,4 +1,0 @@
-flask
-flask_session
-python-dotenv
-twilio

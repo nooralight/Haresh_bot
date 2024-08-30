@@ -17,6 +17,7 @@ class Players(Document):
     preferred_position = StringField()
     dominant_hand = StringField()
     status = StringField()
+    
     created_at = DateTimeField()
     updated_at = DateTimeField()
 
@@ -49,5 +50,9 @@ def update_player(player_id, new_name, new_mobile, new_age, new_sex, new_level, 
     the_player.save()
 
     print(f"Player ID:{player_id} has been updated")
+
+def get_players_based_on_query(query_string):
+    players = Players.objects(query_string)
+    return players
 
     
