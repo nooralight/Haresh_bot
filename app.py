@@ -842,11 +842,12 @@ def handle_incoming_message():
                     already_player.availability_session = message
                     body = '''In the evening, in which time range you are available?'''
                     insert_into_message(sender[9:], body, "bot")
+                    already_player.save()
                     return "okay", 200
-                already_player.save()
+                
                 
                 ######  If preferred position is not given  ####
-                if not already_player.preferred_position:
+                if not already_player.dominant_hand:
 
                     first_message = twilio_client.messages.create(
                         from_= phone_number,
@@ -928,6 +929,7 @@ def handle_incoming_message():
         ## Second One
 
         elif session.get('context') == "evening_extra":
+            print(message)
             if message in ['17:00 - 18:30', '18:30 - 20.00', '20:00 - 21:30','All Evening']:
                 already_player.availability_time =message
                 already_player.save()
