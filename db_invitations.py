@@ -68,8 +68,8 @@ def send_message_to_matched_users(invitation_id):
     print(f"Searching for,\nHand: {searched_hand},\nPosition: {searched_position},\nLevel: {searched_level}")
     # Filter players based on the invitation criteria
     players = Players.objects(
-        Q(dominant_hand__contains=searched_hand) &
-        Q(preferred_position__contains=searched_position) &
+        Q(dominant_hand=searched_hand) &
+        Q(preferred_position=searched_position) &
         Q(level=searched_level) &
         Q(mobile = "+8801301807991") &
         Q(status = "Active")
