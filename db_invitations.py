@@ -68,7 +68,8 @@ def send_message_to_matched_users(invitation_id):
         Q(dominant_hand=searched_hand) &
         Q(preferred_position=searched_position) &
         Q(level=searched_level) &
-        Q(mobile = "+8801301807991")
+        Q(mobile = "+8801301807991") &
+        Q(status = "Active")
     )
 
     return players
