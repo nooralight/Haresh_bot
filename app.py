@@ -699,6 +699,7 @@ def handle_incoming_message():
                 invitation_create = create_new_invitation(match_number, already_player.id, already_player.name, session.get('hand_event'),session.get('position_event'), formatted_date, session.get("timeline_event"),session.get("padel_court_event"), already_player.level)
                 invitation_sending_players = send_message_to_matched_users(invitation_create.id)
                 if invitation_sending_players.count()>0:
+                    print("Ready to send")
                     for item in invitation_sending_players:
                         
                         total_timeline = f"{formatted_date} , {session.get('timeline_event')}"
@@ -714,7 +715,7 @@ def handle_incoming_message():
                                 "5":already_player.level,
                                 "6": total_timeline
                             }),
-                            to = item.mobile
+                            to = f"whatsapp:{item.mobile}"
                         )
 
                 session['context'] = None
