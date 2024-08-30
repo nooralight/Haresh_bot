@@ -58,6 +58,7 @@ def create_new_invitation(match_id, player_id, player_name, searched_hand, searc
 def send_message_to_matched_users(invitation_id):
     the_invitation = Invitations.objects(id = invitation_id).first()
     # Extract criteria from the invitation
+    player_id = the_invitation.created_by_player_id
     searched_hand = the_invitation.searched_hand
     searched_position = the_invitation.searched_position
     searched_level = the_invitation.searched_level
@@ -68,6 +69,7 @@ def send_message_to_matched_users(invitation_id):
     print(f"Searching for,\nHand: {searched_hand},\nPosition: {searched_position},\nLevel: {searched_level}")
     # Filter players based on the invitation criteria
     players = Players.objects(
+        Q(id__ne= player_id)
         Q(dominant_hand=searched_hand.strip()) &
         Q(preferred_position=searched_position.strip()) &
         Q(level=searched_level.strip()) &
