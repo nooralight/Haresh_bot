@@ -396,7 +396,7 @@ def handle_incoming_message():
             if message == "Yes, confirm me":
                 for item in already_player.last_invite_match:
                     booking = check_booking_exist(item['match_number'])
-                    if booking.status == "Searching":
+                    if booking.state == "Searching":
                         booking.players_name_list.append(already_player.name)
                         currently_player_count = booking.player_occupied
                         booking.player_occupied = currently_player_count+1
@@ -414,7 +414,7 @@ def handle_incoming_message():
 
                         # Also check to change status
                         if booking.player_occupied == 4:
-                            booking.status = "Open"
+                            booking.state = "Open"
                             invitation = get_invitation_by_matchID(item['match_number'])
                             invitation.status = "closed"
                             booking.save()
