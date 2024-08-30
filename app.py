@@ -1084,8 +1084,11 @@ def handle_incoming_message():
                 return "okay", 200
             
         elif session.get('context') == "ask_preferred_position":
-            if message in ['Left Side Player', 'Right Side Player']:
-                already_player.preferred_position = message
+            if message in ['Left side Player', 'Right side Player']:
+                if message =="Left side Player":
+                    already_player.preferred_position = "Left Side Player"
+                else:
+                    already_player.preferred_position = "Right Side Player"
                 already_player.save()
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
