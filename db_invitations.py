@@ -33,7 +33,7 @@ class Players(Document):
     preferred_position = StringField()
     dominant_hand = StringField()
     status = StringField()
-    latest_invitation = DictField()
+    last_invite_match = ListField()
     created_at = DateTimeField()
     updated_at = DateTimeField()
 
@@ -81,3 +81,4 @@ def send_message_to_matched_users(invitation_id):
 
 def get_invitation_by_matchID(match_id):
     invitation = Invitations.objects(match_id = match_id).first()
+    return invitation
