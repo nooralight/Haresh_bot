@@ -35,7 +35,7 @@ def add_new_player(name, mobile, age, sex, level, status):
     new_player.save()
     print(f"New Player created, Name: {name}")
 
-def update_player(player_id, new_name, new_mobile, new_age, new_sex, new_level, new_status):
+def update_player(player_id, new_name, new_mobile, new_age, new_sex, new_level, new_status, new_hand, new_position):
 
     # Getting the Player object
     the_player = Players.objects(id = player_id).first()
@@ -46,6 +46,8 @@ def update_player(player_id, new_name, new_mobile, new_age, new_sex, new_level, 
     the_player.sex = new_sex
     the_player.level = new_level
     the_player.status = new_status
+    the_player.dominant_hand = new_hand
+    the_player.preferred_position = new_position
     the_player.updated_at = datetime.now()
     the_player.save()
 

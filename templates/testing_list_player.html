@@ -243,6 +243,20 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group col-md-12 mb-2">
+                                                                                <label style="color: rgb(61, 56, 56);">Player Hand</label>
+                                                                                <select id="inputStatus" name="new_hand" class="form-control">
+                                                                                    <option value="Left hand" {% if player.dominant_hand == "Left hand" %} selected {% endif %}>Left hand</option>
+                                                                                    <option value="Right hand" {% if player.dominant_hand == "Right hand" %} selected {% endif %}>Right hand</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group col-md-12 mb-2">
+                                                                                <label style="color: rgb(61, 56, 56);">Player Position</label>
+                                                                                <select id="inputStatus" name="new_position" class="form-control">
+                                                                                    <option value="Left Side Player" {% if player.preferred_position == "Left Side Player" %} selected {% endif %}>Left Side Player</option>
+                                                                                    <option value="Right Side Player" {% if player.preferred_position == "Right Side Player" %} selected {% endif %}>Right Side Player</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group col-md-12 mb-2">
                                                                                 <label style="color: rgb(61, 56, 56);">Status</label>
                                                                                 <select id="inputStatus" name="new_status" class="form-control">
                                                                                     <option value="Active" {% if player.status == "Active" %} selected {% endif %}>Active</option>

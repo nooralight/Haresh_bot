@@ -332,7 +332,9 @@ def edit_player():
     new_sex = request.form.get('new_sex')
     new_level = request.form.get('new_level')
     new_status = request.form.get('new_status')
-    update_player(player_id, new_name, new_mobile, new_age, new_sex, new_level, new_status)
+    new_hand = request.form.get('new_hand')
+    new_position = request.form.get('new_position')
+    update_player(player_id, new_name, new_mobile, new_age, new_sex, new_level, new_status, new_hand, new_position)
 
     return redirect(referrer)
 
