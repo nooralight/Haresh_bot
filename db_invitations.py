@@ -64,6 +64,8 @@ def send_message_to_matched_users(invitation_id):
     match_date = the_invitation.match_date
     match_time_range = the_invitation.match_time_range
 
+
+    print(f"Searching for,\nHand: {searched_hand},\nPosition: {searched_position},\nLevel: {searched_level}")
     # Filter players based on the invitation criteria
     players = Players.objects(
         Q(dominant_hand__contains=searched_hand) &
