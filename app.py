@@ -401,9 +401,16 @@ def handle_incoming_message():
                         currently_player_count = booking.player_occupied
                         booking.player_occupied = currently_player_count+1
                         booking.save()
+                        # Also check to change status
+                        if booking.player_occupied == 4:
+                            booking.state = "Open"
+                            invitation = get_invitation_by_matchID(item['match_number'])
+                            invitation.status = "closed"
+                            booking.save()
+                            invitation.save()
                         body = "Thank you for joining the match. You are registered into this match from now."
                         message_created = twilio_client.messages.create(
-                            from_= messaging_sid,
+                            from_= phone_number,
                             body= body,
                             to = already_player.mobile
                         )
@@ -412,13 +419,7 @@ def handle_incoming_message():
                         already_player.last_invite_match = []
                         already_player.save()
 
-                        # Also check to change status
-                        if booking.player_occupied == 4:
-                            booking.state = "Open"
-                            invitation = get_invitation_by_matchID(item['match_number'])
-                            invitation.status = "closed"
-                            booking.save()
-                            invitation.save()
+                        
                     else:
                         body = '''Sorry the booking has already been closed. Thank you for showing interest'''
                         message_created = twilio_client.messages.create(
@@ -431,7 +432,7 @@ def handle_incoming_message():
                         already_player.last_invite_match = []
                         already_player.save()
                     
-                    return "okay", 200
+                    
                     
             elif message == "No, reject":
                 body = '''Thank you for your response. You won't be invited for this match anymore.'''
@@ -444,7 +445,7 @@ def handle_incoming_message():
 
                 already_player.last_invite_match = []
                 already_player.save()
-                return "okay", 200
+                
             elif message == "Unsubscribe me":
                 body = '''You have been unsubscribed from getting match invitations.'''
                 message_created = twilio_client.messages.create(
@@ -457,7 +458,7 @@ def handle_incoming_message():
                 already_player.last_invite_match = []
                 already_player.status = "Stopped"
                 already_player.save()
-                return "okay", 200
+                
             else:
                 for item in already_player.last_invite_match:
                     message_created = twilio_client.messages.create(
