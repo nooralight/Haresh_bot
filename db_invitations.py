@@ -55,7 +55,7 @@ def create_new_invitation(match_id, player_id, player_name, searched_hand, searc
     return new_invitation
 
 def send_message_to_matched_users(invitation_id):
-    the_invitation = Invitations(id = invitation_id).first()
+    the_invitation = Invitations.objects(id = invitation_id).first()
     # Extract criteria from the invitation
     searched_hand = the_invitation.searched_hand
     searched_position = the_invitation.searched_position
