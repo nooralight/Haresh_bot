@@ -834,7 +834,7 @@ def handle_incoming_message():
                 elif message == 'Evening':
                     message_created = twilio_client.messages.create(
                         from_= messaging_sid,
-                        content_sid= "HXa2a7e2453ee63195ffb0666832918996",
+                        content_sid= "HX704735e91171f427306bc4ca8a236420",
                         to= sender
                     )
                     session['evening_time'] = "yes"
@@ -914,7 +914,7 @@ def handle_incoming_message():
             else:
                 message_created = twilio_client.messages.create(
                     from_= messaging_sid,
-                    content_sid= "HXa2a7e2453ee63195ffb0666832918996",
+                    content_sid= "HX704735e91171f427306bc4ca8a236420",
                     to= sender
                 )
                 body = '''In the evening, in which time range you are available?'''
@@ -928,7 +928,7 @@ def handle_incoming_message():
         ## Second One
 
         elif session.get('context') == "evening_extra":
-            if message in ['17:00 - 20:00', '20:00 - 22:00','All Evening']:
+            if message in ['17:00 - 18:30', '18:30 - 20.00', '20:00 - 21:30','All Evening']:
                 already_player.availability_time =message
                 already_player.save()
                 
