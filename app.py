@@ -881,7 +881,7 @@ def handle_incoming_message():
                     #pref_pos
                     message_send = twilio_client.messages.create(
                             from_= messaging_sid,
-                            content_sid="HXe1f8691aa5ec2b8a9065d0734c388e78",
+                            content_sid="HXc8ef84da57a3692901a04b7dd33c6b11",
                             to = sender
                         )
                     
@@ -969,7 +969,7 @@ def handle_incoming_message():
                     #pref_pos
                     message_send = twilio_client.messages.create(
                             from_= messaging_sid,
-                            content_sid="HXe1f8691aa5ec2b8a9065d0734c388e78",
+                            content_sid="HXc8ef84da57a3692901a04b7dd33c6b11",
                             to = sender
                         )
                     
@@ -1036,7 +1036,7 @@ def handle_incoming_message():
                     #pref_pos
                     message_send = twilio_client.messages.create(
                             from_= messaging_sid,
-                            content_sid="HXe7eb1d6e61e60528b0983a3c8481795d",
+                            content_sid="HXc8ef84da57a3692901a04b7dd33c6b11",
                             to = sender
                         )
                     
@@ -1084,11 +1084,9 @@ def handle_incoming_message():
                 return "okay", 200
             
         elif session.get('context') == "ask_preferred_position":
-            if message in ['Left side Player', 'Right side Player']:
-                if message =="Left side Player":
-                    already_player.preferred_position = "Left Side Player"
-                else:
-                    already_player.preferred_position = "Right Side Player"
+            if message in ['Left Side Player', 'Right Side Player']:
+                
+                already_player.preferred_position = message
                 already_player.save()
                 first_message = twilio_client.messages.create(
                     from_= phone_number,
@@ -1113,7 +1111,7 @@ def handle_incoming_message():
                 #pref_pos
                 message_send = twilio_client.messages.create(
                         from_= messaging_sid,
-                        content_sid="HXe7eb1d6e61e60528b0983a3c8481795d",
+                        content_sid="HXc8ef84da57a3692901a04b7dd33c6b11",
                         to = sender
                     )
                 
