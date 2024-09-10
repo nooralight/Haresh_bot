@@ -70,9 +70,9 @@ def send_message_to_matched_users(invitation_id):
     # Filter players based on the invitation criteria
     players = Players.objects(
         Q(id__ne= player_id) &
-        Q(dominant_hand=searched_hand.strip()) &
-        Q(preferred_position=searched_position.strip()) &
-        Q(level=searched_level.strip()) &
+        Q(dominant_hand=searched_hand.strip()) & # Dominant hand should be removed
+        Q(preferred_position=searched_position.strip()) & # Any
+        Q(level=searched_level.strip()) & # equal or +1
         Q(status = "Active")
     )
     print(players.count())
