@@ -155,8 +155,3 @@ def available_padels(date_input, input_time):
 
     return available_courts
 
-date_input = input("Tell us the date: \n")
-time_range = input("The time range please: \n")
-
-result = available_padels(date_input, time_range)
-print(result)
