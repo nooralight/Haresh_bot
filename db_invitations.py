@@ -9,8 +9,6 @@ class Invitations(Document):
     match_id = IntField()
     created_by_player_id = IntField()
     created_by_player_name = StringField()
-    searched_hand = StringField()
-    searched_position = StringField()
     searched_level = StringField()
     match_date = StringField()
     match_time_range = StringField()
@@ -39,13 +37,11 @@ class Players(Document):
 
 
 
-def create_new_invitation(match_id, player_id, player_name, searched_hand, searched_position, match_date, match_time_range, pedal, searched_level):
+def create_new_invitation(match_id, player_id, player_name, match_date, match_time_range, pedal, searched_level):
     new_invitation = Invitations(
         match_id = match_id,
         created_by_player_id = player_id,
         created_by_player_name = player_name, 
-        searched_hand = searched_hand, 
-        searched_position = searched_position,
         match_date = match_date,
         match_time_range = match_time_range,
         pedal = pedal,
@@ -59,21 +55,16 @@ def send_message_to_matched_users(invitation_id):
     the_invitation = Invitations.objects(id = invitation_id).first()
     # Extract criteria from the invitation
     player_id = the_invitation.created_by_player_id
-    searched_hand = the_invitation.searched_hand
-    searched_position = the_invitation.searched_position
     searched_level = the_invitation.searched_level
     match_date = the_invitation.match_date
     match_time_range = the_invitation.match_time_range
 
-
-    print(f"Searching for,\nHand: {searched_hand},\nPosition: {searched_position},\nLevel: {searched_level}")
     # Filter players based on the invitation criteria
     players = Players.objects(
-        Q(id__ne= player_id) &
-        Q(dominant_hand=searched_hand.strip()) & # Dominant hand should be removed
-        Q(preferred_position=searched_position.strip()) & # Any
         Q(level=searched_level.strip()) & # equal or +1
-        Q(status = "Active")
+        Q(status = "Active") &
+        Q(last_invite_match__size=0) &
+        Q(mobile = "+8801301807991")
     )
     print(players.count())
 

@@ -10,15 +10,15 @@ see_available_padels = {
                                 "title": "Input date",
                                 "type": "string"
                             },
-                            "time": {
-                                "description": "get user's input time",
-                                "title": "Input time",
+                            "time_range": {
+                                "description": "get user's input time range",
+                                "title": "Input time range",
                                 "type": "string"
                             }
                         },
                         "required": [
                             "date",
-                            "time"
+                            "time_range"
                         ],
                         "type": "object"
                     }
@@ -37,21 +37,21 @@ make_padel_event = {
                                 "title": "Input date",
                                 "type": "string"
                             },
-                            "time": {
-                                "description": "get user's input time",
-                                "title": "Input time",
+                            "time_range": {
+                                "description": "get user's input time range",
+                                "title": "Input time range",
                                 "type": "string"
                             },
-                            "padel_name": {
-                                "description": "get user's input pedal name",
-                                "title": "Input pedal match name",
+                            "padel_court_name": {
+                                "description": "get user's input padel court name",
+                                "title": "Input padel court name",
                                 "type": "string"
                             } 
                         },
                         "required": [
                             "date",
-                            "time",
-                            "padel_name"
+                            "time_range",
+                            "padel_court_name"
                         ],
                         "type": "object"
                     }

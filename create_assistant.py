@@ -16,7 +16,8 @@ One extra thing you need to do is checking the available Padel courts against th
 Here are some basic info for the booking action:
 1. our Padel club has six Padel courts: 'Pádel 1', 'Pádel 2', 'Pádel 3', 'Pádel 4', 'Pádel 5', 'Pádel 6'. 
 2. Input date should be %d-%m-%Y
-3. Input time range should be hh-mm, 24 hours format like  09:30 , 17:30
+3. Input time range should be hh-mm, 24 hours format like  09:30 , 17:30.
+4. We only have these time ranges: '08:00-9:30', '09:30-11:00', '11:00-12:30', '17:00-18:30', '18:30-20.00' , '20:00-21:30'
 4. Ask to give proper answer in case the customer gives wrong input
 
 -> Output of check_available_padel
@@ -31,16 +32,16 @@ A variable will be sent named booking_id as a return which will contain the Matc
 2. If there is any questions not related to Padel Club, you will nicely tell the customer that you don't have knowledge over this, and to try talking about the club.
 3. Try to make shorter answer, within 1400 characters. The shorter answer, the better!'''
 
-# print(updateAssistantInstruction("asst_aWNRkZ7hyEPkwjfHEgKtsMjr", instruction)) 
+#print(updateAssistantInstruction("asst_2JsjuiBR4MOMadLddfvYo4rU", instruction)) 
 # print(saveFile_intoOpenAI("faq chatbot.docx"))
 
-# print(create_assistant("haresh", instruction))
+#print(create_assistant("haresh", instruction))
 
 # print(create_vector_store("haresh_faq"))
 # upload_file_into_vector_store("vs_HnhdsOwjx5Y0JgTPPsJKoHw2", ['file-GXbLsUN0dogIOpHZ2G3iCyaM'])
-# updateAssistantVectorDB("asst_2JsjuiBR4MOMadLddfvYo4rU","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
+updateAssistantVectorDB("asst_G9NiY4LlkdOLM4MYCpZPivvx","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
 
 
-# Server = asst_2JsjuiBR4MOMadLddfvYo4rU
+# Server = asst_G9NiY4LlkdOLM4MYCpZPivvx
 # file-GXbLsUN0dogIOpHZ2G3iCyaM
 # vs_HnhdsOwjx5Y0JgTPPsJKoHw2

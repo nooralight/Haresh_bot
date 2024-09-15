@@ -5,7 +5,7 @@ from mongoengine import *
 from datetime import datetime,timedelta
 import time, json
 from db_player import add_new_player, update_player
-from db_booking import check_booking_exist,insert_new_another_booking,fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
+from db_booking import check_booking_exist,available_padels,insert_new_another_booking,fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
 import pytz
 import re
 from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
@@ -14,6 +14,12 @@ from db_invitations import create_new_invitation, send_message_to_matched_users,
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
+# Configure OpenAI API key from environment variable
+openAI_key = os.getenv('OPENAI_KEY')
+from openai import OpenAI
+
+client = OpenAI(api_key=openAI_key)
 
 import random
 import string
@@ -32,7 +38,7 @@ phone_number = os.getenv('PHONE_NUMBER')
 messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
-ASSISTANT_ID = "asst_2JsjuiBR4MOMadLddfvYo4rU"
+ASSISTANT_ID = "asst_G9NiY4LlkdOLM4MYCpZPivvx"
 
 # Define the timezone for London
 london_tz = pytz.timezone('Europe/London')
@@ -441,6 +447,73 @@ def handle_incoming_message():
                     if run_status.status == "failed":
                         final_response = "No response now"
                         break
+                    if run_status.status == "requires_action":
+                        tool_call = run_status.required_action.submit_tool_outputs.tool_calls[0]
+                    
+                        print(tool_call.function)
+                        arguments = json.loads(tool_call.function.arguments)
+                        if tool_call.function.name == "check_available_padel":
+
+                            input_date = arguments['date']
+                            input_time_range = arguments['time_range']
+                            pedals = available_padels(input_date, input_time_range)
+                            if pedals == None:
+                                run = client.beta.threads.runs.submit_tool_outputs(
+                                        thread_id=my_thread_id,
+                                        run_id=run.id,
+                                        tool_outputs=[
+                                            {
+                                                "tool_call_id": tool_call.id,
+                                                "output": json.dumps({"found":False}),
+                                            }
+                                        ],
+                                    )
+                            else:
+                                run = client.beta.threads.runs.submit_tool_outputs(
+                                    thread_id=my_thread_id,
+                                    run_id=run.id,
+                                    tool_outputs=[
+                                        {
+                                            "tool_call_id": tool_call.id,
+                                            "output": json.dumps({"found":True,"available_courts":pedals}),
+                                        }
+                                    ],
+                                )
+
+                        elif tool_call.function.name == "make_padel_event":
+                            input_date = arguments['date']
+                            input_time_range = arguments['time_range']
+                            padel_court_name = arguments['padel_court_name']
+
+                            # TODO create match
+                            random_number = generate_random_string(4)
+                            match_number = f"{random_number}{get_numOfBookings()}"
+                            
+                            formatted_date = datetime.strptime(input_date, "%d-%m-%Y").strftime("%Y-%m-%d")
+                            new_booking = insert_new_another_booking(formatted_date, input_time_range, padel_court_name, match_number, already_player.level, 4, 1,[already_player.name],"Searching")
+
+                            # Create invitation in the database
+                            invitation_create = create_new_invitation(match_number, already_player.id, already_player.name, formatted_date, padel_court_name, padel_court_name, already_player.level)
+                            invitation_sending_players = send_message_to_matched_users(invitation_create.id)
+                            if invitation_sending_players.count()>0:
+                                print("Ready to send")
+                                for item in invitation_sending_players:
+                                    
+                                    total_timeline = f"{formatted_date} , {input_time_range}"
+
+                                    message_created = twilio_client.messages.create(
+                                        from_= messaging_sid, 
+                                        content_sid= "HX1b6e6997333f7f20599fafe6688fe616",
+                                        content_variables= json.dumps({
+                                            "1": already_player.name,
+                                            "2": match_number,
+                                            "3":already_player.level,
+                                            "4": total_timeline
+                                        }),
+                                        to = f"whatsapp:{item.mobile}"
+                                    )
+                                    item.last_invite_match = [{"match_number": match_number, "total_timeline": total_timeline}]
+                                    item.save()
                     elif run_status.status == "completed":
                         # Extract the bot's response
                         final_response = retrieveResponse(my_thread_id)
