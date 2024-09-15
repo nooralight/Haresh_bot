@@ -139,8 +139,10 @@ def time_range_overlap(existing_time, input_time):
 
 
 def available_padels(date_input, input_time):
-    date_obj = date_input.strptime(date_input, '%Y-%m-%d')
-    input_date = date_obj.strftime('%Y-%m-%d')
+    # Parse the input date string (assuming the input is in 'DD-MM-YYYY' format)
+    date_obj = datetime.strptime(date_input, '%d-%m-%Y')
+    input_date = date_obj.strftime('%Y-%m-%d')  # Convert to 'YYYY-MM-DD' format for querying
+
     # Query the collection for occupied courts on the given date and time range
     occupied_courts = []
     bookings = Bookings.objects(booking_date=input_date)
