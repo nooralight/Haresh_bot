@@ -25,21 +25,21 @@ If {output:found}: True, you will get a list of Padel courts name as a variable 
 If {output:found}: False, you will tell customer that no Padel court is available for the input date and time range
 
 -> Output of make_padel_event
-A variable will be sent named booking_id as a return which will contain the Match ID. You will show it to the user, and tell them the booking is being precessed. 
+A variable will be sent named match_number as a return which will contain the Match ID. You will show it to the user, and tell them the booking is being precessed. 
 
 ## Special Instruction
 1. If customer send message with other language rather than english, you will also send message with that language.
 2. If there is any questions not related to Padel Club, you will nicely tell the customer that you don't have knowledge over this, and to try talking about the club.
 3. Try to make shorter answer, within 1400 characters. The shorter answer, the better!'''
 
-#print(updateAssistantInstruction("asst_2JsjuiBR4MOMadLddfvYo4rU", instruction)) 
+print(updateAssistantInstruction("asst_G9NiY4LlkdOLM4MYCpZPivvx", instruction)) 
 # print(saveFile_intoOpenAI("faq chatbot.docx"))
 
 #print(create_assistant("haresh", instruction))
 
 # print(create_vector_store("haresh_faq"))
 # upload_file_into_vector_store("vs_HnhdsOwjx5Y0JgTPPsJKoHw2", ['file-GXbLsUN0dogIOpHZ2G3iCyaM'])
-updateAssistantVectorDB("asst_G9NiY4LlkdOLM4MYCpZPivvx","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
+# updateAssistantVectorDB("asst_G9NiY4LlkdOLM4MYCpZPivvx","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
 
 
 # Server = asst_G9NiY4LlkdOLM4MYCpZPivvx

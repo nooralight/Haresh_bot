@@ -514,6 +514,16 @@ def handle_incoming_message():
                                     )
                                     item.last_invite_match = [{"match_number": match_number, "total_timeline": total_timeline}]
                                     item.save()
+                            run = client.beta.threads.runs.submit_tool_outputs(
+                                    thread_id=my_thread_id,
+                                    run_id=run.id,
+                                    tool_outputs=[
+                                        {
+                                            "tool_call_id": tool_call.id,
+                                            "output": json.dumps({"match_number":match_number}),
+                                        }
+                                    ],
+                                )
                     elif run_status.status == "completed":
                         # Extract the bot's response
                         final_response = retrieveResponse(my_thread_id)
