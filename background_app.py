@@ -8,7 +8,7 @@ import time
 from datetime import datetime, timedelta
 import pytz
 import re
-from db_booking import insert_new_another_booking, update_another_booking, check_booking_exist
+from db_booking import insert_new_another_booking, update_another_booking, check_booking_exist, check_availabe_event_fully
 
 
 
@@ -203,11 +203,13 @@ def get_sync_bookings():
                             if timetable[1] == ":":
                                 edited_timetable = f"0{timetable}"
                             exact_date = get_previous_date(today_date)
-                            if is_exist:
-                                
-                                update_another_booking(is_exist.id,exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
-                            else:
-                                insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
+                            is_already_event = check_availabe_event_fully(exact_date, edited_timetable, pedal_dict[evento_columna])
+                            if not is_already_event:
+                                if is_exist:
+                                    
+                                    update_another_booking(is_exist.id,exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
+                                else:
+                                    insert_new_another_booking(exact_date, edited_timetable, pedal_dict[evento_columna], evento_id, match_level, total_player, player_occupied, players_lines, state)
             k+= 1   
 
         driver.quit()

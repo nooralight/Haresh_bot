@@ -418,98 +418,53 @@ def handle_incoming_message():
                         )
                     
                     return "okay", 200
-
-                
                 
         else:
-            if not already_player.availability_session and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
-                #available time
-                message_send = twilio_client.messages.create(
-                        from_= messaging_sid,
-                        content_sid="HX9f39dd347c8c1b75eeb4d35565fbe9b6",
-                        to = sender
-                    )
+            
+            
+            if session.get('context') == None or 'context' not in session:
+
+                final_response = None
+
+                if 'my_thread_id' not in session:
+                    my_thread_id = initiate_interaction(message)
+                    session['my_thread_id'] = my_thread_id
+                else:
+                    my_thread_id = session.get('my_thread_id')
+                    sendNewMessage_to_existing_thread(my_thread_id, message)
+
+                run = trigger_assistant(my_thread_id, ASSISTANT_ID)
+
+                while True:
+                    run_status = checkRunStatus(my_thread_id , run.id)
+                    print(f"Run status: {run_status.status}")
+                    if run_status.status == "failed":
+                        final_response = "No response now"
+                        break
+                    elif run_status.status == "completed":
+                        # Extract the bot's response
+                        final_response = retrieveResponse(my_thread_id)
+                        break
+                    time.sleep(1)
                 
-                body = '''Please tell us your available time for playing Pedal Matches. Choose the perfect timetable which is suitable for your availability.
-1. Morning
-2. Evening'''
+
+                # Regex pattern to match the reference
+                pattern = r'【\d+:\d+†source】'
+
+                # Replace the reference with an empty string
+                cleaned_response = re.sub(pattern, '', final_response)
+
+                body = cleaned_response
+
+                message_created = twilio_client.messages.create(
+                    from_= phone_number,
+                    body= cleaned_response,
+                    to= sender
+                )
+
                 insert_into_message(sender[9:], body, "bot")
-                session['context'] = 'ask_availability'
-                return "okay", 200
-            
-            elif not already_player.dominant_hand and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
-                #dominant hand
-                message_send = twilio_client.messages.create(
-                        from_= messaging_sid,
-                        content_sid="HXdcde334dc5cd1476b5b1a4600b850b53",
-                        to = sender
-                    )
-                
-                body = '''Please select which one is your dominant hand?
-1. Left Hand
-2. Right Hand'''
-                insert_into_message(sender[9:], body, "bot")
-                session['context'] = 'ask_dominant_hand'
-                return "okay", 200
-            
-            elif not already_player.preferred_position and not session.get('context') == "ask_preferred_position" and not session.get('context') == "ask_dominant_hand" and not session.get('context') == "ask_availability" and not session.get('context') == "evening_extra":
-                #pref_pos
-                message_send = twilio_client.messages.create(
-                        from_= messaging_sid,
-                        content_sid="HXe1f8691aa5ec2b8a9065d0734c388e78",
-                        to = sender
-                    )
-                
-                body = '''Please select the preferred position of your playing from the list.
-1. Left Side Player
-2. Right Side Player'''
-                insert_into_message(sender[9:], body, "bot")
-                session['context'] = 'ask_preferred_position'
-                return "okay", 200
-            
-        if session.get('context') == None or 'context' not in session:
-
-            final_response = None
-
-            if 'my_thread_id' not in session:
-                my_thread_id = initiate_interaction(message)
-                session['my_thread_id'] = my_thread_id
-            else:
-                my_thread_id = session.get('my_thread_id')
-                sendNewMessage_to_existing_thread(my_thread_id, message)
-
-            run = trigger_assistant(my_thread_id, ASSISTANT_ID)
-
-            while True:
-                run_status = checkRunStatus(my_thread_id , run.id)
-                print(f"Run status: {run_status.status}")
-                if run_status.status == "failed":
-                    final_response = "No response now"
-                    break
-                elif run_status.status == "completed":
-                    # Extract the bot's response
-                    final_response = retrieveResponse(my_thread_id)
-                    break
-                time.sleep(1)
-            
-
-            # Regex pattern to match the reference
-            pattern = r'【\d+:\d+†source】'
-
-            # Replace the reference with an empty string
-            cleaned_response = re.sub(pattern, '', final_response)
-
-            body = cleaned_response
-
-            message_created = twilio_client.messages.create(
-                from_= phone_number,
-                body= cleaned_response,
-                to= sender
-            )
-
-            insert_into_message(sender[9:], body, "bot")
-            session['context'] = "chatgpt"
-            return "okay",200
+                session['context'] = None
+                return "okay",200
         
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True,port=8000)

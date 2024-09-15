@@ -1,10 +1,13 @@
 from mongoengine import *
 from datetime import datetime,timedelta
 from utils import validate_input
+import json
 
 # Define the MongoDB connection
 connect(host="mongodb://127.0.0.1:27017/haresh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.10")
 
+# List of all padel courts
+PADEL_COURTS = ['Pádel 1', 'Pádel 2', 'Pádel 3', 'Pádel 4', 'Pádel 5', 'Pádel 6']
 
 # Define the MongoDB document schema using mongoengine
 class Bookings(Document):
@@ -19,6 +22,12 @@ class Bookings(Document):
     players_name_list = ListField(StringField())
     state = StringField()  # Searching, Open, 
     created_at = DateTimeField()
+
+
+def time_range_overlap(existing_time, input_time):
+    existing_start, existing_end = [datetime.strptime(t.strip(), "%H:%M") for t in existing_time.split('-')]
+    input_start, input_end = [datetime.strptime(t.strip(), "%H:%M") for t in input_time.split('-')]
+    return existing_start < input_end and input_start < existing_end
 
 # Create a new booking
 def insert_new_another_booking(booking_date, booking_time, court_name, match_number, match_level, player_count, player_occupied, players_name_list, state):
@@ -52,6 +61,13 @@ def update_another_booking(booking_id,booking_date, booking_time, court_name, ma
     the_booking.save()
     
 
+def check_availabe_event_fully(date, time, padel):
+
+    event = Bookings.objects(booking_date = date, booking_time = time, court_name = padel).first()
+    if event:
+        return event
+    else:
+        return None
 
 def check_booking_exist(match_number):
     is_exist = Bookings.objects(match_number = match_number).first()
@@ -114,3 +130,35 @@ def check_availability(input_date, input_time_range, court_name):
     
     print("No time conflict, booking is available.")
     return True  # No time conflict
+
+
+def time_range_overlap(existing_time, input_time):
+    existing_start, existing_end = [datetime.strptime(t.strip(), "%H:%M") for t in existing_time.split('-')]
+    input_start, input_end = [datetime.strptime(t.strip(), "%H:%M") for t in input_time.split('-')]
+    return existing_start < input_end and input_start < existing_end
+
+
+def available_padels(date_input, input_time):
+    date_obj = date_input.strptime(date_input, '%Y-%m-%d')
+    input_date = date_obj.strftime('%Y-%m-%d')
+    # Query the collection for occupied courts on the given date and time range
+    occupied_courts = []
+    bookings = Bookings.objects(booking_date=input_date)
+    for booking in bookings:
+        if time_range_overlap(booking.booking_time, input_time):
+            occupied_courts.append(booking.court_name)
+
+    # Get the available courts
+    available_courts = [court for court in PADEL_COURTS if court not in occupied_courts]
+
+    return json.dumps({
+        'date': input_date,
+        'time_range': input_time,
+        'available_courts': available_courts or 'All padel courts are available'
+    })
+
+date_input = input("Tell us the date: \n")
+time_range = input("The time range please: \n")
+
+result = available_padels(date_input, time_range)
+print(result)
