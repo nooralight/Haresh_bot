@@ -153,14 +153,10 @@ def available_padels(date_input, input_time):
     # Get the available courts
     available_courts = [court for court in PADEL_COURTS if court not in occupied_courts]
 
-    return json.dumps({
-        'date': input_date,
-        'time_range': input_time,
-        'available_courts': available_courts or 'All padel courts are available'
-    })
+    return available_courts
 
 date_input = input("Tell us the date: \n")
 time_range = input("The time range please: \n")
 
 result = available_padels(date_input, time_range)
-print(result["available_courts"])
+print(result)
