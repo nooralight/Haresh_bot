@@ -5,7 +5,7 @@ from mongoengine import *
 from datetime import datetime,timedelta
 import time, json
 from db_player import add_new_player, update_player
-from db_booking import check_booking_exist,available_padels,insert_new_another_booking,fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
+from db_booking import fetch_booking_by_match_number, check_booking_exist,available_padels,insert_new_another_booking,fetch_all_bookings_by_date, fetch_booking_by_id, get_numOfBookings, get_numOfunfinishedBookings, check_availability
 import pytz
 import re
 from gpt_functions import initiate_interaction, trigger_assistant, checkRunStatus, retrieveResponse, sendNewMessage_to_existing_thread
@@ -432,7 +432,6 @@ def handle_incoming_message():
                 
         else:
             
-            
             if session.get('context') == None or 'context' not in session:
 
                 final_response = None
@@ -530,6 +529,35 @@ def handle_incoming_message():
                                         }
                                     ],
                                 )
+                            
+                        elif tool_call.function.name == "show_pedal_event":
+                            booking_id = arguments['booking_id']
+                            booking = fetch_booking_by_match_number(booking_id)
+                            if booking:
+                                booking_details = {"match_number": booking.match_number, "current_status":booking.state, "players_name_list": booking.players_name_list}
+                                run = client.beta.threads.runs.submit_tool_outputs(
+                                    thread_id=my_thread_id,
+                                    run_id=run.id,
+                                    tool_outputs=[
+                                        {
+                                            "tool_call_id": tool_call.id,
+                                            "output": json.dumps({"found":True,"booking_details":booking_details}),
+                                        }
+                                    ],
+                                )
+                            else:
+                                run = client.beta.threads.runs.submit_tool_outputs(
+                                    thread_id=my_thread_id,
+                                    run_id=run.id,
+                                    tool_outputs=[
+                                        {
+                                            "tool_call_id": tool_call.id,
+                                            "output": json.dumps({"found":False}),
+                                        }
+                                    ],
+                                )
+
+
                     elif run_status.status == "completed":
                         # Extract the bot's response
                         final_response = retrieveResponse(my_thread_id)

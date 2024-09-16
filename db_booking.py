@@ -102,6 +102,15 @@ def fetch_booking_by_id(id):
     exact_boooking = Bookings.objects(id = id).first()
     return exact_boooking
 
+# Fetch booking by match_number
+def fetch_booking_by_match_number(match_number):
+    exact_boooking = Bookings.objects(match_number = match_number).first()
+    if exact_boooking:
+        return exact_boooking
+    else:
+        return None
+
+
 def is_time_conflict(existing_time, input_start_time, input_end_time):
     existing_start_time, existing_end_time = existing_time.split('-')
     existing_start_time = datetime.strptime(existing_start_time.strip(), "%H:%M")
