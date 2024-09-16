@@ -57,10 +57,10 @@ If {output:found} = False, you will tell customer that there is no booking under
 # print(create_assistant("haresh", instruction))
 
 # print(create_vector_store("haresh_faq"))
-# upload_file_into_vector_store("vs_HnhdsOwjx5Y0JgTPPsJKoHw2", ['file-GXbLsUN0dogIOpHZ2G3iCyaM'])
-# updateAssistantVectorDB("asst_Us32WVMSxEbVGzQD6EENNboR","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
+#upload_file_into_vector_store("vs_Ma1wMsJpQkrzPSO2LlAvVEi0", ['file-GXbLsUN0dogIOpHZ2G3iCyaM'])
+updateAssistantVectorDB("asst_aXmq9DtnOx9rL16xdHGACEBD","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
 
 
-# Server = asst_Us32WVMSxEbVGzQD6EENNboR
+# Server = asst_aXmq9DtnOx9rL16xdHGACEBD
 # file-GXbLsUN0dogIOpHZ2G3iCyaM
 # vs_HnhdsOwjx5Y0JgTPPsJKoHw2
