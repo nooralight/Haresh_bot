@@ -30,7 +30,7 @@ def create_assistant(assistant_name, my_instruction):
         name = assistant_name,
         instructions = my_instruction,
         description = "A human like representative of Haresh Padel Club",
-        model="gpt-4o",
+        model="gpt-4o-mini",
         tools=[{"type": "file_search"}, ft.see_available_padels, ft.make_padel_event, ft.show_padel_event, ft.cancel_padel_event],
 	)
     
