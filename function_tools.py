@@ -62,17 +62,17 @@ show_padel_event = {
                 "type": "function",
                 "function": {
                     "name": "show_pedal_event",
-                    "description":  "If user wants to check a padel match booking, or give you booking ID or number. This means the user wants to see details of the Match booking.",
+                    "description":  "If user wants to check a padel match booking, or give you match number. This means the user wants to see details of the Match booking.",
                     "parameters": {
                         "properties": {
-                            "booking_id": {
-                                "description": "get the booking ID number",
-                                "title": "Booking number",
+                            "match_number": {
+                                "description": "get the match number",
+                                "title": "Match number",
                                 "type": "string"
                             }
                         },
                         "required": [
-                            "booking_id"
+                            "match_number"
                         ],
                         "type": "object"
                     }
@@ -84,17 +84,17 @@ cancel_padel_event = {
                 "type": "function",
                 "function": {
                     "name": "cancel_pedal_event",
-                    "description":  "If user wants to cancel a padel match booking, or give you booking ID or number to cencel it.",
+                    "description":  "If user wants to cancel a padel match booking, or give you match number to cencel it.",
                     "parameters": {
                         "properties": {
-                            "booking_id": {
+                            "match_number": {
                                 "description": "get the booking ID number",
-                                "title": "Booking number",
+                                "title": "Match number",
                                 "type": "string"
                             }
                         },
                         "required": [
-                            "booking_id"
+                            "match_number"
                         ],
                         "type": "object"
                     }

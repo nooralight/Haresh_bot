@@ -38,7 +38,7 @@ phone_number = os.getenv('PHONE_NUMBER')
 messaging_sid=os.getenv('MESSAGING_SID')
 twilio_client = Client(account_sid, auth_token)
 
-ASSISTANT_ID = "asst_vg6eLLPPL4LbTTee51Pz2S7M"
+ASSISTANT_ID = "asst_N83heuXhMvD2Fp6ouDlOaIfM"
 
 # Define the timezone for London
 london_tz = pytz.timezone('Europe/London')
@@ -531,8 +531,8 @@ def handle_incoming_message():
                                 )
                             
                         elif tool_call.function.name == "show_pedal_event":
-                            booking_id = arguments['booking_id']
-                            booking = fetch_booking_by_match_number(booking_id)
+                            match_number = arguments['match_number']
+                            booking = fetch_booking_by_match_number(match_number)
                             if booking:
                                 booking_details = {"match_number": booking.match_number, "current_status":booking.state, "players_name_list": booking.players_name_list}
                                 run = client.beta.threads.runs.submit_tool_outputs(
@@ -557,6 +557,59 @@ def handle_incoming_message():
                                     ],
                                 )
 
+                        elif tool_call.function.name == "cancel_pedal_event":
+                            match_number = arguments['match_number']
+                            booking = fetch_booking_by_match_number(match_number)
+                            if booking:
+                                if booking.state == "closed":
+                                    run = client.beta.threads.runs.submit_tool_outputs(
+                                        thread_id=my_thread_id,
+                                        run_id=run.id,
+                                        tool_outputs=[
+                                            {
+                                                "tool_call_id": tool_call.id,
+                                                "output": json.dumps({"finished_already":True}),
+                                            }
+                                        ],
+                                    )
+                                invitation_item = get_invitation_by_matchID(match_number)
+                                if invitation_item == None or invitation_item.created_by_player_id != already_player.id:
+                                    run = client.beta.threads.runs.submit_tool_outputs(
+                                        thread_id=my_thread_id,
+                                        run_id=run.id,
+                                        tool_outputs=[
+                                            {
+                                                "tool_call_id": tool_call.id,
+                                                "output": json.dumps({"not_owner":True}),
+                                            }
+                                        ],
+                                    )
+                                
+                                else:
+                                    booking.delete()
+                                    invitation_item.delete()
+                                    run = client.beta.threads.runs.submit_tool_outputs(
+                                        thread_id=my_thread_id,
+                                        run_id=run.id,
+                                        tool_outputs=[
+                                            {
+                                                "tool_call_id": tool_call.id,
+                                                "output": json.dumps({"found":True, "match_number": match_number}),
+                                            }
+                                        ],
+                                    )
+                                
+                            else:
+                                run = client.beta.threads.runs.submit_tool_outputs(
+                                        thread_id=my_thread_id,
+                                        run_id=run.id,
+                                        tool_outputs=[
+                                            {
+                                                "tool_call_id": tool_call.id,
+                                                "output": json.dumps({"found":False}),
+                                            }
+                                        ],
+                                    )
 
                     elif run_status.status == "completed":
                         # Extract the bot's response

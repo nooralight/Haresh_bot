@@ -72,4 +72,8 @@ def send_message_to_matched_users(invitation_id):
 
 def get_invitation_by_matchID(match_id):
     invitation = Invitations.objects(match_id = match_id).first()
-    return invitation
+    # Check if an invitation was found
+    if invitation:
+        return invitation
+    else:
+        return None
