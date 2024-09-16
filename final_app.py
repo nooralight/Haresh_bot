@@ -459,6 +459,7 @@ def handle_incoming_message():
                     
                         print(tool_call.function)
                         arguments = json.loads(tool_call.function.arguments)
+                        print(arguments)
                         if tool_call.function.name == "check_available_padel":
 
                             input_date = arguments['date']
