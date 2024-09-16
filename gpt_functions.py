@@ -31,7 +31,7 @@ def create_assistant(assistant_name, my_instruction):
         instructions = my_instruction,
         description = "A human like representative of Haresh Padel Club",
         model="gpt-4o",
-        tools=[{"type": "file_search"}, ft.see_available_padels, ft.make_padel_event],
+        tools=[{"type": "file_search"}, ft.see_available_padels, ft.make_padel_event, ft.show_padel_event],
 	)
     
     return my_assistant.id

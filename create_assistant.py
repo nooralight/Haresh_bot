@@ -41,16 +41,16 @@ If (output:found) = False, that means there is no match booking for the given ma
 2. If there is any questions not related to Padel Club, you will nicely tell the customer that you don't have knowledge over this, and to try talking about the club.
 3. Try to make shorter answer, within 1400 characters. The shorter answer, the better!'''
 
-print(updateAssistantInstruction("asst_G9NiY4LlkdOLM4MYCpZPivvx", instruction)) 
+# print(updateAssistantInstruction("asst_G9NiY4LlkdOLM4MYCpZPivvx", instruction)) 
 # print(saveFile_intoOpenAI("faq chatbot.docx"))
 
-#print(create_assistant("haresh", instruction))
+# print(create_assistant("haresh", instruction))
 
 # print(create_vector_store("haresh_faq"))
 # upload_file_into_vector_store("vs_HnhdsOwjx5Y0JgTPPsJKoHw2", ['file-GXbLsUN0dogIOpHZ2G3iCyaM'])
-# updateAssistantVectorDB("asst_G9NiY4LlkdOLM4MYCpZPivvx","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
+updateAssistantVectorDB("asst_vg6eLLPPL4LbTTee51Pz2S7M","vs_HnhdsOwjx5Y0JgTPPsJKoHw2")
 
 
-# Server = asst_G9NiY4LlkdOLM4MYCpZPivvx
+# Server = asst_vg6eLLPPL4LbTTee51Pz2S7M
 # file-GXbLsUN0dogIOpHZ2G3iCyaM
 # vs_HnhdsOwjx5Y0JgTPPsJKoHw2
