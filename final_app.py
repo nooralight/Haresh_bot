@@ -388,7 +388,7 @@ def handle_incoming_message():
                         already_player.save()
                     
                     
-                    
+                return "okay", 200 
             elif message == "No, reject":
                 body = '''Thank you for your response. You won't be invited for this match anymore.'''
                 message_created = twilio_client.messages.create(
@@ -400,7 +400,7 @@ def handle_incoming_message():
 
                 already_player.last_invite_match = []
                 already_player.save()
-                
+                return "okay", 200
             elif message == "Unsubscribe me":
                 body = '''You have been unsubscribed from getting match invitations.'''
                 message_created = twilio_client.messages.create(
@@ -413,24 +413,22 @@ def handle_incoming_message():
                 already_player.last_invite_match = []
                 already_player.status = "Stopped"
                 already_player.save()
-                
+                return "okay", 200
             else:
                 for item in already_player.last_invite_match:
                     message_created = twilio_client.messages.create(
                             from_= messaging_sid, 
-                            content_sid= "HXe9c3a08640af9c1c4c71f8dc78a913ca",
+                            content_sid= "HX1b6e6997333f7f20599fafe6688fe616",
                             content_variables= json.dumps({
                                 "1": already_player.name,
                                 "2": item['match_number'],
-                                "3": item['searched_hand'],
-                                "4": item['searched_position'],
-                                "5":already_player.level,
-                                "6": item['total_timeline']
+                                "3":already_player.level,
+                                "4": item['total_timeline']
                             }),
                             to = f"whatsapp:{item.mobile}"
                         )
                     
-                    return "okay", 200
+                return "okay", 200
                 
         else:
             
