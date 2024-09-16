@@ -63,7 +63,6 @@ def send_message_to_matched_users(invitation_id):
     players = Players.objects(
         Q(level=searched_level.strip()) & # equal or +1
         Q(status = "Active") &
-        Q(last_invite_match__size=0) &
         Q(mobile = "+8801301807991")
     )
     print(players.count())

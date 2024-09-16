@@ -501,27 +501,27 @@ def handle_incoming_message():
                             new_booking = insert_new_another_booking(formatted_date, input_time_range, padel_court_name, match_number, already_player.level, 4, 1,[already_player.name],"Searching")
 
                             # Create invitation in the database
-                            invitation_create = create_new_invitation(match_number, already_player.id, already_player.name, formatted_date, padel_court_name, padel_court_name, already_player.level)
+                            invitation_create = create_new_invitation(match_number, already_player.id, already_player.name, formatted_date, input_time_range, padel_court_name, already_player.level)
                             invitation_sending_players = send_message_to_matched_users(invitation_create.id)
                             if invitation_sending_players.count()>0:
                                 print("Ready to send")
                                 for item in invitation_sending_players:
-                                    
-                                    total_timeline = f"{formatted_date} , {input_time_range}"
+                                    if not item.last_invite_match or len(item.last_invite_match) == 0:
+                                        total_timeline = f"{formatted_date} , {input_time_range}"
 
-                                    message_created = twilio_client.messages.create(
-                                        from_= messaging_sid, 
-                                        content_sid= "HX1b6e6997333f7f20599fafe6688fe616",
-                                        content_variables= json.dumps({
-                                            "1": already_player.name,
-                                            "2": match_number,
-                                            "3":already_player.level,
-                                            "4": total_timeline
-                                        }),
-                                        to = f"whatsapp:{item.mobile}"
-                                    )
-                                    item.last_invite_match = [{"match_number": match_number, "total_timeline": total_timeline}]
-                                    item.save()
+                                        message_created = twilio_client.messages.create(
+                                            from_= messaging_sid, 
+                                            content_sid= "HX1b6e6997333f7f20599fafe6688fe616",
+                                            content_variables= json.dumps({
+                                                "1": already_player.name,
+                                                "2": match_number,
+                                                "3":already_player.level,
+                                                "4": total_timeline
+                                            }),
+                                            to = f"whatsapp:{item.mobile}"
+                                        )
+                                        item.last_invite_match = [{"match_number": match_number, "total_timeline": total_timeline}]
+                                        item.save()
                             run = client.beta.threads.runs.submit_tool_outputs(
                                     thread_id=my_thread_id,
                                     run_id=run.id,
