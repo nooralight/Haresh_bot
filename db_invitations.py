@@ -62,8 +62,7 @@ def send_message_to_matched_users(invitation_id):
     # Filter players based on the invitation criteria
     players = Players.objects(
         Q(level=searched_level.strip()) & # equal or +1
-        Q(status = "Active") &
-        Q(mobile = "+8801301807991")
+        Q(status = "Active")
     )
     print(players.count())
 
