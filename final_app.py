@@ -503,22 +503,25 @@ def handle_incoming_message():
                             if invitation_sending_players.count()>0:
                                 print("Ready to send")
                                 for item in invitation_sending_players:
-                                    if not item.last_invite_match or len(item.last_invite_match) == 0:
-                                        total_timeline = f"{formatted_date} , {input_time_range}"
+                                    try:
+                                        if not item.last_invite_match or len(item.last_invite_match) == 0:
+                                            total_timeline = f"{formatted_date} , {input_time_range}"
 
-                                        message_created = twilio_client.messages.create(
-                                            from_= messaging_sid, 
-                                            content_sid= "HX1b6e6997333f7f20599fafe6688fe616",
-                                            content_variables= json.dumps({
-                                                "1": already_player.name,
-                                                "2": match_number,
-                                                "3":already_player.level,
-                                                "4": total_timeline
-                                            }),
-                                            to = f"whatsapp:{item.mobile}"
-                                        )
-                                        item.last_invite_match = [{"match_number": match_number, "total_timeline": total_timeline}]
-                                        item.save()
+                                            message_created = twilio_client.messages.create(
+                                                from_= messaging_sid, 
+                                                content_sid= "HX1b6e6997333f7f20599fafe6688fe616",
+                                                content_variables= json.dumps({
+                                                    "1": already_player.name,
+                                                    "2": match_number,
+                                                    "3":already_player.level,
+                                                    "4": total_timeline
+                                                }),
+                                                to = f"whatsapp:{item.mobile}"
+                                            )
+                                            item.last_invite_match = [{"match_number": match_number, "total_timeline": total_timeline}]
+                                            item.save()
+                                    except:
+                                        print("error sending invitations")
                             run = client.beta.threads.runs.submit_tool_outputs(
                                     thread_id=my_thread_id,
                                     run_id=run.id,
