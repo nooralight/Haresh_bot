@@ -150,7 +150,7 @@ def available_padels(date_input, input_time):
         if time_range_overlap(booking.booking_time, input_time):
             occupied_courts.append(booking.court_name)
     
-    if len(available_courts) > 0:
+    if len(occupied_courts) > 0:
         # Get the available courts
         available_courts = [court for court in PADEL_COURTS if court not in occupied_courts]
         

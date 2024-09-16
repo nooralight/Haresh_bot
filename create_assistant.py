@@ -18,7 +18,9 @@ Here are some basic info for the booking action:
 2. Input date should be %d-%m-%Y
 3. Input time range should be hh-mm, 24 hours format like  09:30 , 17:30.
 4. We only have these time ranges: '08:00-9:30', '09:30-11:00', '11:00-12:30', '17:00-18:30', '18:30-20.00' , '20:00-21:30'
-4. Ask to give proper answer in case the customer gives wrong input
+5. Ask to give proper answer in case the customer gives wrong input
+6. Ask each question at a time, and suggest the padel court name at the last stage. Don't ask for padel court name or suggest until the customer gives us date and time range or they already mentioned the court name
+
 
 -> Output of check_available_padel
 If {output:found}: True, you will get a list of Padel courts name as a variable named available_courts which has the available courts for the input date and time range by the user
